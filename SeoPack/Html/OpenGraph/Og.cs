@@ -1,0 +1,52 @@
+﻿using SeoPack.Html.OpenGraph.StructuredProperties;
+using System;
+
+namespace SeoPack.Html.OpenGraph
+{
+    public abstract class Og
+    {
+        protected Og(string title, Uri url, OgImage image, ObjectType objectType)
+        {
+            if(string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentException("title not set");
+            }
+
+            if (url == null)
+            {
+                throw new ArgumentNullException("url");
+            }
+
+            if (image == null)
+            {
+                throw new ArgumentNullException("image");
+            }
+
+            Title = title;
+            Url = url;
+            Image = image;
+            Type = objectType;
+        }
+
+        [OgProperty("title")]
+        public string Title { get; private set; }
+
+        [OgProperty("type")]
+        protected ObjectType Type { get; private set; }
+
+        [OgProperty("image")]
+        public OgImage Image { get; private set; }
+
+        [OgProperty("url")]
+        public Uri Url { get; private set; }
+
+        [OgProperty("audio")]
+        public Uri Audio { get; set; }
+
+        [OgProperty("description")]
+        public string Description { get; set; }
+
+        [OgProperty("determiner")]
+        public Determiner Determiner { get; set; }
+    }
+}
