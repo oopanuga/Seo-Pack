@@ -7,20 +7,46 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeoPack", "SeoPack\SeoPack.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeoPack.Tests", "SeoPack.Tests\SeoPack.Tests.csproj", "{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D81599F5-E879-4C05-9E5F-B6A636280978}"
+	ProjectSection(SolutionItems) = preProject
+		SeoPack\build_solution.bat = SeoPack\build_solution.bat
+		SeoPack\SeoPack.nuspec = SeoPack\SeoPack.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		DebugNET40|Any CPU = DebugNET40|Any CPU
+		DebugNET45|Any CPU = DebugNET45|Any CPU
 		Release|Any CPU = Release|Any CPU
+		ReleaseNET40|Any CPU = ReleaseNET40|Any CPU
+		ReleaseNET45|Any CPU = ReleaseNET45|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.DebugNET40|Any CPU.ActiveCfg = DebugNET40|Any CPU
+		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.DebugNET40|Any CPU.Build.0 = DebugNET40|Any CPU
+		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.DebugNET45|Any CPU.ActiveCfg = DebugNET45|Any CPU
+		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.DebugNET45|Any CPU.Build.0 = DebugNET45|Any CPU
 		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.ReleaseNET40|Any CPU.ActiveCfg = ReleaseNET40|Any CPU
+		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.ReleaseNET40|Any CPU.Build.0 = ReleaseNET40|Any CPU
+		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.ReleaseNET45|Any CPU.ActiveCfg = ReleaseNET45|Any CPU
+		{AD3883F1-8102-4CB5-A6F4-84954C480BB6}.ReleaseNET45|Any CPU.Build.0 = ReleaseNET45|Any CPU
 		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.DebugNET40|Any CPU.ActiveCfg = Debug|Any CPU
+		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.DebugNET40|Any CPU.Build.0 = Debug|Any CPU
+		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.DebugNET45|Any CPU.ActiveCfg = Debug|Any CPU
+		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.DebugNET45|Any CPU.Build.0 = Debug|Any CPU
 		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.ReleaseNET40|Any CPU.ActiveCfg = Release|Any CPU
+		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.ReleaseNET40|Any CPU.Build.0 = Release|Any CPU
+		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.ReleaseNET45|Any CPU.ActiveCfg = Release|Any CPU
+		{11FD6BF6-8F93-40FC-B5FF-629A7023AE28}.ReleaseNET45|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

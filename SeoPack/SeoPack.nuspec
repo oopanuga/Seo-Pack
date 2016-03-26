@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SeoPack</id>
+    <version>0.4.0</version>
+    <authors>Oluwaseun Opanuga</authors>
+    <owners>Oluwaseun Opanuga</owners>
+    <projectUrl>https://github.com/oopanuga/seo-pack</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>SeoPack A library packed with lots of SEO goodness for ASP.Net MVC projects.</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2016 SeoPack</copyright>
+    <summary />
+    <language>en-US</language>
+    <tags>seo, mvc seo, asp.net seo, asp.net mvc seo, search engine, search engine optimization, search engine optimisation, search, engine, optimization, optimisation</tags>
+  </metadata>
+  <files>
+    <file src="bin\ReleaseNET40\SeoPack.dll" target="lib\net40\SeoPack.dll" />
+    <file src="bin\ReleaseNET40\SeoPack.XML" target="lib\net40\SeoPack.XML" />
+    <file src="bin\ReleaseNET45\SeoPack.dll" target="lib\net45\SeoPack.dll" />
+    <file src="bin\ReleaseNET45\SeoPack.XML" target="lib\net45\SeoPack.XML" />
+  </files>
+</package>
