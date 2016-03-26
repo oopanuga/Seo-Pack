@@ -1,6 +1,6 @@
 # SeoPack
 
-Is a library packed with lots of SEO goodness for ASP.Net MVC projects.
+A library packed with lots of SEO goodness for ASP.Net MVC projects.
 
 ```
 PM> Install-Package SeoPack
