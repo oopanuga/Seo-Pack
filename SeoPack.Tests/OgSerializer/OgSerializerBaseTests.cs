@@ -96,7 +96,7 @@ namespace SeoPack.Tests.OgSerializer
                 var website = new SeoPackWebsite(
                     websiteTitle,
                     websiteUrl,
-                    new Html.OpenGraph.StructuredProperties.OgImage(websiteImageUrl))
+                    new Html.OpenGraph.OgImage(websiteImageUrl))
                 {
                     ContactPageUrl = websiteContactPageUrl
                 };

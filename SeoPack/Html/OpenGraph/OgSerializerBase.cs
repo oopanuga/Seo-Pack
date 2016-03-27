@@ -49,14 +49,8 @@ namespace SeoPack.Html.OpenGraph
                         var propertyValue = property.GetValue(obj, null);
                         if (propertyValue == null) continue;
 
-                        var ogspAttributes = propertyValue.GetType()
-                            .GetCustomAttributes(typeof(OgStructuredPropertyAttribute), true) as OgStructuredPropertyAttribute[];
-
-                        //if (ogspAttributes != null && ogspAttributes.Length > 0)
-                        //{
                         BuildOpenGraphData(property.GetValue(obj, null));
                         propertTypeIsComplex = true;
-                        //}
                     }
 
                     var ogName = ogpAttributes[0].Name;

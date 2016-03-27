@@ -1,6 +1,5 @@
 ﻿using SeoPack.Html.OpenGraph;
 using SeoPack.Html.OpenGraph.ObjectTypes.Standard;
-using SeoPack.Html.OpenGraph.StructuredProperties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
