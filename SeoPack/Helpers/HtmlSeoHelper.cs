@@ -11,65 +11,76 @@ using System.Web.Mvc;
 namespace SeoPack.Helpers
 {
     /// <summary>
-    /// 
+    /// Represents a Html Seo Helper for generating SEO compliant html.
     /// </summary>
-    public static class HtmlSeoHelper
+    public class HtmlSeoHelper : IHtmlSeoHelper
     {
         /// <summary>
-        /// 
+        /// Returns an seo compliant title tag.
         /// </summary>
-        /// <param name="title"></param>
-        /// <returns></returns>
-        public static IHtmlString Title(string title)
+        /// <param name="title">The inner text of the title tag.</param>
+        /// <param name="validateLength">A flag that indicates whether or not to validate the 
+        /// length of the title. The title must be between 50 and 60 characters in length</param>
+        /// <returns>The html string.</returns>
+        public IHtmlString Title(string title, bool validateLength = false)
         {
             if (string.IsNullOrEmpty(title))
             {
                 throw new ArgumentException("title not set");
             }
 
-            if (title.Length < 50 || title.Length > 60)
+            if (validateLength)
             {
-                throw new ArgumentException(
-                    "title must be between 50 and 60 characters in length");
+                if (title.Length < 50 || title.Length > 60)
+                {
+                    throw new ArgumentException(
+                        "title must be between 50 and 60 characters in length");
+                }
             }
 
-            var tag = new TagBuilder("title");
-            tag.SetInnerText(title);
+            var htmlElement = new HtmlElement("title");
+            htmlElement.SetInnerText(title);
 
-            return MvcHtmlString.Create(tag.ToString());
+            return MvcHtmlString.Create(htmlElement.ToString());
         }
 
         /// <summary>
-        /// 
+        /// Returns an seo compliant meta description tag.
         /// </summary>
-        /// <param name="metaDescription"></param>
-        /// <returns></returns>
-        public static IHtmlString MetaDescription(string metaDescription)
+        /// <param name="description">The content of the description meta tag.</param>
+        /// <param name="validateLength">A flag that indicates whether or not to validate the 
+        /// length of the description. The description must be less than or equal to 155 characters
+        /// in length</param>
+        /// <returns>The html string.</returns>
+        public IHtmlString MetaDescription(string description, bool validateLength = false)
         {
-            if (string.IsNullOrEmpty(metaDescription))
+            if (string.IsNullOrEmpty(description))
             {
-                throw new ArgumentException("metaDescription not set");
+                throw new ArgumentException("description not set");
             }
 
-            if (metaDescription.Length > 155)
+            if (validateLength)
             {
-                throw new ArgumentException(
-                    "metaDescription cannot be more than 155 characters in length");
+                if (description.Length > 155)
+                {
+                    throw new ArgumentException(
+                        "description cannot be more than 155 characters in length");
+                }
             }
 
-            var tag = new TagBuilder("meta");
-            tag.MergeAttribute("name", "description");
-            tag.MergeAttribute("content", metaDescription);
+            var htmlElement = new HtmlElement("meta");
+            htmlElement.AddAttribute("name", "description");
+            htmlElement.AddAttribute("content", description);
 
-            return MvcHtmlString.Create(tag.ToString(TagRenderMode.SelfClosing));
+            return MvcHtmlString.Create(htmlElement.ToString());
         }
 
         /// <summary>
-        /// 
+        /// Returns an seo compliant image tag.
         /// </summary>
         /// <param name="image"></param>
         /// <returns></returns>
-        public static IHtmlString Image(SeoPack.Html.Image image)
+        public IHtmlString Image(SeoPack.Html.Image image)
         {
             if (image == null)
             {
@@ -77,7 +88,7 @@ namespace SeoPack.Helpers
             }
 
             return MvcHtmlString.Create(BuildImageTag(image)
-                .ToString(TagRenderMode.SelfClosing));
+                .ToString());
         }
 
         /// <summary>
@@ -85,7 +96,7 @@ namespace SeoPack.Helpers
         /// </summary>
         /// <param name="anchor"></param>
         /// <returns></returns>
-        public static IHtmlString Anchor(Anchor anchor)
+        public IHtmlString Anchor(Anchor anchor)
         {
             if (anchor == null)
             {
@@ -100,7 +111,7 @@ namespace SeoPack.Helpers
         /// </summary>
         /// <param name="imageLink"></param>
         /// <returns></returns>
-        public static IHtmlString ImageLink(ImageLink imageLink)
+        public IHtmlString ImageLink(ImageLink imageLink)
         {
             if (imageLink == null)
             {
@@ -111,7 +122,7 @@ namespace SeoPack.Helpers
 
             anchorTag.InnerHtml = BuildImageTag(imageLink.Image).ToString();
 
-            return MvcHtmlString.Create(anchorTag.ToString(TagRenderMode.SelfClosing));
+            return MvcHtmlString.Create(anchorTag.ToString());
         }
 
         /// <summary>
@@ -119,7 +130,7 @@ namespace SeoPack.Helpers
         /// </summary>
         /// <param name="canonicalUrl"></param>
         /// <returns></returns>
-        public static IHtmlString CanonicalLink(Uri canonicalUrl)
+        public IHtmlString CanonicalLink(Uri canonicalUrl)
         {
             if (canonicalUrl == null)
             {
@@ -137,7 +148,7 @@ namespace SeoPack.Helpers
             return BuildCanonicalLink(canonicalUrl.AbsoluteUri);
         }
 
-        public static IHtmlString CanonicalLink()
+        public IHtmlString CanonicalLink()
         {
             var query = HttpContext.Current.Request.Url.Query;
             var canonicalUrl = "";
@@ -154,7 +165,7 @@ namespace SeoPack.Helpers
         /// </summary>
         /// <param name="og"></param>
         /// <returns></returns>
-        public static IHtmlString OpenGraph(Og og)
+        public IHtmlString OpenGraph(Og og)
         {
             if (og == null)
             {
@@ -169,7 +180,7 @@ namespace SeoPack.Helpers
         /// </summary>
         /// <param name="pagingLink"></param>
         /// <returns></returns>
-        public static IHtmlString PagingLink(PagingLink pagingLink)
+        public IHtmlString PagingLink(PagingLink pagingLink)
         {
             if (pagingLink == null)
             {
@@ -187,22 +198,22 @@ namespace SeoPack.Helpers
 
             if (pagingLink.CurrentPage < pagingLink.RecordCount)
             {
-                var tag = new TagBuilder("link");
-                tag.MergeAttribute("rel", "next");
-                tag.MergeAttribute("heref",
+                var htmlElement = new HtmlElement("link");
+                htmlElement.AddAttribute("rel", "next");
+                htmlElement.AddAttribute("heref",
                     string.Format(pagingLink.UrlFormat, pagingLink.CurrentPage + 1));
 
-                str.Append(tag.ToString(TagRenderMode.SelfClosing));
+                str.Append(htmlElement.ToString());
             }
 
             if (pagingLink.CurrentPage > firstPage)
             {
-                var tag = new TagBuilder("link");
-                tag.MergeAttribute("rel", "prev");
-                tag.MergeAttribute("heref",
+                var htmlElement = new HtmlElement("link");
+                htmlElement.AddAttribute("rel", "prev");
+                htmlElement.AddAttribute("heref",
                     string.Format(pagingLink.UrlFormat, pagingLink.CurrentPage - 1));
 
-                str.Append(tag.ToString(TagRenderMode.SelfClosing));
+                str.Append(htmlElement.ToString());
             }
 
             return MvcHtmlString.Create(str.ToString());
@@ -213,14 +224,14 @@ namespace SeoPack.Helpers
         /// </summary>
         /// <param name="hrefLangLinks"></param>
         /// <returns></returns>
-        public static IHtmlString HrefLangLink(List<HrefLangLink> hrefLangLinks)
+        public IHtmlString HrefLangLink(List<HrefLangLink> hrefLangLinks)
         {
             if (hrefLangLinks == null)
             {
                 throw new ArgumentNullException("hrefLangLinks");
             }
 
-            TagBuilder tag;
+            HtmlElement htmlElement;
             var currentPageUrl = HttpContext.Current.Request.Url.AbsoluteUri.ToLower();
             var foundUrl = hrefLangLinks.SingleOrDefault(
                 x => x.CanonicalUrl.AbsoluteUri.ToLower() == currentPageUrl);
@@ -230,11 +241,11 @@ namespace SeoPack.Helpers
 
             var str = new StringBuilder();
 
-            tag = new TagBuilder("link");
-            tag.MergeAttribute("rel", "alternate");
-            tag.MergeAttribute("href", foundUrl.CanonicalUrl.AbsoluteUri);
-            tag.MergeAttribute("hreflang", foundUrl.Language);
-            str.Append(tag.ToString(TagRenderMode.SelfClosing));
+            htmlElement = new HtmlElement("link");
+            htmlElement.AddAttribute("rel", "alternate");
+            htmlElement.AddAttribute("href", foundUrl.CanonicalUrl.AbsoluteUri);
+            htmlElement.AddAttribute("hreflang", foundUrl.Language);
+            str.Append(htmlElement.ToString());
 
             var otherUrlsWithSamePageName = hrefLangLinks.Where(x =>
                 x.PageName.ToLower() == foundUrl.PageName.ToLower() &&
@@ -243,11 +254,11 @@ namespace SeoPack.Helpers
 
             foreach (var otherUrl in otherUrlsWithSamePageName)
             {
-                tag = new TagBuilder("link");
-                tag.MergeAttribute("rel", "alternate");
-                tag.MergeAttribute("href", otherUrl.CanonicalUrl.AbsoluteUri);
-                tag.MergeAttribute("hreflang", otherUrl.Language);
-                str.Append(tag.ToString(TagRenderMode.SelfClosing));
+                htmlElement = new HtmlElement("link");
+                htmlElement.AddAttribute("rel", "alternate");
+                htmlElement.AddAttribute("href", otherUrl.CanonicalUrl.AbsoluteUri);
+                htmlElement.AddAttribute("hreflang", otherUrl.Language);
+                str.Append(htmlElement.ToString());
             }
 
             return MvcHtmlString.Create(str.ToString());
@@ -255,44 +266,44 @@ namespace SeoPack.Helpers
 
         #region Private Methods
 
-        private static TagBuilder BuildAnchorTag(Anchor anchor)
+        private HtmlElement BuildAnchorTag(Anchor anchor)
         {
-            var tag = new TagBuilder("a");
+            var htmlElement = new HtmlElement("a");
 
             if (anchor.NoFollow)
             {
-                tag.MergeAttribute("rel", "nofollow");
+                htmlElement.AddAttribute("rel", "nofollow");
             }
 
-            tag.MergeAttribute("href", anchor.Href);
-            tag.MergeAttribute("title", anchor.Title);
+            htmlElement.AddAttribute("href", anchor.Href);
+            htmlElement.AddAttribute("title", anchor.Title);
 
             if (!string.IsNullOrEmpty(anchor.Text))
             {
-                tag.SetInnerText(anchor.Text);
+                htmlElement.SetInnerText(anchor.Text);
             }
 
-            return tag;
+            return htmlElement;
         }
 
-        private static TagBuilder BuildImageTag(SeoPack.Html.Image image)
+        private HtmlElement BuildImageTag(SeoPack.Html.Image image)
         {
-            var tag = new TagBuilder("img");
-            tag.MergeAttribute("src", image.Src);
-            tag.MergeAttribute("alt", image.AltText);
+            var htmlElement = new HtmlElement("img");
+            htmlElement.AddAttribute("src", image.Src);
+            htmlElement.AddAttribute("alt", image.AltText);
 
             if (image.Attributes != null)
             {
                 foreach (var pair in DictionaryFromAnonymousObject(image.Attributes))
                 {
-                    tag.MergeAttribute(pair.Key, pair.Value);
+                    htmlElement.AddAttribute(pair.Key, pair.Value);
                 }
             }
 
-            return tag;
+            return htmlElement;
         }
 
-        private static IDictionary<string, string> DictionaryFromAnonymousObject(object o)
+        private IDictionary<string, string> DictionaryFromAnonymousObject(object o)
         {
             IDictionary<string, string> dic = new Dictionary<string, string>();
             var properties = o.GetType().GetProperties();
@@ -303,13 +314,13 @@ namespace SeoPack.Helpers
             return dic;
         }
 
-        private static IHtmlString BuildCanonicalLink(string canonicalUrl)
+        private IHtmlString BuildCanonicalLink(string canonicalUrl)
         {
-            var tag = new TagBuilder("link");
-            tag.MergeAttribute("rel", "canonical");
-            tag.MergeAttribute("href", canonicalUrl);
+            var htmlElement = new HtmlElement("link");
+            htmlElement.AddAttribute("rel", "canonical");
+            htmlElement.AddAttribute("href", canonicalUrl);
 
-            return MvcHtmlString.Create(tag.ToString(TagRenderMode.SelfClosing));
+            return MvcHtmlString.Create(htmlElement.ToString());
         }
 
         #endregion
