@@ -28,9 +28,9 @@ namespace SeoPack.Html
             PageIsZeroBased = pageIsZeroBased;
         }
 
-        public int CurrentPage { get; set; }
-        public int RecordCount { get; set; }
-        public string UrlFormat { get; set; }
+        public int CurrentPage { get; private set; }
+        public int RecordCount { get; private set; }
+        public string UrlFormat { get; private set; }
         public bool PageIsZeroBased { get; set; }
     }
 }

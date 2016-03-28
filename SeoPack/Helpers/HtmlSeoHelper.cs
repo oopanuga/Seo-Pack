@@ -78,9 +78,9 @@ namespace SeoPack.Helpers
         /// <summary>
         /// Returns an seo compliant image tag.
         /// </summary>
-        /// <param name="image"></param>
-        /// <returns></returns>
-        public IHtmlString Image(SeoPack.Html.Image image)
+        /// <param name="image">Data used to build an image tag.</param>
+        /// <returns>The html string.</returns>
+        public IHtmlString Image(Image image)
         {
             if (image == null)
             {
@@ -92,10 +92,10 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// 
+        /// Returns an seo compliant anchor tag.
         /// </summary>
-        /// <param name="anchor"></param>
-        /// <returns></returns>
+        /// <param name="anchor">Data used to build an anchor tag.</param>
+        /// <returns>The html string.</returns>
         public IHtmlString Anchor(Anchor anchor)
         {
             if (anchor == null)
@@ -107,10 +107,10 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// 
+        /// Returns an seo compliant image link.
         /// </summary>
-        /// <param name="imageLink"></param>
-        /// <returns></returns>
+        /// <param name="imageLink">Data used to build an anchor tag.</param>
+        /// <returns>The html string.</returns>
         public IHtmlString ImageLink(ImageLink imageLink)
         {
             if (imageLink == null)
@@ -189,14 +189,15 @@ namespace SeoPack.Helpers
 
             var str = new StringBuilder();
             int firstPage = 1;
+            int recordCount = pagingLink.RecordCount;
 
             if (pagingLink.PageIsZeroBased)
             {
-                pagingLink.RecordCount--;
+                recordCount--;
                 firstPage = 0;
             }
 
-            if (pagingLink.CurrentPage < pagingLink.RecordCount)
+            if (pagingLink.CurrentPage < recordCount)
             {
                 var htmlElement = new HtmlElement("link");
                 htmlElement.AddAttribute("rel", "next");
@@ -269,18 +270,29 @@ namespace SeoPack.Helpers
         private HtmlElement BuildAnchorTag(AnchorBase anchor, string anchorText = "")
         {
             var htmlElement = new HtmlElement("a");
+            htmlElement.AddAttribute("href", anchor.Href);
+
+            if(!string.IsNullOrEmpty(anchor.Title))
+            {
+                htmlElement.AddAttribute("title", anchor.Title);
+            }
 
             if (anchor.NoFollow)
             {
                 htmlElement.AddAttribute("rel", "nofollow");
             }
 
-            htmlElement.AddAttribute("href", anchor.Href);
-            htmlElement.AddAttribute("title", anchor.Title);
-
             if (!string.IsNullOrEmpty(anchorText))
             {
                 htmlElement.SetInnerText(anchorText);
+            }
+
+            if (anchor.Attributes != null)
+            {
+                foreach (var pair in DictionaryFromAnonymousObject(anchor.Attributes))
+                {
+                    htmlElement.AddAttribute(pair.Key, pair.Value);
+                }
             }
 
             return htmlElement;
@@ -291,6 +303,11 @@ namespace SeoPack.Helpers
             var htmlElement = new HtmlElement("img");
             htmlElement.AddAttribute("src", image.Src);
             htmlElement.AddAttribute("alt", image.AltText);
+
+            if (!string.IsNullOrEmpty(image.Title))
+            {
+                htmlElement.AddAttribute("title", image.Title);
+            }
 
             if (image.Attributes != null)
             {

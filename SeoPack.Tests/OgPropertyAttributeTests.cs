@@ -7,7 +7,7 @@ namespace SeoPack.Tests
     [TestFixture]
     public class OgPropertyAttributeTests
     {
-        [Category("OgPropertyAttribute(name)")]
+        [Category("OgPropertyAttribute.Constructor")]
         public class Constructor
         {
             [Test]
@@ -28,11 +28,12 @@ namespace SeoPack.Tests
                 Assert.That(ogpa.Name, Is.EqualTo(propertyName));
             }
 
-            [Test]
+            [TestCase("")]
+            [TestCase(null)]
             [ExpectedException(typeof(ArgumentException))]
-            public void Should_throw_exception_when_property_name_not_supplied_by_caller()
+            public void Should_throw_exception_when_property_name_not_supplied_by_caller(string propertyName)
             {
-                var ogpa = new OgPropertyAttribute(string.Empty);
+                var ogpa = new OgPropertyAttribute(propertyName);
             }
         }
     }

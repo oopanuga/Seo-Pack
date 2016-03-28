@@ -49,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HtmlSeoHelperTests.cs" />
+    <Compile Include="Models\AnchorTests.cs" />
+    <Compile Include="Models\ImageLinkTests.cs" />
+    <Compile Include="Models\ImageTests.cs" />
     <Compile Include="OgHtmlSerializerTests.cs" />
     <Compile Include="OgPropertyAttributeTests.cs" />
     <Compile Include="OgSerializer\OgSerializerBaseTests.cs" />

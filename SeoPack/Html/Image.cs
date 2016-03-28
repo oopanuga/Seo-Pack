@@ -24,5 +24,6 @@ namespace SeoPack.Html
         public string Src { get; private set; }
         public string AltText { get; private set; }
         public object Attributes { get; set; }
+        public string Title { get; set; }
     }
 }
