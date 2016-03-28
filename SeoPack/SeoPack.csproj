@@ -32,7 +32,6 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\SeoPack.XML</DocumentationFile>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugNET40|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\DebugNET40\</OutputPath>
@@ -77,7 +76,6 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -91,6 +89,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\IHtmlSeoHelper.cs" />
+    <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Html\HtmlElement.cs" />
     <Compile Include="Html\HrefLangLink.cs" />
     <Compile Include="Html\Anchor.cs" />
     <Compile Include="Html\Image.cs" />
@@ -98,17 +99,16 @@
     <Compile Include="Html\OpenGraph\ObjectTypes\Standard\OgBook.cs" />
     <Compile Include="Html\OpenGraph\OgHtmlSerializer.cs" />
     <Compile Include="Html\OpenGraph\OgProperty.cs" />
-    <Compile Include="Html\OpenGraph\StructuredProperties\OgAudio.cs" />
-    <Compile Include="Html\OpenGraph\StructuredProperties\OgImage.cs" />
+    <Compile Include="Html\OpenGraph\OgAudio.cs" />
+    <Compile Include="Html\OpenGraph\OgImage.cs" />
     <Compile Include="Html\OpenGraph\ObjectTypes\Standard\OgArticle.cs" />
     <Compile Include="Html\OpenGraph\ObjectTypes\Standard\OgWebsite.cs" />
     <Compile Include="Html\OpenGraph\Og.cs" />
     <Compile Include="Html\OpenGraph\OgSerializerBase.cs" />
     <Compile Include="Html\OpenGraph\Enums.cs" />
     <Compile Include="Html\OpenGraph\OgPropertyAttribute.cs" />
-    <Compile Include="Html\OpenGraph\OgStructuredPropertyAttribute.cs" />
     <Compile Include="Helpers\HtmlSeoHelper.cs" />
-    <Compile Include="Html\OpenGraph\StructuredProperties\OgVideo.cs" />
+    <Compile Include="Html\OpenGraph\OgVideo.cs" />
     <Compile Include="Html\PagingLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

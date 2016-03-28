@@ -1,5 +1,4 @@
-﻿using SeoPack.Html.OpenGraph.StructuredProperties;
-using System;
+﻿using System;
 
 namespace SeoPack.Html.OpenGraph.ObjectTypes.Standard
 {

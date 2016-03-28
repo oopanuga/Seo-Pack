@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using SeoPack.Html;
+using SeoPack.Html.OpenGraph;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace SeoPack.Html.OpenGraph
+namespace SeoPack.Tests.OgSerializer
 {
-    public class OgHtmlSerializer : OgSerializerBase<IHtmlString>
+    public class OgTestSerializer : OgSerializerBase<string>
     {
-        protected override IHtmlString Serialize(IEnumerable<OgProperty> properties)
+        protected override string Serialize(IEnumerable<OgProperty> properties)
         {
             var tagString = new StringBuilder();
 
@@ -16,7 +20,7 @@ namespace SeoPack.Html.OpenGraph
                 tagString.Append(BuildOpenGraphTag(property.Name, property.Value));
             }
 
-            return MvcHtmlString.Create(tagString.ToString());
+            return tagString.ToString();
         }
 
         private string BuildOpenGraphTag(string propertyName, string content)

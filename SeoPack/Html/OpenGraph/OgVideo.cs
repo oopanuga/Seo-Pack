@@ -1,28 +1,27 @@
 ﻿using System;
 
-namespace SeoPack.Html.OpenGraph.StructuredProperties
+namespace SeoPack.Html.OpenGraph
 {
-    [OgStructuredProperty]
-    public class OgImage
+    public class OgVideo
     {
-        public OgImage(Uri url)
+        public OgVideo(Uri url)
         {
             Url = url;
         }
 
-        [OgProperty("image")]
+        [OgProperty("video")]
         public Uri Url { get; private set; }
 
-        [OgProperty("image:secure_url")]
+        [OgProperty("video:secure_url")]
         public Uri SecureUrl { get; private set; }
 
-        [OgProperty("image:type")]
+        [OgProperty("video:type")]
         public string ImageType { get; set; }
 
-        [OgProperty("image:width")]
+        [OgProperty("video:width")]
         public int Width { get; set; }
 
-        [OgProperty("image:height")]
+        [OgProperty("video:height")]
         public int Height { get; set; }
 
         public override string ToString()

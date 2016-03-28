@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace SeoPack.Html.OpenGraph.StructuredProperties
+namespace SeoPack.Html.OpenGraph
 {
-    [OgStructuredProperty]
     public class OgAudio
     {
         public OgAudio(Uri url)

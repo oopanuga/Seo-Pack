@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SeoPack.Html.OpenGraph
 {
@@ -15,6 +16,11 @@ namespace SeoPack.Html.OpenGraph
 
         public T Serialize(Og og)
         {
+            if (og == null)
+            {
+                throw new ArgumentNullException("og");
+            }
+
             BuildOpenGraphData(og);
 
             return Serialize(_properties);
@@ -28,32 +34,35 @@ namespace SeoPack.Html.OpenGraph
 
             foreach (var property in type.GetProperties())
             {
-                var propertyType = property.PropertyType;
-
-                // if its an og structured property then call function recursively
-                if (!propertyType.Equals(typeof(string)) && !propertyType.IsPrimitive)
-                {
-                    var propertyValue = property.GetValue(obj, null);
-                    if (propertyValue == null) continue;
-
-                    var ogspAttributes = propertyValue.GetType()
-                        .GetCustomAttributes(typeof(OgStructuredPropertyAttribute), true) as OgStructuredPropertyAttribute[];
-
-                    if (ogspAttributes != null && ogspAttributes.Length > 0)
-                    {
-                        BuildOpenGraphData(property.GetValue(obj, null));
-                        continue;
-                    };
-                }
-
                 //
                 var ogpAttributes = property
                     .GetCustomAttributes(typeof(OgPropertyAttribute), true) as OgPropertyAttribute[];
 
+                var propertTypeIsComplex = false;
                 if (ogpAttributes != null && ogpAttributes.Length > 0)
                 {
+                    var propertyType = property.PropertyType;
+
+                    // if property returns a complex type then call function recursively
+                    if (!propertyType.Equals(typeof(string)) && !propertyType.IsPrimitive)
+                    {
+                        var propertyValue = property.GetValue(obj, null);
+                        if (propertyValue == null) continue;
+
+                        BuildOpenGraphData(property.GetValue(obj, null));
+                        propertTypeIsComplex = true;
+                    }
+
                     var ogName = ogpAttributes[0].Name;
                     var ogValue = property.GetValue(obj, null);
+
+                    // if its a structured property and if the ogproperty name is represented as a property
+                    // on of the structured property then move to the next item on the list
+                    if (propertTypeIsComplex &&
+                        _properties.Any(x => x.Name.Equals(ogName, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        continue;
+                    }
 
                     if (ogValue != null && !ogValue.Equals(GetTypeDefaultValue(ogValue.GetType())))
                     {
