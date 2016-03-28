@@ -5,13 +5,13 @@ namespace SeoPack.Html.OpenGraph.ObjectTypes.Standard
 {
     public class OgBook : Og
     {
-        public OgBook(string title, Uri url, OgImage image)
+        public OgBook(string title, string url, OgImage image)
             : base(title, url, image, ObjectType.Book)
         {
         }
 
         [OgProperty("book:author")]
-        public Uri AuthorUrl { get; set; }
+        public string AuthorUrl { get; set; }
 
         [OgProperty("book:isbn")]
         public string ISBN { get; set; }

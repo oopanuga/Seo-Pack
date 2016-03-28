@@ -4,16 +4,16 @@ namespace SeoPack.Html.OpenGraph
 {
     public class OgImage
     {
-        public OgImage(Uri url)
+        public OgImage(string url)
         {
             Url = url;
         }
 
         [OgProperty("image")]
-        public Uri Url { get; private set; }
+        public string Url { get; private set; }
 
         [OgProperty("image:secure_url")]
-        public Uri SecureUrl { get; private set; }
+        public string SecureUrl { get; private set; }
 
         [OgProperty("image:type")]
         public string ImageType { get; set; }
@@ -26,7 +26,7 @@ namespace SeoPack.Html.OpenGraph
 
         public override string ToString()
         {
-            return Url.AbsoluteUri;
+            return Url;
         }
     }
 }

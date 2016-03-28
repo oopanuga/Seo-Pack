@@ -5,13 +5,13 @@ namespace SeoPack.Html.OpenGraph.ObjectTypes.Standard
 {
     public class OgArticle : Og
     {
-        public OgArticle(string title, Uri url, OgImage image)
+        public OgArticle(string title, string url, OgImage image)
             : base(title, url, image, ObjectType.Article)
         {
         }
 
         [OgProperty("article:author")]
-        public IEnumerable<Uri> AuthorUrls { get; set; }
+        public IEnumerable<string> AuthorUrls { get; set; }
 
         [OgProperty("article:expiration_time")] 
         public DateTime ExpirationTime { get; set; }

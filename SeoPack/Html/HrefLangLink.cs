@@ -4,7 +4,7 @@ namespace SeoPack.Html
 {
     public class HrefLangLink
     {
-        public HrefLangLink(string pageName, Uri canonicalUrl, string language)
+        public HrefLangLink(string pageName, string canonicalUrl, string language)
         {
             if (string.IsNullOrEmpty(pageName))
             {
@@ -27,7 +27,7 @@ namespace SeoPack.Html
         }
 
         public string PageName { get; private set; }
-        public Uri CanonicalUrl { get; private set; }
+        public string CanonicalUrl { get; private set; }
         public string Language { get; private set; }
     }
 }

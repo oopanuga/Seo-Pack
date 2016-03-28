@@ -20,7 +20,7 @@ namespace SeoPack.Helpers
 
         IHtmlString ImageLink(ImageLink imageLink);
 
-        IHtmlString CanonicalLink(Uri canonicalUrl);
+        IHtmlString CanonicalLink(string canonicalUrl);
 
         IHtmlString CanonicalLink();
 

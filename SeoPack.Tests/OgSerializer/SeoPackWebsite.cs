@@ -10,12 +10,12 @@ namespace SeoPack.Tests.OgSerializer
 {
     public class SeoPackWebsite : Website
     {
-        public SeoPackWebsite(string title, Uri url, OgImage image)
+        public SeoPackWebsite(string title, string url, OgImage image)
             : base(title, url, image)
         {
         }
 
-        public Uri ContactPageUrl { get; set; }
+        public string ContactPageUrl { get; set; }
 
         [OgProperty("address")]
         public Address Address { get; set; }
@@ -41,7 +41,7 @@ namespace SeoPack.Tests.OgSerializer
     public class AboutUs
     {
         [OgProperty("aboutus")]
-        public Uri Url { get; set; }
+        public string Url { get; set; }
 
         [OgProperty("founder")]
         public string Founder { get; set; }

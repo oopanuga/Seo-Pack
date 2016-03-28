@@ -130,7 +130,7 @@ namespace SeoPack.Helpers
         /// </summary>
         /// <param name="canonicalUrl"></param>
         /// <returns></returns>
-        public IHtmlString CanonicalLink(Uri canonicalUrl)
+        public IHtmlString CanonicalLink(string canonicalUrl)
         {
             if (canonicalUrl == null)
             {
@@ -139,13 +139,13 @@ namespace SeoPack.Helpers
 
             var currentPageUrl = HttpContext.Current.Request.Url.AbsoluteUri.ToLower();
 
-            if (currentPageUrl.Equals(canonicalUrl.AbsoluteUri.ToLower()))
+            if (currentPageUrl.Equals(canonicalUrl.ToLower()))
                 return MvcHtmlString.Create(string.Empty);
 
-            if (!currentPageUrl.StartsWith(canonicalUrl.AbsoluteUri.ToLower()))
+            if (!currentPageUrl.StartsWith(canonicalUrl.ToLower()))
                 return MvcHtmlString.Create(string.Empty);
 
-            return BuildCanonicalLink(canonicalUrl.AbsoluteUri);
+            return BuildCanonicalLink(canonicalUrl);
         }
 
         public IHtmlString CanonicalLink()
@@ -234,7 +234,7 @@ namespace SeoPack.Helpers
             HtmlElement htmlElement;
             var currentPageUrl = HttpContext.Current.Request.Url.AbsoluteUri.ToLower();
             var foundUrl = hrefLangLinks.SingleOrDefault(
-                x => x.CanonicalUrl.AbsoluteUri.ToLower() == currentPageUrl);
+                x => x.CanonicalUrl.ToLower() == currentPageUrl);
 
             if (foundUrl == null)
                 return MvcHtmlString.Create(string.Empty);
@@ -243,20 +243,20 @@ namespace SeoPack.Helpers
 
             htmlElement = new HtmlElement("link");
             htmlElement.AddAttribute("rel", "alternate");
-            htmlElement.AddAttribute("href", foundUrl.CanonicalUrl.AbsoluteUri);
+            htmlElement.AddAttribute("href", foundUrl.CanonicalUrl);
             htmlElement.AddAttribute("hreflang", foundUrl.Language);
             str.Append(htmlElement.ToString());
 
             var otherUrlsWithSamePageName = hrefLangLinks.Where(x =>
                 x.PageName.ToLower() == foundUrl.PageName.ToLower() &&
-                x.CanonicalUrl.AbsoluteUri.Equals(foundUrl.CanonicalUrl.AbsoluteUri,
+                x.CanonicalUrl.Equals(foundUrl.CanonicalUrl,
                 StringComparison.CurrentCultureIgnoreCase));
 
             foreach (var otherUrl in otherUrlsWithSamePageName)
             {
                 htmlElement = new HtmlElement("link");
                 htmlElement.AddAttribute("rel", "alternate");
-                htmlElement.AddAttribute("href", otherUrl.CanonicalUrl.AbsoluteUri);
+                htmlElement.AddAttribute("href", otherUrl.CanonicalUrl);
                 htmlElement.AddAttribute("hreflang", otherUrl.Language);
                 str.Append(htmlElement.ToString());
             }

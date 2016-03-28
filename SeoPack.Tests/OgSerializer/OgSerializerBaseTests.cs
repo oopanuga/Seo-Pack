@@ -74,7 +74,7 @@ namespace SeoPack.Tests.OgSerializer
                 var website = SetupWebsiteOpenGraphObject();
                 website.AboutUs = new AboutUs()
                 {
-                    Url = new Uri("http://www.seopackweb.com/aboutus"),
+                    Url = "http://www.seopackweb.com/aboutus",
                     Founder = "Me",
                     Director = "Me"
                 };
@@ -89,9 +89,9 @@ namespace SeoPack.Tests.OgSerializer
             private static SeoPackWebsite SetupWebsiteOpenGraphObject()
             {
                 var websiteTitle = "The SeoPack website";
-                var websiteUrl = new Uri("http://www.seopackweb.com");
-                var websiteImageUrl = new Uri("http://www.seopackweb.com/seopack.png");
-                var websiteContactPageUrl = new Uri("http://www.seopackweb.com/contactus");
+                var websiteUrl = "http://www.seopackweb.com";
+                var websiteImageUrl = "http://www.seopackweb.com/seopack.png";
+                var websiteContactPageUrl = "http://www.seopackweb.com/contactus";
 
                 var website = new SeoPackWebsite(
                     websiteTitle,

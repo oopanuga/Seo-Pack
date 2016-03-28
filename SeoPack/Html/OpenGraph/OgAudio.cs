@@ -4,23 +4,23 @@ namespace SeoPack.Html.OpenGraph
 {
     public class OgAudio
     {
-        public OgAudio(Uri url)
+        public OgAudio(string url)
         {
             Url = url;
         }
 
         [OgProperty("audio")]
-        public Uri Url { get; private set; }
+        public string Url { get; private set; }
 
         [OgProperty("audio:secure_url")]
-        public Uri SecureUrl { get; private set; }
+        public string SecureUrl { get; private set; }
 
         [OgProperty("audio:type")]
         public string ImageType { get; set; }
 
         public override string ToString()
         {
-            return Url.AbsoluteUri;
+            return Url;
         }
     }
 }

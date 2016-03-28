@@ -4,7 +4,7 @@ namespace SeoPack.Html.OpenGraph
 {
     public abstract class Og
     {
-        protected Og(string title, Uri url, OgImage image, ObjectType objectType)
+        protected Og(string title, string url, OgImage image, ObjectType objectType)
         {
             if(string.IsNullOrEmpty(title))
             {
@@ -37,10 +37,10 @@ namespace SeoPack.Html.OpenGraph
         public OgImage Image { get; private set; }
 
         [OgProperty("url")]
-        public Uri Url { get; private set; }
+        public string Url { get; private set; }
 
         [OgProperty("audio")]
-        public Uri Audio { get; set; }
+        public string Audio { get; set; }
 
         [OgProperty("description")]
         public string Description { get; set; }
