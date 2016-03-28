@@ -11,9 +11,9 @@ namespace SeoPack.Html.OpenGraph
                 throw new ArgumentException("title not set");
             }
 
-            if (url == null)
+            if (string.IsNullOrEmpty(url))
             {
-                throw new ArgumentNullException("url");
+                throw new ArgumentException("url not set");
             }
 
             if (image == null)

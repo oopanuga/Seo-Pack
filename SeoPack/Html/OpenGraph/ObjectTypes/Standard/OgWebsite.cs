@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace SeoPack.Html.OpenGraph.ObjectTypes.Standard
 {
     public class Website : Og

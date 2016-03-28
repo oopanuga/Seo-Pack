@@ -103,7 +103,7 @@ namespace SeoPack.Helpers
                 throw new ArgumentNullException("anchor");
             }
 
-            return MvcHtmlString.Create(BuildAnchorTag(anchor).ToString());
+            return MvcHtmlString.Create(BuildAnchorTag(anchor, anchor.Text).ToString());
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace SeoPack.Helpers
                 throw new ArgumentNullException("imageLink");
             }
 
-            var anchorTag = BuildAnchorTag((Anchor)imageLink);
+            var anchorTag = BuildAnchorTag(imageLink);
 
             anchorTag.InnerHtml = BuildImageTag(imageLink.Image).ToString();
 
@@ -132,9 +132,9 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public IHtmlString CanonicalLink(string canonicalUrl)
         {
-            if (canonicalUrl == null)
+            if (string.IsNullOrEmpty(canonicalUrl))
             {
-                throw new ArgumentNullException("canonicalUrl");
+                throw new ArgumentException("canonicalUrl not set");
             }
 
             var currentPageUrl = HttpContext.Current.Request.Url.AbsoluteUri.ToLower();
@@ -180,7 +180,7 @@ namespace SeoPack.Helpers
         /// </summary>
         /// <param name="pagingLink"></param>
         /// <returns></returns>
-        public IHtmlString PagingLink(PagingLink pagingLink)
+        public IHtmlString PaginationAttributes(Pagination pagingLink)
         {
             if (pagingLink == null)
             {
@@ -266,7 +266,7 @@ namespace SeoPack.Helpers
 
         #region Private Methods
 
-        private HtmlElement BuildAnchorTag(Anchor anchor)
+        private HtmlElement BuildAnchorTag(AnchorBase anchor, string anchorText = "")
         {
             var htmlElement = new HtmlElement("a");
 
@@ -278,9 +278,9 @@ namespace SeoPack.Helpers
             htmlElement.AddAttribute("href", anchor.Href);
             htmlElement.AddAttribute("title", anchor.Title);
 
-            if (!string.IsNullOrEmpty(anchor.Text))
+            if (!string.IsNullOrEmpty(anchorText))
             {
-                htmlElement.SetInnerText(anchor.Text);
+                htmlElement.SetInnerText(anchorText);
             }
 
             return htmlElement;

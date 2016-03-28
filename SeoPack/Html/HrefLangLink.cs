@@ -11,7 +11,7 @@ namespace SeoPack.Html
                 throw new ArgumentException("pageName not set");
             }
 
-            if (canonicalUrl == null)
+            if (string.IsNullOrEmpty(canonicalUrl))
             {
                 throw new ArgumentException("canonicalUrl not set");
             }

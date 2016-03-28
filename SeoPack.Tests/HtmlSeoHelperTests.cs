@@ -1,10 +1,6 @@
 ﻿using NUnit.Framework;
 using SeoPack.Helpers;
-using SeoPack.Html;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SeoPack.Tests
 {
@@ -88,7 +84,7 @@ namespace SeoPack.Tests
                 var seoHelper = new HtmlSeoHelper();
                 var output = seoHelper.MetaDescription(description, true);
 
-                Assert.That(output.ToString(), Is.EqualTo(string.Format("<meta name=\"description\" content=\"{0}\" />", description)));
+                Assert.That(output.ToString(), Is.EqualTo(string.Format("<meta name=\"description\" content=\"{0}\">", description)));
             }
 
             [TestCase("The is the official SeoPack website. We've got tonThe is the official SeoPack website. " +
@@ -100,7 +96,7 @@ namespace SeoPack.Tests
                 var seoHelper = new HtmlSeoHelper();
                 var output = seoHelper.MetaDescription(description, false);
 
-                Assert.That(output.ToString(), Is.EqualTo(string.Format("<meta name=\"description\" content=\"{0}\" />", description)));
+                Assert.That(output.ToString(), Is.EqualTo(string.Format("<meta name=\"description\" content=\"{0}\">", description)));
             }
         }
 

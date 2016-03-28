@@ -2,9 +2,6 @@
 using SeoPack.Html.OpenGraph.ObjectTypes.Standard;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeoPack.Tests.OgSerializer
 {
@@ -22,6 +19,12 @@ namespace SeoPack.Tests.OgSerializer
 
         [OgProperty("aboutus")]
         public AboutUs AboutUs { get; set; }
+
+        [OgProperty("contact_number")]
+        public List<PhoneNumber> ContactNumbers { get; set; }
+
+        [OgProperty("start_date")]
+        public DateTime? StartDate { get; set; }
     }
 
     public class Address
@@ -52,6 +55,17 @@ namespace SeoPack.Tests.OgSerializer
         public override string ToString()
         {
             return "SeoPack rocks!!!";
+        }
+    }
+
+    public class PhoneNumber
+    {
+        public string CountryCode { get; set; }
+        public string Number { get; set; }
+
+        public override string ToString()
+        {
+            return Number;
         }
     }
 }
