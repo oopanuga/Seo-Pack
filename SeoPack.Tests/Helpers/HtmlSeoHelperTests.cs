@@ -2,8 +2,10 @@
 using SeoPack.Helpers;
 using SeoPack.Html;
 using System;
+using System.IO;
+using System.Web;
 
-namespace SeoPack.Tests
+namespace SeoPack.Tests.Helpers
 {
     [TestFixture]
     public class HtmlSeoHelperTests
@@ -116,8 +118,88 @@ namespace SeoPack.Tests
             }
         }
 
+        [Category("HtmlSeoHelper.CanonicalLinkIfRequired(canonicalUrl)")]
+        public class CanonicalLinkWithArgTests
+        {
+            [TestCase(null)]
+            [TestCase("")]
+            [ExpectedException(typeof(ArgumentException))]
+            public void Should_throw_exception_if_canonicalurl_is_not_set(string canonicalUrl)
+            {
+                var seoHelper = new HtmlSeoHelper();
+                seoHelper.CanonicalLinkIfRequired(canonicalUrl);
+            }
+
+            [Test]
+            public void Should_return_a_canonicallink_if_current_url_starts_with_canonical_url_but_is_not_same_as_canonical_url()
+            {
+                var canonicalUrl = "http://www.seopack.com/marketplace";
+                var currentPageUrl = "http://www.seopack.com/marketplace?query=seo";
+
+                HttpContext.Current = new HttpContext(
+                    new HttpRequest("", currentPageUrl, ""), 
+                    new HttpResponse(new StringWriter()));
+
+                var seoHelper = new HtmlSeoHelper();
+                var output = seoHelper.CanonicalLinkIfRequired(canonicalUrl);
+
+                Assert.That(output.ToString(), Is.EqualTo(string.Format("<link rel=\"canonical\" href=\"{0}\" />", canonicalUrl)));
+            }
+
+            [Test]
+            public void Should_return_an_empty_string_if_current_url_doesnt_start_with_canonical_url()
+            {
+                var canonicalUrl = "http://www.seopack.com/marketplace";
+                var currentPageUrl = "http://www.seopack.com/blog?category=somecategory";
+
+                HttpContext.Current = new HttpContext(
+                    new HttpRequest("", currentPageUrl, ""),
+                    new HttpResponse(new StringWriter()));
+
+                var seoHelper = new HtmlSeoHelper();
+                var output = seoHelper.CanonicalLinkIfRequired(canonicalUrl);
+
+                Assert.That(output.ToString(), Is.EqualTo(string.Empty));
+            }
+        }
+
+        [Category("HtmlSeoHelper.CanonicalLinkIfRequired()")]
+        public class CanonicalLinkTests
+        {
+            [Test]
+            public void Should_return_a_canonicallink_if_current_url_has_querystrings()
+            {
+                var canonicalUrl = "http://www.seopack.com/marketplace";
+                var currentPageUrl = "http://www.seopack.com/marketplace?query=seo";
+
+                HttpContext.Current = new HttpContext(
+                    new HttpRequest("", currentPageUrl, ""),
+                    new HttpResponse(new StringWriter()));
+
+                var seoHelper = new HtmlSeoHelper();
+                var output = seoHelper.CanonicalLinkIfRequired();
+
+                Assert.That(output.ToString(), Is.EqualTo(string.Format("<link rel=\"canonical\" href=\"{0}\" />", canonicalUrl)));
+            }
+
+            [Test]
+            public void Should_return_an_empty_string_if_current_url_does_not_have_querystrings()
+            {
+                var currentPageUrl = "http://www.seopack.com/marketplace";
+
+                HttpContext.Current = new HttpContext(
+                    new HttpRequest("", currentPageUrl, ""),
+                    new HttpResponse(new StringWriter()));
+
+                var seoHelper = new HtmlSeoHelper();
+                var output = seoHelper.CanonicalLinkIfRequired();
+
+                Assert.That(output.ToString(), Is.EqualTo(string.Empty));
+            }
+        }
+
         [Category("HtmlSeoHelper.Title(title)")]
-        public class Title
+        public class TitleTests
         {
             [TestCase(null)]
             [TestCase("")]
@@ -162,7 +244,7 @@ namespace SeoPack.Tests
         }
 
         [Category("HtmlSeoHelper.MetaDescription(description)")]
-        public class MetaDescription
+        public class MetaDescriptionTests
         {
             [TestCase(null)]
             [TestCase("")]

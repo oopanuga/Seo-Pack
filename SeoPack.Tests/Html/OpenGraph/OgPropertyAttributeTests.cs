@@ -2,13 +2,13 @@
 using SeoPack.Html.OpenGraph;
 using System;
 
-namespace SeoPack.Tests
+namespace SeoPack.Tests.Html.OpenGraph
 {
     [TestFixture]
     public class OgPropertyAttributeTests
     {
         [Category("OgPropertyAttribute.Constructor")]
-        public class Constructor
+        public class ConstructorTests
         {
             [Test]
             public void Should_not_duplicate_og_colon_prefix_when_supplied_by_caller()

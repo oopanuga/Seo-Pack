@@ -31,7 +31,7 @@ namespace SeoPack.Html.OpenGraph
         public string Title { get; private set; }
 
         [OgProperty("type")]
-        protected ObjectType Type { get; private set; }
+        public ObjectType Type { get; private set; }
 
         [OgProperty("image")]
         public OgImage Image { get; private set; }

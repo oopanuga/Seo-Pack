@@ -3,7 +3,7 @@ using SeoPack.Html.OpenGraph;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SeoPack.Tests.OgSerializer
+namespace SeoPack.Tests.Html.OpenGraph
 {
     public class OgTestSerializer : OgSerializerBase<string>
     {

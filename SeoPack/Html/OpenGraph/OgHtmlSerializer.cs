@@ -5,8 +5,16 @@ using System.Web.Mvc;
 
 namespace SeoPack.Html.OpenGraph
 {
+    /// <summary>
+    /// Represents a class that serializes an open graph object to Html.
+    /// </summary>
     public class OgHtmlSerializer : OgSerializerBase<IHtmlString>
     {
+        /// <summary>
+        /// Serializes the supplied open graph object to Html.
+        /// </summary>
+        /// <param name="properties">A dictionary of open graph properties.</param>
+        /// <returns>The html string.</returns>
         protected override IHtmlString Serialize(IEnumerable<OgProperty> properties)
         {
             var tagString = new StringBuilder();

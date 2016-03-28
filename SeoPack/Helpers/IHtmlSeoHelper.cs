@@ -17,9 +17,9 @@ namespace SeoPack.Helpers
 
         IHtmlString ImageLink(ImageLink imageLink);
 
-        IHtmlString CanonicalLink(string canonicalUrl);
+        IHtmlString CanonicalLinkIfRequired(string canonicalUrl);
 
-        IHtmlString CanonicalLink();
+        IHtmlString CanonicalLinkIfRequired();
 
         IHtmlString OpenGraph(Og og);
 

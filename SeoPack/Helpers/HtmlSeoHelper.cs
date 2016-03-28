@@ -126,11 +126,12 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// 
+        /// Returns a seo compliant canonical link if the current url starts with the 
+        /// supplied canonical url but is not the same as the supplied canonical url.
         /// </summary>
-        /// <param name="canonicalUrl"></param>
-        /// <returns></returns>
-        public IHtmlString CanonicalLink(string canonicalUrl)
+        /// <param name="canonicalUrl">The canonical url.</param>
+        /// <returns>The html string.</returns>
+        public IHtmlString CanonicalLinkIfRequired(string canonicalUrl)
         {
             if (string.IsNullOrEmpty(canonicalUrl))
             {
@@ -148,23 +149,30 @@ namespace SeoPack.Helpers
             return BuildCanonicalLink(canonicalUrl);
         }
 
-        public IHtmlString CanonicalLink()
+        /// <summary>
+        /// Returns a seo compliant canonical link if the current url has querystrings.
+        /// </summary>
+        /// <returns>The html string.</returns>
+        public IHtmlString CanonicalLinkIfRequired()
         {
             var query = HttpContext.Current.Request.Url.Query;
-            var canonicalUrl = "";
-            if (query.Length > 0)
-                canonicalUrl = HttpContext.Current.Request.Url.AbsoluteUri.Replace(query, "");
-            else
-                canonicalUrl = HttpContext.Current.Request.Url.AbsoluteUri;
+
+            if (query.Length == 0)
+            {
+                return MvcHtmlString.Create(string.Empty);
+            }
+
+            var canonicalUrl = HttpContext.Current
+                .Request.Url.AbsoluteUri.Replace(query, "");
 
             return BuildCanonicalLink(canonicalUrl);
         }
 
         /// <summary>
-        /// 
+        /// Returns a seo compliant opengraph tag.
         /// </summary>
-        /// <param name="og"></param>
-        /// <returns></returns>
+        /// <param name="og">The opengraph object.</param>
+        /// <returns>The html string</returns>
         public IHtmlString OpenGraph(Og og)
         {
             if (og == null)
@@ -272,7 +280,7 @@ namespace SeoPack.Helpers
             var htmlElement = new HtmlElement("a");
             htmlElement.AddAttribute("href", anchor.Href);
 
-            if(!string.IsNullOrEmpty(anchor.Title))
+            if (!string.IsNullOrEmpty(anchor.Title))
             {
                 htmlElement.AddAttribute("title", anchor.Title);
             }

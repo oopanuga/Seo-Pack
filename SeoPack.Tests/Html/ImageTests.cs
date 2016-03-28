@@ -2,7 +2,7 @@
 using SeoPack.Html;
 using System;
 
-namespace SeoPack.Tests.Models
+namespace SeoPack.Tests.Html
 {
     [TestFixture]
     public class ImageTests
@@ -30,7 +30,7 @@ namespace SeoPack.Tests.Models
             }
 
             [Test]
-            public void Should_set_appropriate_properties_when_instantiated()
+            public void Should_correctly_set_properties_when_set_explicitly_and_via_constructor_arguments()
             {
                 var attributes = new { @class = "dog" };
                 var title = "This is an image of a dog";

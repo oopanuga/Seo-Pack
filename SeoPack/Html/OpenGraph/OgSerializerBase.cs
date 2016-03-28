@@ -5,15 +5,27 @@ using System.Linq;
 
 namespace SeoPack.Html.OpenGraph
 {
+    /// <summary>
+    /// Represents a class that serializes an open graph object to the typeof T.
+    /// </summary>
+    /// <typeparam name="T">The </typeparam>
     public abstract class OgSerializerBase<T>
     {
         List<OgProperty> _properties;
 
+        /// <summary>
+        /// Initialises the OgSerializerBase class.
+        /// </summary>
         protected OgSerializerBase()
         {
             _properties = new List<OgProperty>();
         }
 
+        /// <summary>
+        /// Serializes the supplied open graph object to the typeof T.
+        /// </summary>
+        /// <param name="og">The opengraph object to serialize.</param>
+        /// <returns>The serialized open graph object.</returns>
         public T Serialize(Og og)
         {
             if (og == null)
@@ -21,14 +33,22 @@ namespace SeoPack.Html.OpenGraph
                 throw new ArgumentNullException("og");
             }
 
-            BuildOpenGraphData(og);
+            AddOgPropertiesToList(og);
 
             return Serialize(_properties);
         }
 
+        /// <summary>
+        /// Serializes the supplied open graph object to the typeof T. Derived types provide
+        /// an implementation for this Serialize overload.
+        /// </summary>
+        /// <param name="properties">An enumerable list of open graph properties.</param>
+        /// <returns>The serialized open graph object.</returns>
         protected abstract T Serialize(IEnumerable<OgProperty> properties);
 
-        private void BuildOpenGraphData(object obj)
+        #region Helper Methods
+
+        private void AddOgPropertiesToList(object obj)
         {
             var type = obj.GetType();
 
@@ -49,7 +69,7 @@ namespace SeoPack.Html.OpenGraph
                         var propertyValue = property.GetValue(obj, null);
                         if (propertyValue == null) continue;
 
-                        BuildOpenGraphData(property.GetValue(obj, null));
+                        AddOgPropertiesToList(property.GetValue(obj, null));
                         propertTypeIsComplex = true;
                     }
 
@@ -66,13 +86,13 @@ namespace SeoPack.Html.OpenGraph
 
                     if (ogValue != null && !ogValue.Equals(GetTypeDefaultValue(ogValue.GetType())))
                     {
-                        BuildOpenGraphData(ogName, ogValue);
+                        AddOgPropertyToList(ogName, ogValue);
                     }
                 }
             }
         }
 
-        private void BuildOpenGraphData(string propertyName, object content)
+        private void AddOgPropertyToList(string propertyName, object content)
         {
             if (content.GetType() != typeof(string) && content is IEnumerable)
             {
@@ -108,6 +128,8 @@ namespace SeoPack.Html.OpenGraph
                 return Activator.CreateInstance(type);
             }
             return null;
-        }
+        } 
+
+        #endregion
     }
 }

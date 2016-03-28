@@ -1,14 +1,15 @@
 ﻿using NUnit.Framework;
+using SeoPack.Html.OpenGraph;
 using System;
 using System.Collections.Generic;
 
-namespace SeoPack.Tests.OgSerializer
+namespace SeoPack.Tests.Html.OpenGraph
 {
     [TestFixture]
     public class OgSerializerBaseTests
     {
         [Category("OgSerializerBase.Serialize()")]
-        public class Serialize
+        public class SerializeTests
         {
             [Test]
             [ExpectedException(typeof(ArgumentNullException))]
@@ -139,7 +140,7 @@ namespace SeoPack.Tests.OgSerializer
                 var website = new SeoPackWebsite(
                     websiteTitle,
                     websiteUrl,
-                    new Html.OpenGraph.OgImage(websiteImageUrl))
+                    new OgImage(websiteImageUrl))
                 {
                     ContactPageUrl = websiteContactPageUrl
                 };
