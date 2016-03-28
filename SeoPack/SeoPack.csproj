@@ -96,6 +96,8 @@
     <Compile Include="Html\Anchor.cs" />
     <Compile Include="Html\Image.cs" />
     <Compile Include="Html\ImageLink.cs" />
+    <Compile Include="Html\AnchorBase.cs" />
+    <Compile Include="Html\OpenGraph\IStructuredProperty.cs" />
     <Compile Include="Html\OpenGraph\ObjectTypes\Standard\OgBook.cs" />
     <Compile Include="Html\OpenGraph\OgHtmlSerializer.cs" />
     <Compile Include="Html\OpenGraph\OgProperty.cs" />
@@ -109,7 +111,7 @@
     <Compile Include="Html\OpenGraph\OgPropertyAttribute.cs" />
     <Compile Include="Helpers\HtmlSeoHelper.cs" />
     <Compile Include="Html\OpenGraph\OgVideo.cs" />
-    <Compile Include="Html\PagingLink.cs" />
+    <Compile Include="Html\Pagination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

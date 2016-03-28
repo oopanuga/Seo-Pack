@@ -1,9 +1,6 @@
 ﻿using SeoPack.Html;
 using SeoPack.Html.OpenGraph;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web;
 
 namespace SeoPack.Helpers
@@ -20,13 +17,13 @@ namespace SeoPack.Helpers
 
         IHtmlString ImageLink(ImageLink imageLink);
 
-        IHtmlString CanonicalLink(Uri canonicalUrl);
+        IHtmlString CanonicalLink(string canonicalUrl);
 
         IHtmlString CanonicalLink();
 
         IHtmlString OpenGraph(Og og);
 
-        IHtmlString PagingLink(PagingLink pagingLink);
+        IHtmlString PaginationAttributes(Pagination pagingLink);
 
         IHtmlString HrefLangLink(List<HrefLangLink> hrefLangLinks);
     }

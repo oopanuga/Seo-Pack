@@ -2,21 +2,26 @@
 
 namespace SeoPack.Html.OpenGraph
 {
-    public class OgVideo
+    public class OgVideo : IStructuredProperty
     {
-        public OgVideo(Uri url)
+        public OgVideo(string url)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                throw new ArgumentException("url not set");
+            }
+
             Url = url;
         }
 
         [OgProperty("video")]
-        public Uri Url { get; private set; }
+        public string Url { get; private set; }
 
         [OgProperty("video:secure_url")]
-        public Uri SecureUrl { get; private set; }
+        public string SecureUrl { get; set; }
 
         [OgProperty("video:type")]
-        public string ImageType { get; set; }
+        public string Type { get; set; }
 
         [OgProperty("video:width")]
         public int Width { get; set; }
@@ -26,7 +31,7 @@ namespace SeoPack.Html.OpenGraph
 
         public override string ToString()
         {
-            return Url.AbsoluteUri;
+            return Url;
         }
     }
 }

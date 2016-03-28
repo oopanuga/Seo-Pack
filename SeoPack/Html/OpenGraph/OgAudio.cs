@@ -2,25 +2,30 @@
 
 namespace SeoPack.Html.OpenGraph
 {
-    public class OgAudio
+    public class OgAudio : IStructuredProperty
     {
-        public OgAudio(Uri url)
+        public OgAudio(string url)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                throw new ArgumentException("url not set");
+            }
+
             Url = url;
         }
 
         [OgProperty("audio")]
-        public Uri Url { get; private set; }
+        public string Url { get; private set; }
 
         [OgProperty("audio:secure_url")]
-        public Uri SecureUrl { get; private set; }
+        public string SecureUrl { get; set; }
 
         [OgProperty("audio:type")]
-        public string ImageType { get; set; }
+        public string Type { get; set; }
 
         public override string ToString()
         {
-            return Url.AbsoluteUri;
+            return Url;
         }
     }
 }

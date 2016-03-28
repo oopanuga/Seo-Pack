@@ -2,9 +2,9 @@
 
 namespace SeoPack.Html
 {
-    public class PagingLink
+    public class Pagination
     {
-        public PagingLink(int currentPage, int recordCount, string urlFormat, bool pageIsZeroBased = false)
+        public Pagination(int currentPage, int recordCount, string urlFormat, bool pageIsZeroBased = false)
         {
             if (recordCount <= 0)
             {

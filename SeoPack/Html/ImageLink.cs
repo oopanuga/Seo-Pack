@@ -2,28 +2,19 @@
 
 namespace SeoPack.Html
 {
-    public class ImageLink
+    public class ImageLink : AnchorBase
     {
-        public ImageLink(string linkHref, Image image, object linkAttributes = null)
+        public ImageLink(string href, Image image, bool noFollow = false, object attributes = null)
+            : base(href, noFollow, attributes)
         {
-            if(string.IsNullOrEmpty(linkHref))
-            {
-                throw new ArgumentException("linkHref not set");
-            }
-
             if (image == null)
             {
                 throw new ArgumentNullException("image");
             }
 
-            LinkHref = linkHref;
-            LinkAttributes = linkAttributes;
             Image = image;
         }
 
-        public string LinkHref { get; private set; }
-        public string LinkTitle { get; set; }
-        public object LinkAttributes { get; set; }
         public Image Image { get; private set; }
     }
 }

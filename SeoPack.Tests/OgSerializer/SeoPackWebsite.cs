@@ -2,26 +2,29 @@
 using SeoPack.Html.OpenGraph.ObjectTypes.Standard;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeoPack.Tests.OgSerializer
 {
     public class SeoPackWebsite : Website
     {
-        public SeoPackWebsite(string title, Uri url, OgImage image)
+        public SeoPackWebsite(string title, string url, OgImage image)
             : base(title, url, image)
         {
         }
 
-        public Uri ContactPageUrl { get; set; }
+        public string ContactPageUrl { get; set; }
 
         [OgProperty("address")]
         public Address Address { get; set; }
 
         [OgProperty("aboutus")]
         public AboutUs AboutUs { get; set; }
+
+        [OgProperty("contact_number")]
+        public List<PhoneNumber> ContactNumbers { get; set; }
+
+        [OgProperty("start_date")]
+        public DateTime? StartDate { get; set; }
     }
 
     public class Address
@@ -41,7 +44,7 @@ namespace SeoPack.Tests.OgSerializer
     public class AboutUs
     {
         [OgProperty("aboutus")]
-        public Uri Url { get; set; }
+        public string Url { get; set; }
 
         [OgProperty("founder")]
         public string Founder { get; set; }
@@ -52,6 +55,17 @@ namespace SeoPack.Tests.OgSerializer
         public override string ToString()
         {
             return "SeoPack rocks!!!";
+        }
+    }
+
+    public class PhoneNumber
+    {
+        public string CountryCode { get; set; }
+        public string Number { get; set; }
+
+        public override string ToString()
+        {
+            return Number;
         }
     }
 }

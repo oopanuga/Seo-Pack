@@ -2,21 +2,26 @@
 
 namespace SeoPack.Html.OpenGraph
 {
-    public class OgImage
+    public class OgImage : IStructuredProperty
     {
-        public OgImage(Uri url)
+        public OgImage(string url)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                throw new ArgumentException("url not set");
+            }
+
             Url = url;
         }
 
         [OgProperty("image")]
-        public Uri Url { get; private set; }
+        public string Url { get; private set; }
 
         [OgProperty("image:secure_url")]
-        public Uri SecureUrl { get; private set; }
+        public string SecureUrl { get; set; }
 
         [OgProperty("image:type")]
-        public string ImageType { get; set; }
+        public string Type { get; set; }
 
         [OgProperty("image:width")]
         public int Width { get; set; }
@@ -26,7 +31,7 @@ namespace SeoPack.Html.OpenGraph
 
         public override string ToString()
         {
-            return Url.AbsoluteUri;
+            return Url;
         }
     }
 }
