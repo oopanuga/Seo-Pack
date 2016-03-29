@@ -28,10 +28,5 @@ namespace SeoPack.Html.OpenGraph
 
         [OgProperty("video:height")]
         public int Height { get; set; }
-
-        public override string ToString()
-        {
-            return Url;
-        }
     }
 }

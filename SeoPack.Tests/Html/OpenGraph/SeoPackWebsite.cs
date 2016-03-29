@@ -25,27 +25,38 @@ namespace SeoPack.Tests.Html.OpenGraph
 
     public class SeoPackWebsite : Website
     {
-        public SeoPackWebsite(string title, string url, OgImage image)
-            : base(title, url, image)
+        public SeoPackWebsite(string title, string url, OgImage[] images)
+            : base(title, url, images)
         {
         }
 
-        public string ContactPageUrl { get; set; }
-
-        [OgStructuredProperty]
-        public Address Address { get; set; }
-
-        [OgProperty("aboutus")]
+        [OgProperty("aboutus", 20)]
         public AboutUs AboutUs { get; set; }
 
-        [OgProperty("contact_number")]
+        [OgStructuredProperty(21)]
+        public Product[] Products { get; set; }
+
+        [OgStructuredProperty(22)]
+        public Address Address { get; set; }
+
+        [OgProperty("contact_number", 23)]
         public List<PhoneNumber> ContactNumbers { get; set; }
 
-        [OgProperty("start_date")]
+        [OgProperty("start_date", 24)]
         public DateTime? StartDate { get; set; }
 
-        [OgProperty("website_type")]
+        [OgProperty("website_type", 25)]
         public WebsiteType WebsiteType { get; set; }
+
+        public string ContactPageUrl { get; set; }
+    }
+
+    public class Product
+    {
+        [OgProperty("product")]
+        public string Name { get; set; }
+        [OgProperty("product:description")]
+        public string Description { get; set; }
     }
 
     public class Address

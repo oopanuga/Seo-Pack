@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SeoPack.Html.OpenGraph
 {
     public abstract class Og
     {
-        protected Og(string title, string url, OgImage image, ObjectType objectType)
+        protected Og(string title, string url, OgImage[] images, ObjectType objectType)
         {
             if (string.IsNullOrEmpty(title))
             {
@@ -18,7 +19,7 @@ namespace SeoPack.Html.OpenGraph
                 throw new ArgumentException("url not set");
             }
 
-            if (image == null)
+            if (images == null || !images.Any())
             {
                 throw new ArgumentNullException("image");
             }
@@ -30,7 +31,7 @@ namespace SeoPack.Html.OpenGraph
 
             Title = title;
             Url = url;
-            Image = image;
+            Images = images;
             Type = objectType;
         }
 
@@ -44,7 +45,7 @@ namespace SeoPack.Html.OpenGraph
         public string Url { get; private set; }
 
         [OgStructuredProperty(4)]
-        public OgImage Image { get; private set; }
+        public OgImage[] Images { get; private set; }
 
         [OgProperty("audio", 5)]
         public string Audio { get; set; }

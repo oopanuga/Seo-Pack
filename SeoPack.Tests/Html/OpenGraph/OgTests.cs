@@ -20,7 +20,7 @@ namespace SeoPack.Tests.Html.OpenGraph
             [ExpectedException(typeof(ArgumentException))]
             public void Should_throw_exception_if_title_not_set(string title)
             {
-                new FakeOgWebsite(title, ogObjectUrl, new OgImage(ogImageUrl));
+                new FakeOgWebsite(title, ogObjectUrl, new OgImage[] { new OgImage(ogImageUrl) });
             }
 
             [TestCase(null)]
@@ -28,22 +28,22 @@ namespace SeoPack.Tests.Html.OpenGraph
             [ExpectedException(typeof(ArgumentException))]
             public void Should_throw_exception_if_url_not_set(string url)
             {
-                new FakeOgWebsite(title, url, new OgImage(ogImageUrl));
+                new FakeOgWebsite(title, url, new OgImage[] { new OgImage(ogImageUrl) });
             }
 
             [Test]
             [ExpectedException(typeof(ArgumentNullException))]
             public void Should_throw_exception_if_image_is_null()
             {
-                OgImage ogImage = null;
-                new FakeOgWebsite(title, ogObjectUrl, ogImage);
+                OgImage[] ogImages = null;
+                new FakeOgWebsite(title, ogObjectUrl,  ogImages );
             }
 
             [Test]
             public void Should_correctly_set_properties_when_done_explicitly_or_via_constructor_arguments()
             {
                 var ogImage = new OgImage(ogImageUrl);
-                var website = new FakeOgWebsite(title, ogObjectUrl, ogImage);
+                var website = new FakeOgWebsite(title, ogObjectUrl, new OgImage[] { ogImage });
                 var audioUrl = "http://www.seopack.com/audio";
                 var videoUrl = "http://www.seopack.com/video";
                 var description = "some description";
@@ -62,7 +62,7 @@ namespace SeoPack.Tests.Html.OpenGraph
 
                 Assert.That(website.Title, Is.EqualTo(title));
                 Assert.That(website.Url, Is.EqualTo(ogObjectUrl));
-                Assert.That(website.Image, Is.EqualTo(ogImage));
+                Assert.That(website.Images[0], Is.EqualTo(ogImage));
                 Assert.That(website.Audio, Is.EqualTo(audioUrl));
                 Assert.That(website.Description, Is.EqualTo(description));
                 Assert.That(website.Determiner, Is.EqualTo(determiner));

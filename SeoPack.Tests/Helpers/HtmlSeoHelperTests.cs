@@ -60,7 +60,7 @@ namespace SeoPack.Tests.Helpers
             }
 
             [Test]
-            public void Should_include_rel_nofollow_in_output_if_set_to_true()
+            public void Should_include_rel_nofollow_in_output_if_nofollow_is_set_to_true()
             {
                 var noFollow = true;
                 var anchor = new Anchor(href, text, noFollow, attributes);
@@ -74,7 +74,7 @@ namespace SeoPack.Tests.Helpers
             }
 
             [Test]
-            public void Should_exclude_rel_nofollow_in_output_if_set_to_false()
+            public void Should_exclude_rel_nofollow_in_output_if_nofollow_is_set_to_false()
             {
                 var noFollow = false;
                 var anchor = new Anchor(href, text, noFollow, attributes);
@@ -170,7 +170,7 @@ namespace SeoPack.Tests.Helpers
         public class CanonicalLinkTests
         {
             [Test]
-            public void Should_return_a_canonicallink_if_current_url_has_querystrings()
+            public void Should_return_a_canonicallink_if_the_current_url_has_querystrings()
             {
                 var canonicalUrl = "http://www.seopack.com/marketplace";
                 var currentPageUrl = "http://www.seopack.com/marketplace?query=seo";
@@ -186,7 +186,7 @@ namespace SeoPack.Tests.Helpers
             }
 
             [Test]
-            public void Should_return_an_empty_string_if_current_url_does_not_have_querystrings()
+            public void Should_return_an_empty_string_if_the_current_url_does_not_have_querystrings()
             {
                 var currentPageUrl = "http://www.seopack.com/marketplace";
 
@@ -220,7 +220,7 @@ namespace SeoPack.Tests.Helpers
                 string title = "This is an Og object";
 
                 var ogImage = new OgImage(ogImageUrl);
-                var website = new FakeOgWebsite(title, ogObjectUrl, ogImage);
+                var website = new FakeOgWebsite(title, ogObjectUrl, new OgImage[] { ogImage });
                 var audioUrl = "http://www.seopack.com/audio";
                 var videoUrl = "http://www.seopack.com/video";
                 var description = "some description";

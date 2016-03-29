@@ -97,6 +97,7 @@
     <Compile Include="Html\Image.cs" />
     <Compile Include="Html\ImageLink.cs" />
     <Compile Include="Html\AnchorBase.cs" />
+    <Compile Include="Html\OpenGraph\Extensions.cs" />
     <Compile Include="Html\OpenGraph\IMediaProperty.cs" />
     <Compile Include="Html\OpenGraph\ObjectTypes\Standard\OgBook.cs" />
     <Compile Include="Html\OpenGraph\OgHtmlSerializer.cs" />

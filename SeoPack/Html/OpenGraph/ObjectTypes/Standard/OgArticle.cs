@@ -5,8 +5,8 @@ namespace SeoPack.Html.OpenGraph.ObjectTypes.Standard
 {
     public class OgArticle : Og
     {
-        public OgArticle(string title, string url, OgImage image)
-            : base(title, url, image, ObjectType.Article)
+        public OgArticle(string title, string url, OgImage[] images)
+            : base(title, url, images, ObjectType.Article)
         {
         }
 

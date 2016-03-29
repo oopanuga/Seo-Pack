@@ -22,10 +22,5 @@ namespace SeoPack.Html.OpenGraph
 
         [OgProperty("audio:type")]
         public string Type { get; set; }
-
-        public override string ToString()
-        {
-            return Url;
-        }
     }
 }

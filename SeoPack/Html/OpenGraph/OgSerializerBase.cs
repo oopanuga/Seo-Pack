@@ -54,17 +54,19 @@ namespace SeoPack.Html.OpenGraph
         {
             var type = obj.GetType();
 
-            var filteredAndOrderedProperties = type.GetProperties().Where(x => x.IsOgProperty()).OrderBy(x => x.PropertyOrder());
+            var filteredAndOrderedProperties = type.GetProperties()
+                .Where(x => x.IsOgMetadata())
+                .OrderBy(x => x.OgMetadataOrder());
 
             foreach (var property in filteredAndOrderedProperties)
             {
-                var ogspAttributes = property
-                            .GetCustomAttributes(typeof(OgStructuredPropertyAttribute), true) as OgStructuredPropertyAttribute[];
-
-                var propertyType = property.PropertyType;
+                var ogspAttributes = property.GetCustomAttributes(
+                    typeof(OgStructuredPropertyAttribute), true) as OgStructuredPropertyAttribute[];
 
                 if (ogspAttributes != null && ogspAttributes.Length > 0)
                 {
+                    var propertyType = property.PropertyType;
+
                     if (!propertyType.Equals(typeof(string)) && !propertyType.IsPrimitive)
                     {
                         var propertyValue = property.GetValue(obj, null);
@@ -73,6 +75,7 @@ namespace SeoPack.Html.OpenGraph
                         if (propertyValue.GetType() != typeof(string) && propertyValue is IEnumerable)
                         {
                             var propertyValueList = (IEnumerable)propertyValue;
+
                             foreach (object pv in propertyValueList)
                             {
                                 AddOgPropertiesToList(pv);
@@ -83,11 +86,7 @@ namespace SeoPack.Html.OpenGraph
                             AddOgPropertiesToList(propertyValue);
                         }
                     }
-                    else
-                    {
-                        continue;
-                        //throw new Exception("The OgStructuredProperty attribute can only be used on complex type properties");
-                    }
+                    else continue;
                 }
                 else
                 {
@@ -157,28 +156,5 @@ namespace SeoPack.Html.OpenGraph
         }
 
         #endregion
-    }
-
-    public static class PropertyInfoExtensions
-    {
-        public static int PropertyOrder(this PropertyInfo propInfo)
-        {
-            var orderAttr = propInfo.GetCustomAttributes(typeof(OgMetadataAttribute), false) as OgMetadataAttribute[];
-
-            if (orderAttr != null && orderAttr.Length > 0)
-            {
-                return orderAttr[0].DisplayOrder;
-            }
-            else
-            {
-                return Int32.MaxValue;
-            }
-        }
-
-        public static bool IsOgProperty(this PropertyInfo propInfo)
-        {
-            var orderAttr = propInfo.GetCustomAttributes(typeof(OgMetadataAttribute), false) as OgMetadataAttribute[];
-            return orderAttr != null && orderAttr.Length > 0;
-        }
     }
 }

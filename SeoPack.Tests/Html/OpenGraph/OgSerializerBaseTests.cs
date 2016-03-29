@@ -29,7 +29,7 @@ namespace SeoPack.Tests.Html.OpenGraph
 
                 Assert.That(output, Is.StringContaining(FormatOgAttributes("title", website.Title)));
                 Assert.That(output, Is.StringContaining(FormatOgAttributes("url", website.Url)));
-                Assert.That(output, Is.StringContaining(FormatOgAttributes("image", website.Image.Url)));
+                Assert.That(output, Is.StringContaining(FormatOgAttributes("image", website.Images[0].Url)));
                 Assert.That(output, Is.Not.StringContaining(website.ContactPageUrl.ToString()));
             }
 
@@ -103,6 +103,34 @@ namespace SeoPack.Tests.Html.OpenGraph
 
                 Assert.That(output, Is.StringContaining(FormatOgAttributes("contact_number", website.ContactNumbers[0].Number)));
                 Assert.That(output, Is.StringContaining(FormatOgAttributes("contact_number", website.ContactNumbers[1].Number)));
+            }
+
+            [Test]
+            public void Should_read_array_of_data_if_ogstructuredproperty_type_is_array_and_has_more_than_one_item()
+            {
+                var website = SetupWebsiteOpenGraphObject();
+                var products = new List<Product>();
+
+                products.Add(new Product()
+                {
+                    Name = "Prod 1",
+                    Description ="Description for Prod 1"
+                });
+                products.Add(new Product()
+                {
+                    Name = "Prod 2",
+                    Description = "Description for Prod 2"
+                });
+
+                website.Products = products.ToArray();
+
+                var serializer = new OgTestSerializer();
+                var output = serializer.Serialize(website);
+
+                Assert.That(output, Is.StringContaining(FormatOgAttributes("product", website.Products[0].Name)));
+                Assert.That(output, Is.StringContaining(FormatOgAttributes("product:description", website.Products[0].Description)));
+                Assert.That(output, Is.StringContaining(FormatOgAttributes("product", website.Products[1].Name)));
+                Assert.That(output, Is.StringContaining(FormatOgAttributes("product:description", website.Products[1].Description)));
             }
 
             [Test]
@@ -182,7 +210,7 @@ namespace SeoPack.Tests.Html.OpenGraph
                 var website = new SeoPackWebsite(
                     websiteTitle,
                     websiteUrl,
-                    new OgImage(websiteImageUrl))
+                    new OgImage[] { new OgImage(websiteImageUrl) })
                 {
                     ContactPageUrl = websiteContactPageUrl
                 };
