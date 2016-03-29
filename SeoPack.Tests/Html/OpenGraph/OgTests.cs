@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using SeoPack.Html.OpenGraph;
 using System;
+using System.Collections.Generic;
 
 namespace SeoPack.Tests.Html.OpenGraph
 {
@@ -39,17 +40,25 @@ namespace SeoPack.Tests.Html.OpenGraph
             }
 
             [Test]
-            public void Should_correctly_set_properties_when_set_explicitly_and_via_constructor_arguments()
+            public void Should_correctly_set_properties_when_done_explicitly_or_via_constructor_arguments()
             {
                 var ogImage = new OgImage(ogImageUrl);
                 var website = new FakeOgWebsite(title, ogObjectUrl, ogImage);
                 var audioUrl = "http://www.seopack.com/audio";
+                var videoUrl = "http://www.seopack.com/video";
                 var description = "some description";
                 var determiner = Determiner.An;
+                var siteName = "SeoPack Website";
+                var locale = "en-gb";
+                var alternateLocales = new List<string> { "en-us", "en-ca" };
 
                 website.Audio = audioUrl;
                 website.Description = description;
                 website.Determiner = determiner;
+                website.Locale = locale;
+                website.AlternateLocales = alternateLocales;
+                website.SiteName = siteName;
+                website.Video = videoUrl;
 
                 Assert.That(website.Title, Is.EqualTo(title));
                 Assert.That(website.Url, Is.EqualTo(ogObjectUrl));
@@ -58,6 +67,10 @@ namespace SeoPack.Tests.Html.OpenGraph
                 Assert.That(website.Description, Is.EqualTo(description));
                 Assert.That(website.Determiner, Is.EqualTo(determiner));
                 Assert.That(website.Type, Is.EqualTo(ObjectType.Website));
+                Assert.That(website.Locale, Is.EqualTo(locale));
+                Assert.That(website.AlternateLocales, Is.EqualTo(alternateLocales));
+                Assert.That(website.SiteName, Is.EqualTo(siteName));
+                Assert.That(website.Video, Is.EqualTo(videoUrl));
             }
         }
     }

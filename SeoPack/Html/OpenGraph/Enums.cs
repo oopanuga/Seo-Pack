@@ -1,8 +1,8 @@
-﻿namespace SeoPack.Html.OpenGraph
+﻿using System.ComponentModel;
+namespace SeoPack.Html.OpenGraph
 {
     public enum Determiner
     {
-        Blank,
         A,
         An,
         The,
@@ -11,12 +11,13 @@
 
     public enum Gender
     {
-        Male, 
+        Male,
         Female
     }
 
     public enum ObjectType
     {
+        Unknown,
         Website,
         Article,
         Book

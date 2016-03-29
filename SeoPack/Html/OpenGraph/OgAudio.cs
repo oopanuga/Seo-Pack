@@ -2,7 +2,7 @@
 
 namespace SeoPack.Html.OpenGraph
 {
-    public class OgAudio : IStructuredProperty
+    public class OgAudio : IMediaProperty
     {
         public OgAudio(string url)
         {

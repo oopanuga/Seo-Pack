@@ -97,7 +97,7 @@
     <Compile Include="Html\Image.cs" />
     <Compile Include="Html\ImageLink.cs" />
     <Compile Include="Html\AnchorBase.cs" />
-    <Compile Include="Html\OpenGraph\IStructuredProperty.cs" />
+    <Compile Include="Html\OpenGraph\IMediaProperty.cs" />
     <Compile Include="Html\OpenGraph\ObjectTypes\Standard\OgBook.cs" />
     <Compile Include="Html\OpenGraph\OgHtmlSerializer.cs" />
     <Compile Include="Html\OpenGraph\OgProperty.cs" />
@@ -106,10 +106,14 @@
     <Compile Include="Html\OpenGraph\ObjectTypes\Standard\OgArticle.cs" />
     <Compile Include="Html\OpenGraph\ObjectTypes\Standard\OgWebsite.cs" />
     <Compile Include="Html\OpenGraph\Og.cs" />
+    <Compile Include="Html\OpenGraph\OgMetadataAttribute.cs" />
     <Compile Include="Html\OpenGraph\OgSerializerBase.cs" />
     <Compile Include="Html\OpenGraph\Enums.cs" />
     <Compile Include="Html\OpenGraph\OgPropertyAttribute.cs" />
     <Compile Include="Helpers\HtmlSeoHelper.cs" />
+    <Compile Include="Html\OpenGraph\OgStructuredPropertyAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Html\OpenGraph\OgVideo.cs" />
     <Compile Include="Html\Pagination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

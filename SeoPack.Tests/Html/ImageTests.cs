@@ -30,7 +30,7 @@ namespace SeoPack.Tests.Html
             }
 
             [Test]
-            public void Should_correctly_set_properties_when_set_explicitly_and_via_constructor_arguments()
+            public void Should_correctly_set_properties_when_done_explicitly_or_via_constructor_arguments()
             {
                 var attributes = new { @class = "dog" };
                 var title = "This is an image of a dog";

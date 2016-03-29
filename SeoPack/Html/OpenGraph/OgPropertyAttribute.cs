@@ -3,9 +3,10 @@
 namespace SeoPack.Html.OpenGraph
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class OgPropertyAttribute : Attribute
+    public class OgPropertyAttribute : OgMetadataAttribute
     {
-        public OgPropertyAttribute(string name)
+        public OgPropertyAttribute(string name, int displayOrder = 0)
+            : base(displayOrder)
         {
             if(string.IsNullOrEmpty(name))
             {
@@ -14,6 +15,7 @@ namespace SeoPack.Html.OpenGraph
 
             Name = string.Format("og:{0}", name.Replace("og:", ""));
         }
+
         public string Name { get; private set; }
     }
 }

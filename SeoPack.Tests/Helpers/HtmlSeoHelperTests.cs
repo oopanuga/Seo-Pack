@@ -1,7 +1,10 @@
 ﻿using NUnit.Framework;
 using SeoPack.Helpers;
 using SeoPack.Html;
+using SeoPack.Html.OpenGraph;
+using SeoPack.Tests.Html.OpenGraph;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 
@@ -137,7 +140,7 @@ namespace SeoPack.Tests.Helpers
                 var currentPageUrl = "http://www.seopack.com/marketplace?query=seo";
 
                 HttpContext.Current = new HttpContext(
-                    new HttpRequest("", currentPageUrl, ""), 
+                    new HttpRequest("", currentPageUrl, ""),
                     new HttpResponse(new StringWriter()));
 
                 var seoHelper = new HtmlSeoHelper();
@@ -195,6 +198,62 @@ namespace SeoPack.Tests.Helpers
                 var output = seoHelper.CanonicalLinkIfRequired();
 
                 Assert.That(output.ToString(), Is.EqualTo(string.Empty));
+            }
+        }
+
+        [Category("HtmlSeoHelper.OpenGraph(og)")]
+        public class OpenGraphTests
+        {
+            [Test]
+            [ExpectedException(typeof(ArgumentNullException))]
+            public void Should_throw_exception_if_opengraph_object_is_null()
+            {
+                var seoHelper = new HtmlSeoHelper();
+                seoHelper.Image(null);
+            }
+
+            [Test]
+            public void Should_return_correct_output_when_image_object_is_not_null()
+            {
+                string ogImageUrl = "http://www.seopack.com/dog.png";
+                string ogObjectUrl = "http://www.seopack.com";
+                string title = "This is an Og object";
+
+                var ogImage = new OgImage(ogImageUrl);
+                var website = new FakeOgWebsite(title, ogObjectUrl, ogImage);
+                var audioUrl = "http://www.seopack.com/audio";
+                var videoUrl = "http://www.seopack.com/video";
+                var description = "some description";
+                var determiner = Determiner.An;
+                var siteName = "SeoPack Website";
+                var locale = "en-gb";
+                var alternateLocales = new List<string> { "en-us", "en-ca" };
+
+                website.Audio = audioUrl;
+                website.Description = description;
+                website.Determiner = determiner;
+                website.Locale = locale;
+                website.AlternateLocales = alternateLocales;
+                website.SiteName = siteName;
+                website.Video = videoUrl;
+
+                var seoHelper = new HtmlSeoHelper();
+                var output = seoHelper.OpenGraph(website);
+
+                string expectedOutput = "<meta property=\"og:title\" content=\"This is an Og object\">"
+                    + "<meta property=\"og:type\" content=\"website\">"
+                    + "<meta property=\"og:url\" content=\"http://www.seopack.com\">"
+                    + "<meta property=\"og:image\" content=\"http://www.seopack.com/dog.png\">"
+                    + "<meta property=\"og:audio\" content=\"http://www.seopack.com/audio\">"
+                    + "<meta property=\"og:description\" content=\"some description\">"
+                    + "<meta property=\"og:determiner\" content=\"an\">"
+                    + "<meta property=\"og:locale\" content=\"en-gb\">"
+                    + "<meta property=\"og:locale:alternate\" content=\"en-us\">"
+                    + "<meta property=\"og:locale:alternate\" content=\"en-ca\">"
+                    + "<meta property=\"og:site_name\" content=\"SeoPack Website\">"
+                    + "<meta property=\"og:video\" content=\"http://www.seopack.com/video\">";
+
+                Assert.That(output.ToString(), Is.EqualTo(expectedOutput));
             }
         }
 

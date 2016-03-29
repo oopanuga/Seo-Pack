@@ -34,7 +34,7 @@ namespace SeoPack.Tests.Html.OpenGraph
             }
 
             [Test]
-            public void Should_recursively_read_data_from_members_of_complex_properties_marked_with_the_ogproperty_attribute()
+            public void Should_recursively_read_data_from_members_of_complex_properties_marked_with_the_ogstructuredproperty_attribute()
             {
                 var website = SetupWebsiteOpenGraphObject();
                 website.Address = new Address()
@@ -51,24 +51,7 @@ namespace SeoPack.Tests.Html.OpenGraph
             }
 
             [Test]
-            public void Should_call_tostring_on_a_complex_property_if_it_does_not_have_a_member_thats_been_marked_with_the_same_ogproperty_attribute()
-            {
-                var website = SetupWebsiteOpenGraphObject();
-                website.Address = new Address()
-                {
-                    Country = "UK",
-                    Line1 = "House on a hill",
-                    PostCode = "AAA11ZZZ"
-                };
-
-                var serializer = new OgTestSerializer();
-                var output = serializer.Serialize(website);
-
-                Assert.That(output, Is.StringContaining(FormatOgAttributes("address", website.Address.ToString())));
-            }
-
-            [Test]
-            public void Should_not_call_tostring_on_a_complex_property_if_it_has_a_member_thats_been_marked_with_the_same_ogproperty_attribute()
+            public void Should_call_tostring_on_a_complex_property_thats_been_marked_with_the_ogproperty_attribute()
             {
                 var website = SetupWebsiteOpenGraphObject();
                 website.AboutUs = new AboutUs()
@@ -81,8 +64,24 @@ namespace SeoPack.Tests.Html.OpenGraph
                 var serializer = new OgTestSerializer();
                 var output = serializer.Serialize(website);
 
-                Assert.That(output, Is.StringContaining(FormatOgAttributes("aboutus", website.AboutUs.Url)));
-                Assert.That(output, Is.Not.StringContaining(website.AboutUs.ToString()));
+                Assert.That(output, Is.StringContaining(FormatOgAttributes("aboutus", website.AboutUs.ToString())));
+            }
+
+            [Test]
+            public void Should_not_call_tostring_on_a_complex_property_marked_with_the_ogstructuredproperty_attribute()
+            {
+                var website = SetupWebsiteOpenGraphObject();
+                website.Address = new Address()
+                {
+                    Country = "UK",
+                    Line1 = "House on a hill",
+                    PostCode = "AAA11ZZZ"
+                };
+
+                var serializer = new OgTestSerializer();
+                var output = serializer.Serialize(website);
+
+                Assert.That(output, Is.Not.StringContaining(website.Address.ToString()));
             }
 
             [Test]
@@ -128,6 +127,49 @@ namespace SeoPack.Tests.Html.OpenGraph
                 var output = serializer.Serialize(website);
 
                 Assert.That(output, Is.StringContaining(FormatOgAttributes("start_date", "1900-11-01T11:20:45Z")));
+            }
+
+            [Test]
+            public void Should_exclude_properties_that_dont_have_a_value()
+            {
+                var website = SetupWebsiteOpenGraphObject();
+                website.Determiner = null;
+                var determinerPropertyName = "derterminer";
+
+                var serializer = new OgTestSerializer();
+                var output = serializer.Serialize(website);
+
+                Assert.That(output, Is.Not.StringContaining(determinerPropertyName));
+            }
+
+            [Test]
+            public void Should_use_description_text_of_enum_if_present()
+            {
+                var website = SetupWebsiteOpenGraphObject();
+                website.Address = new Address()
+                {
+                    Country = "UK",
+                    Line1 = "House on a hill",
+                    PostCode = "AAA11ZZZ",
+                    AddressType = AddressType.Office
+                };
+
+                var serializer = new OgTestSerializer();
+                var output = serializer.Serialize(website);
+
+                Assert.That(output, Is.StringContaining(FormatOgAttributes("address_type", "office address")));
+            }
+
+            [Test]
+            public void Should_use_string_value_of_enum_if_description_text_is_not_present()
+            {
+                var website = SetupWebsiteOpenGraphObject();
+                website.WebsiteType = WebsiteType.Developer;
+
+                var serializer = new OgTestSerializer();
+                var output = serializer.Serialize(website);
+
+                Assert.That(output, Is.StringContaining(FormatOgAttributes("website_type", "developer")));
             }
 
             private static SeoPackWebsite SetupWebsiteOpenGraphObject()

@@ -2,7 +2,7 @@
 
 namespace SeoPack.Html.OpenGraph
 {
-    public class OgVideo : IStructuredProperty
+    public class OgVideo : IMediaProperty
     {
         public OgVideo(string url)
         {

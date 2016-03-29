@@ -2,9 +2,27 @@
 using SeoPack.Html.OpenGraph.ObjectTypes.Standard;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace SeoPack.Tests.Html.OpenGraph
 {
+    public enum AddressType
+    {
+        [Description("home address")]
+        Home,
+        [Description("office address")]
+        Office,
+        [Description("other address")]
+        Other
+    }
+
+    public enum WebsiteType
+    {
+        Game,
+        News,
+        Developer
+    }
+
     public class SeoPackWebsite : Website
     {
         public SeoPackWebsite(string title, string url, OgImage image)
@@ -14,7 +32,7 @@ namespace SeoPack.Tests.Html.OpenGraph
 
         public string ContactPageUrl { get; set; }
 
-        [OgProperty("address")]
+        [OgStructuredProperty]
         public Address Address { get; set; }
 
         [OgProperty("aboutus")]
@@ -25,6 +43,9 @@ namespace SeoPack.Tests.Html.OpenGraph
 
         [OgProperty("start_date")]
         public DateTime? StartDate { get; set; }
+
+        [OgProperty("website_type")]
+        public WebsiteType WebsiteType { get; set; }
     }
 
     public class Address
@@ -34,6 +55,9 @@ namespace SeoPack.Tests.Html.OpenGraph
         public string Line2 { get; set; }
         public string PostCode { get; set; }
         public string Country { get; set; }
+
+        [OgProperty("address_type")]
+        public AddressType AddressType { get; set; }
 
         public override string ToString()
         {

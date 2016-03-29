@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 
 namespace SeoPack.Html.OpenGraph
 {
@@ -52,37 +54,48 @@ namespace SeoPack.Html.OpenGraph
         {
             var type = obj.GetType();
 
-            foreach (var property in type.GetProperties())
+            var filteredAndOrderedProperties = type.GetProperties().Where(x => x.IsOgProperty()).OrderBy(x => x.PropertyOrder());
+
+            foreach (var property in filteredAndOrderedProperties)
             {
-                //
-                var ogpAttributes = property
-                    .GetCustomAttributes(typeof(OgPropertyAttribute), true) as OgPropertyAttribute[];
+                var ogspAttributes = property
+                            .GetCustomAttributes(typeof(OgStructuredPropertyAttribute), true) as OgStructuredPropertyAttribute[];
 
-                var propertTypeIsComplex = false;
-                if (ogpAttributes != null && ogpAttributes.Length > 0)
+                var propertyType = property.PropertyType;
+
+                if (ogspAttributes != null && ogspAttributes.Length > 0)
                 {
-                    var propertyType = property.PropertyType;
-
-                    // if property returns a complex type then call function recursively
                     if (!propertyType.Equals(typeof(string)) && !propertyType.IsPrimitive)
                     {
                         var propertyValue = property.GetValue(obj, null);
                         if (propertyValue == null) continue;
 
-                        AddOgPropertiesToList(property.GetValue(obj, null));
-                        propertTypeIsComplex = true;
+                        if (propertyValue.GetType() != typeof(string) && propertyValue is IEnumerable)
+                        {
+                            var propertyValueList = (IEnumerable)propertyValue;
+                            foreach (object pv in propertyValueList)
+                            {
+                                AddOgPropertiesToList(pv);
+                            }
+                        }
+                        else
+                        {
+                            AddOgPropertiesToList(propertyValue);
+                        }
                     }
+                    else
+                    {
+                        continue;
+                        //throw new Exception("The OgStructuredProperty attribute can only be used on complex type properties");
+                    }
+                }
+                else
+                {
+                    var ogpAttributes = property
+                        .GetCustomAttributes(typeof(OgPropertyAttribute), true) as OgPropertyAttribute[];
 
                     var ogName = ogpAttributes[0].Name;
                     var ogValue = property.GetValue(obj, null);
-
-                    // if its a structured property and if the ogproperty name is represented as a property
-                    // on of the structured property then move to the next item on the list
-                    if (propertTypeIsComplex &&
-                        _properties.Any(x => x.Name.Equals(ogName, StringComparison.OrdinalIgnoreCase)))
-                    {
-                        continue;
-                    }
 
                     if (ogValue != null && !ogValue.Equals(GetTypeDefaultValue(ogValue.GetType())))
                     {
@@ -115,6 +128,19 @@ namespace SeoPack.Html.OpenGraph
                     _properties.Add(new OgProperty(propertyName, dateContent.ToString("s") + "Z"));
                 }
             }
+            else if (content.GetType().IsEnum)
+            {
+                var fi = content.GetType().GetField(content.ToString());
+                var attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
+                if (attributes != null && attributes.Length > 0)
+                {
+                    _properties.Add(new OgProperty(propertyName, attributes[0].Description.ToLower()));
+                }
+                else
+                {
+                    _properties.Add(new OgProperty(propertyName, content.ToString().ToLower()));
+                }
+            }
             else
             {
                 _properties.Add(new OgProperty(propertyName, content.ToString()));
@@ -128,8 +154,31 @@ namespace SeoPack.Html.OpenGraph
                 return Activator.CreateInstance(type);
             }
             return null;
-        } 
+        }
 
         #endregion
+    }
+
+    public static class PropertyInfoExtensions
+    {
+        public static int PropertyOrder(this PropertyInfo propInfo)
+        {
+            var orderAttr = propInfo.GetCustomAttributes(typeof(OgMetadataAttribute), false) as OgMetadataAttribute[];
+
+            if (orderAttr != null && orderAttr.Length > 0)
+            {
+                return orderAttr[0].DisplayOrder;
+            }
+            else
+            {
+                return Int32.MaxValue;
+            }
+        }
+
+        public static bool IsOgProperty(this PropertyInfo propInfo)
+        {
+            var orderAttr = propInfo.GetCustomAttributes(typeof(OgMetadataAttribute), false) as OgMetadataAttribute[];
+            return orderAttr != null && orderAttr.Length > 0;
+        }
     }
 }
