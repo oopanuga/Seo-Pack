@@ -23,8 +23,8 @@ namespace SeoPack.Helpers
 
         IHtmlString OpenGraph(Og og);
 
-        IHtmlString PaginationAttributes(Pagination pagingLink);
+        IHtmlString PaginationLink(PaginationLink pagingLink);
 
-        IHtmlString HrefLangLink(List<HrefLangLink> hrefLangLinks);
+        IHtmlString HrefLangLink(IEnumerable<HrefLangPage> hrefLangPages);
     }
 }

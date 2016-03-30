@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Helpers\HtmlSeoHelperTests.cs" />
     <Compile Include="Html\AnchorTests.cs" />
+    <Compile Include="Html\HrefLangLinkTests.cs" />
     <Compile Include="Html\ImageLinkTests.cs" />
     <Compile Include="Html\ImageTests.cs" />
     <Compile Include="Html\OpenGraph\OgHtmlSerializerTests.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Html\OpenGraph\OgTestSerializer.cs" />
     <Compile Include="Html\OpenGraph\SeoPackWebsite.cs" />
     <Compile Include="Html\OpenGraph\FakeOgWebsite.cs" />
+    <Compile Include="Html\PaginationLinkTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -25,7 +25,7 @@ namespace SeoPack.Tests.Helpers
             }
 
             [Test]
-            public void Should_return_correct_output_when_image_object_is_not_null()
+            public void Should_return_seo_compliant_image_tag_when_image_object_is_not_null()
             {
                 var altText = "This is an image of a dog";
                 var src = "http://www.seopack.com/dog.png";
@@ -60,7 +60,7 @@ namespace SeoPack.Tests.Helpers
             }
 
             [Test]
-            public void Should_include_rel_nofollow_in_output_if_nofollow_is_set_to_true()
+            public void Should_include_rel_nofollow_in_anchor_tag_if_nofollow_is_set_to_true()
             {
                 var noFollow = true;
                 var anchor = new Anchor(href, text, noFollow, attributes);
@@ -74,7 +74,7 @@ namespace SeoPack.Tests.Helpers
             }
 
             [Test]
-            public void Should_exclude_rel_nofollow_in_output_if_nofollow_is_set_to_false()
+            public void Should_exclude_rel_nofollow_in_anchor_tag_if_nofollow_is_set_to_false()
             {
                 var noFollow = false;
                 var anchor = new Anchor(href, text, noFollow, attributes);
@@ -100,7 +100,7 @@ namespace SeoPack.Tests.Helpers
             }
 
             [Test]
-            public void Should_return_correct_output_when_imagelink_object_not_null()
+            public void Should_return_seo_compliant_imagelink_when_imagelink_object_not_null()
             {
                 var altText = "This is an image of a dog";
                 var src = "http://www.seopack.com/dog.png";
@@ -134,7 +134,7 @@ namespace SeoPack.Tests.Helpers
             }
 
             [Test]
-            public void Should_return_a_canonicallink_if_current_url_starts_with_canonical_url_but_is_not_same_as_canonical_url()
+            public void Should_return_seo_compliant_canonicallink_when_not_on_canonical_version_of_page_and_current_page_url_starts_with_canonical_url()
             {
                 var canonicalUrl = "http://www.seopack.com/marketplace";
                 var currentPageUrl = "http://www.seopack.com/marketplace?query=seo";
@@ -150,7 +150,23 @@ namespace SeoPack.Tests.Helpers
             }
 
             [Test]
-            public void Should_return_an_empty_string_if_current_url_doesnt_start_with_canonical_url()
+            public void Should_return_an_empty_string_when_on_canonical_version_of_page()
+            {
+                var canonicalUrl = "http://www.seopack.com/marketplace";
+                var currentPageUrl = "http://www.seopack.com/marketplace";
+
+                HttpContext.Current = new HttpContext(
+                    new HttpRequest("", currentPageUrl, ""),
+                    new HttpResponse(new StringWriter()));
+
+                var seoHelper = new HtmlSeoHelper();
+                var output = seoHelper.CanonicalLinkIfRequired(canonicalUrl);
+
+                Assert.That(output.ToString(), Is.EqualTo(string.Empty));
+            }
+
+            [Test]
+            public void Should_return_an_empty_string_when_current_page_url_does_not_start_with_canonical_url()
             {
                 var canonicalUrl = "http://www.seopack.com/marketplace";
                 var currentPageUrl = "http://www.seopack.com/blog?category=somecategory";
@@ -170,7 +186,7 @@ namespace SeoPack.Tests.Helpers
         public class CanonicalLinkTests
         {
             [Test]
-            public void Should_return_a_canonicallink_if_the_current_url_has_querystrings()
+            public void Should_return_seo_compliant_canonicallink_if_the_current_url_has_querystrings()
             {
                 var canonicalUrl = "http://www.seopack.com/marketplace";
                 var currentPageUrl = "http://www.seopack.com/marketplace?query=seo";
@@ -213,7 +229,7 @@ namespace SeoPack.Tests.Helpers
             }
 
             [Test]
-            public void Should_return_correct_output_when_image_object_is_not_null()
+            public void Should_return_seo_compliant_opengraph_tag_when_image_object_is_not_null()
             {
                 string ogImageUrl = "http://www.seopack.com/dog.png";
                 string ogObjectUrl = "http://www.seopack.com";
@@ -254,6 +270,144 @@ namespace SeoPack.Tests.Helpers
                     + "<meta property=\"og:video\" content=\"http://www.seopack.com/video\">";
 
                 Assert.That(output.ToString(), Is.EqualTo(expectedOutput));
+            }
+        }
+
+        [Category("HtmlSeoHelper.PaginationLink(paginationLink)")]
+        public class PaginationLinkTest
+        {
+            private int currentPage;
+            private int recordCount;
+            private string urlFormat;
+            private bool pageIsZeroBased;
+
+            [Test]
+            [ExpectedException(typeof(ArgumentNullException))]
+            public void Should_throw_exception_if_paginationlink_object_is_null()
+            {
+                var seoHelper = new HtmlSeoHelper();
+                seoHelper.PaginationLink(null);
+            }
+
+            [Test]
+            public void Should_return_rel_prev_and_rel_next_pagination_links_when_currentpage_is_not_first_page_and_is_less_than_recordcount()
+            {
+                currentPage = 3;
+                recordCount = 10;
+                urlFormat = "http://www.seopack.com/result?page={0}";
+                pageIsZeroBased = true;
+
+                var paginationLink = new PaginationLink(currentPage, recordCount, urlFormat, pageIsZeroBased);
+
+                var seoHelper = new HtmlSeoHelper();
+                var output = seoHelper.PaginationLink(paginationLink);
+
+                Assert.That(output.ToString(), Is.EqualTo(
+                    "<link rel=\"prev\" heref=\"http://www.seopack.com/result?page=2\" /><link rel=\"next\" heref=\"http://www.seopack.com/result?page=4\" />"));
+            }
+
+            [TestCase(true)]
+            [TestCase(false)]
+            public void Should_return_only_rel_next_pagination_link_when_currentpage_is_first_page_and_is_less_than_recordcount(bool pageIsZeroBased)
+            {
+                currentPage = pageIsZeroBased ? 0 : 1;
+                recordCount = 10;
+                urlFormat = "http://www.seopack.com/result?page={0}";
+
+                var paginationLink = new PaginationLink(currentPage, recordCount, urlFormat, pageIsZeroBased);
+
+                var seoHelper = new HtmlSeoHelper();
+                var output = seoHelper.PaginationLink(paginationLink);
+
+                if (pageIsZeroBased)
+                {
+                    Assert.That(output.ToString(), Is.EqualTo(
+                    "<link rel=\"next\" heref=\"http://www.seopack.com/result?page=1\" />"));
+                }
+                else
+                {
+                    Assert.That(output.ToString(), Is.EqualTo(
+                    "<link rel=\"next\" heref=\"http://www.seopack.com/result?page=2\" />"));
+                }
+            }
+
+            [TestCase(true)]
+            [TestCase(false)]
+            public void Should_return_only_rel_prev_pagination_link_when_currentpage_is_equal_to_last_page(bool pageIsZeroBased)
+            {
+                currentPage = pageIsZeroBased ? 9 : 10;
+                recordCount = 10;
+                urlFormat = "http://www.seopack.com/result?page={0}";
+
+                var paginationLink = new PaginationLink(currentPage, recordCount, urlFormat, pageIsZeroBased);
+
+                var seoHelper = new HtmlSeoHelper();
+                var output = seoHelper.PaginationLink(paginationLink);
+
+                if (pageIsZeroBased)
+                {
+                    Assert.That(output.ToString(), Is.EqualTo(
+                    "<link rel=\"prev\" heref=\"http://www.seopack.com/result?page=8\" />"));
+                }
+                else
+                {
+                    Assert.That(output.ToString(), Is.EqualTo(
+                    "<link rel=\"prev\" heref=\"http://www.seopack.com/result?page=9\" />"));
+                }
+            }
+        }
+
+        [Category("HtmlSeoHelper.HrefLangLink(hrefLangLinks)")]
+        public class HrefLangLinkTests
+        {
+            //[Test]
+            //[ExpectedException(typeof(ArgumentException))]
+            //public void Should_throw_exception_if_hreflanglinks_object_is_null()
+            //{
+            //    var seoHelper = new HtmlSeoHelper();
+            //    seoHelper.HrefLangLink(null);
+            //}
+
+            //[Test]
+            //[ExpectedException(typeof(ArgumentException))]
+            //public void Should_throw_exception_if_hreflanglinks_object_is_empty()
+            //{
+            //    var seoHelper = new HtmlSeoHelper();
+            //    seoHelper.HrefLangLink(new List<HrefLangLink>());
+            //}
+
+            [Test]
+            public void Should_display_hreflanglinks_only_when_on_canonical_version_of_page()
+            {
+                var gbLang = "en-gb";
+                var usLang = "en-us";
+                var marketplacePageName = "Marketplace";
+                var aboutUsPageName = "AboutUs";
+
+                HttpContext.Current = new HttpContext(
+                    new HttpRequest("", "http://www.seopack.com/gb/marketplace", ""),
+                    new HttpResponse(new StringWriter()));
+
+
+                var hrefLangPages = new List<HrefLangPage>();
+
+                var marketingPage = new HrefLangPage(marketplacePageName);
+                marketingPage.AddHrefLangLink(new HrefLangLink("http://www.seopack.com/marketplace"));
+                marketingPage.AddHrefLangLink(new HrefLangLink("http://www.seopack.com/gb/marketplace", gbLang));
+                marketingPage.AddHrefLangLink(new HrefLangLink("http://www.seopack.com/us/marketplace", usLang));
+                hrefLangPages.Add(marketingPage);
+
+                var aboutUsPage = new HrefLangPage(aboutUsPageName);
+                aboutUsPage.AddHrefLangLink(new HrefLangLink("http://www.seopack.com/aboutus"));
+                aboutUsPage.AddHrefLangLink(new HrefLangLink("http://www.seopack.com/gb/aboutus", gbLang));
+                aboutUsPage.AddHrefLangLink(new HrefLangLink("http://www.seopack.com/us/aboutus", usLang));
+                hrefLangPages.Add(aboutUsPage);
+
+                var seoHelper = new HtmlSeoHelper();
+                var output = seoHelper.HrefLangLink(hrefLangPages);
+
+                Assert.That(output.ToString(), Is.EqualTo("<link rel=\"alternate\" hreflang=\"x-default\" href=\"http://www.seopack.com/marketplace\" />"+
+                    "<link rel=\"alternate\" hreflang=\"en-gb\" href=\"http://www.seopack.com/gb/marketplace\" /><link rel=\"alternate\" hreflang=\"en-us\" href=\"http://www.seopack.com/us/marketplace\" />"));
             }
         }
 

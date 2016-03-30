@@ -6,23 +6,6 @@ using System.ComponentModel;
 
 namespace SeoPack.Tests.Html.OpenGraph
 {
-    public enum AddressType
-    {
-        [Description("home address")]
-        Home,
-        [Description("office address")]
-        Office,
-        [Description("other address")]
-        Other
-    }
-
-    public enum WebsiteType
-    {
-        Game,
-        News,
-        Developer
-    }
-
     public class SeoPackWebsite : Website
     {
         public SeoPackWebsite(string title, string url, OgImage[] images)
@@ -49,6 +32,23 @@ namespace SeoPack.Tests.Html.OpenGraph
         public WebsiteType WebsiteType { get; set; }
 
         public string ContactPageUrl { get; set; }
+    }
+
+    public enum AddressType
+    {
+        [Description("home address")]
+        Home,
+        [Description("office address")]
+        Office,
+        [Description("other address")]
+        Other
+    }
+
+    public enum WebsiteType
+    {
+        Game,
+        News,
+        Developer
     }
 
     public class Product

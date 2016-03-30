@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Helpers\IHtmlSeoHelper.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Html\HrefLangPage.cs" />
     <Compile Include="Html\HtmlElement.cs" />
     <Compile Include="Html\HrefLangLink.cs" />
     <Compile Include="Html\Anchor.cs" />
@@ -116,7 +117,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Html\OpenGraph\OgVideo.cs" />
-    <Compile Include="Html\Pagination.cs" />
+    <Compile Include="Html\PaginationLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

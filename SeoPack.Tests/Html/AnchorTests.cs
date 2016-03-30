@@ -7,7 +7,7 @@ namespace SeoPack.Tests.Html
     [TestFixture]
     public class AnchorTests
     {
-        [Category("AnchorTests.Constructor")]
+        [Category("Anchor.Constructor")]
         public class Constructor
         {
             string text = "SeoPack";

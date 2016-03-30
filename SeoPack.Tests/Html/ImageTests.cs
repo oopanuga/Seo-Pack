@@ -7,7 +7,7 @@ namespace SeoPack.Tests.Html
     [TestFixture]
     public class ImageTests
     {
-        [Category("ImageTests.Constructor")]
+        [Category("Image.Constructor")]
         public class Constructor
         {
             string altText = "This is an image of a dog";

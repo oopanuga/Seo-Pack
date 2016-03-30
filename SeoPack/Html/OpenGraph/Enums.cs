@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-namespace SeoPack.Html.OpenGraph
+﻿namespace SeoPack.Html.OpenGraph
 {
     public enum Determiner
     {
