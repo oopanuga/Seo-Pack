@@ -2,7 +2,7 @@
 
 namespace SeoPack.Html.OpenGraph
 {
-    public class OgImage : IStructuredProperty
+    public class OgImage : IMediaProperty
     {
         public OgImage(string url)
         {
@@ -28,10 +28,5 @@ namespace SeoPack.Html.OpenGraph
 
         [OgProperty("image:height")]
         public int Height { get; set; }
-
-        public override string ToString()
-        {
-            return Url;
-        }
     }
 }

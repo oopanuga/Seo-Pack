@@ -2,7 +2,7 @@
 
 namespace SeoPack.Html.OpenGraph
 {
-    public class OgVideo : IStructuredProperty
+    public class OgVideo : IMediaProperty
     {
         public OgVideo(string url)
         {
@@ -28,10 +28,5 @@ namespace SeoPack.Html.OpenGraph
 
         [OgProperty("video:height")]
         public int Height { get; set; }
-
-        public override string ToString()
-        {
-            return Url;
-        }
     }
 }

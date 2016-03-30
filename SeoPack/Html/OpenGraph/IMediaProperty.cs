@@ -1,7 +1,7 @@
 ﻿
 namespace SeoPack.Html.OpenGraph
 {
-    public interface IStructuredProperty
+    public interface IMediaProperty
     {
         string Url { get; }
         string SecureUrl { get; set; }

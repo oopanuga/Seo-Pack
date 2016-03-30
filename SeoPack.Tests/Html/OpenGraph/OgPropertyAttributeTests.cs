@@ -2,13 +2,13 @@
 using SeoPack.Html.OpenGraph;
 using System;
 
-namespace SeoPack.Tests
+namespace SeoPack.Tests.Html.OpenGraph
 {
     [TestFixture]
     public class OgPropertyAttributeTests
     {
-        [Category("OgPropertyAttribute(name)")]
-        public class Constructor
+        [Category("OgPropertyAttribute.Constructor")]
+        public class ConstructorTests
         {
             [Test]
             public void Should_not_duplicate_og_colon_prefix_when_supplied_by_caller()
@@ -28,11 +28,12 @@ namespace SeoPack.Tests
                 Assert.That(ogpa.Name, Is.EqualTo(propertyName));
             }
 
-            [Test]
+            [TestCase("")]
+            [TestCase(null)]
             [ExpectedException(typeof(ArgumentException))]
-            public void Should_throw_exception_when_property_name_not_supplied_by_caller()
+            public void Should_throw_exception_when_property_name_not_supplied_by_caller(string propertyName)
             {
-                var ogpa = new OgPropertyAttribute(string.Empty);
+                var ogpa = new OgPropertyAttribute(propertyName);
             }
         }
     }

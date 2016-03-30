@@ -16,7 +16,7 @@ namespace SeoPack.Helpers
     public class HtmlSeoHelper : IHtmlSeoHelper
     {
         /// <summary>
-        /// Returns an seo compliant title tag.
+        /// Returns a seo compliant title tag.
         /// </summary>
         /// <param name="title">The inner text of the title tag.</param>
         /// <param name="validateLength">A flag that indicates whether or not to validate the 
@@ -45,7 +45,7 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// Returns an seo compliant meta description tag.
+        /// Returns a seo compliant meta description tag.
         /// </summary>
         /// <param name="description">The content of the description meta tag.</param>
         /// <param name="validateLength">A flag that indicates whether or not to validate the 
@@ -76,11 +76,11 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// Returns an seo compliant image tag.
+        /// Returns a seo compliant image tag.
         /// </summary>
-        /// <param name="image"></param>
-        /// <returns></returns>
-        public IHtmlString Image(SeoPack.Html.Image image)
+        /// <param name="image">The image object.</param>
+        /// <returns>The html string.</returns>
+        public IHtmlString Image(Image image)
         {
             if (image == null)
             {
@@ -92,10 +92,10 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// 
+        /// Returns a seo compliant anchor tag.
         /// </summary>
-        /// <param name="anchor"></param>
-        /// <returns></returns>
+        /// <param name="anchor">The anchor object.</param>
+        /// <returns>The html string.</returns>
         public IHtmlString Anchor(Anchor anchor)
         {
             if (anchor == null)
@@ -107,10 +107,10 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// 
+        /// Returns a seo compliant image link.
         /// </summary>
-        /// <param name="imageLink"></param>
-        /// <returns></returns>
+        /// <param name="imageLink">The imageLink object.</param>
+        /// <returns>The html string.</returns>
         public IHtmlString ImageLink(ImageLink imageLink)
         {
             if (imageLink == null)
@@ -126,11 +126,12 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// 
+        /// Returns a seo compliant canonical link if the current url starts with the 
+        /// supplied canonical url but is not the same as the supplied canonical url.
         /// </summary>
-        /// <param name="canonicalUrl"></param>
-        /// <returns></returns>
-        public IHtmlString CanonicalLink(string canonicalUrl)
+        /// <param name="canonicalUrl">The canonical url.</param>
+        /// <returns>The html string.</returns>
+        public IHtmlString CanonicalLinkIfRequired(string canonicalUrl)
         {
             if (string.IsNullOrEmpty(canonicalUrl))
             {
@@ -148,23 +149,30 @@ namespace SeoPack.Helpers
             return BuildCanonicalLink(canonicalUrl);
         }
 
-        public IHtmlString CanonicalLink()
+        /// <summary>
+        /// Returns a seo compliant canonical link if the current url has querystrings.
+        /// </summary>
+        /// <returns>The html string.</returns>
+        public IHtmlString CanonicalLinkIfRequired()
         {
             var query = HttpContext.Current.Request.Url.Query;
-            var canonicalUrl = "";
-            if (query.Length > 0)
-                canonicalUrl = HttpContext.Current.Request.Url.AbsoluteUri.Replace(query, "");
-            else
-                canonicalUrl = HttpContext.Current.Request.Url.AbsoluteUri;
+
+            if (query.Length == 0)
+            {
+                return MvcHtmlString.Create(string.Empty);
+            }
+
+            var canonicalUrl = HttpContext.Current
+                .Request.Url.AbsoluteUri.Replace(query, "");
 
             return BuildCanonicalLink(canonicalUrl);
         }
 
         /// <summary>
-        /// 
+        /// Returns a seo compliant opengraph tag.
         /// </summary>
-        /// <param name="og"></param>
-        /// <returns></returns>
+        /// <param name="og">The opengraph object.</param>
+        /// <returns>The html string.</returns>
         public IHtmlString OpenGraph(Og og)
         {
             if (og == null)
@@ -176,42 +184,43 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// 
+        /// Returns a seo compliant rel=next and/or rel=prev pagination link.
         /// </summary>
-        /// <param name="pagingLink"></param>
-        /// <returns></returns>
-        public IHtmlString PaginationAttributes(Pagination pagingLink)
+        /// <param name="paginationLink">The pagination link object.</param>
+        /// <returns>The html string.</returns>
+        public IHtmlString PaginationLink(PaginationLink paginationLink)
         {
-            if (pagingLink == null)
+            if (paginationLink == null)
             {
-                throw new ArgumentNullException("pagingLink");
+                throw new ArgumentNullException("paginationLink");
             }
 
             var str = new StringBuilder();
             int firstPage = 1;
+            int recordCount = paginationLink.RecordCount;
 
-            if (pagingLink.PageIsZeroBased)
+            if (paginationLink.PageIsZeroBased)
             {
-                pagingLink.RecordCount--;
+                recordCount--;
                 firstPage = 0;
             }
 
-            if (pagingLink.CurrentPage < pagingLink.RecordCount)
-            {
-                var htmlElement = new HtmlElement("link");
-                htmlElement.AddAttribute("rel", "next");
-                htmlElement.AddAttribute("heref",
-                    string.Format(pagingLink.UrlFormat, pagingLink.CurrentPage + 1));
-
-                str.Append(htmlElement.ToString());
-            }
-
-            if (pagingLink.CurrentPage > firstPage)
+            if (paginationLink.CurrentPage > firstPage)
             {
                 var htmlElement = new HtmlElement("link");
                 htmlElement.AddAttribute("rel", "prev");
                 htmlElement.AddAttribute("heref",
-                    string.Format(pagingLink.UrlFormat, pagingLink.CurrentPage - 1));
+                    string.Format(paginationLink.UrlFormat, paginationLink.CurrentPage - 1));
+
+                str.Append(htmlElement.ToString());
+            }
+
+            if (paginationLink.CurrentPage < recordCount)
+            {
+                var htmlElement = new HtmlElement("link");
+                htmlElement.AddAttribute("rel", "next");
+                htmlElement.AddAttribute("heref",
+                    string.Format(paginationLink.UrlFormat, paginationLink.CurrentPage + 1));
 
                 str.Append(htmlElement.ToString());
             }
@@ -220,44 +229,56 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// 
+        /// Returns a seo compliant href lang link.
         /// </summary>
-        /// <param name="hrefLangLinks"></param>
-        /// <returns></returns>
-        public IHtmlString HrefLangLink(List<HrefLangLink> hrefLangLinks)
+        /// <param name="hrefLangPages">A collection of pages with href lang link objects.</param>
+        /// <returns>The html string.</returns>
+        public IHtmlString HrefLangLink(IEnumerable<HrefLangPage> hrefLangPages)
         {
-            if (hrefLangLinks == null)
+            if (hrefLangPages == null || !hrefLangPages.Any())
             {
-                throw new ArgumentNullException("hrefLangLinks");
+                throw new ArgumentException("hrefLangPages not set");
+            }
+
+            if (hrefLangPages
+                .GroupBy(x => x.PageName.ToLower())
+                .Where(x => x.Count() > 1)
+                .Select(x => x.Key).Count() > 1)
+            {
+                throw new ArgumentException("Href lang page names should be unique");
             }
 
             HtmlElement htmlElement;
             var currentPageUrl = HttpContext.Current.Request.Url.AbsoluteUri.ToLower();
-            var foundUrl = hrefLangLinks.SingleOrDefault(
-                x => x.CanonicalUrl.ToLower() == currentPageUrl);
+            HrefLangLink foundLink = null;
+            HrefLangPage foundPage = null;
 
-            if (foundUrl == null)
+            foreach (var page in hrefLangPages)
+            {
+                foundLink = page.HrefLangLinks.First(
+                    x => x.CanonicalUrl.ToLower() == currentPageUrl);
+
+                if(foundLink != null)
+                {
+                    foundPage = page;
+                    break;
+                }
+            }
+
+            if (foundLink == null)
                 return MvcHtmlString.Create(string.Empty);
 
             var str = new StringBuilder();
 
-            htmlElement = new HtmlElement("link");
-            htmlElement.AddAttribute("rel", "alternate");
-            htmlElement.AddAttribute("href", foundUrl.CanonicalUrl);
-            htmlElement.AddAttribute("hreflang", foundUrl.Language);
-            str.Append(htmlElement.ToString());
-
-            var otherUrlsWithSamePageName = hrefLangLinks.Where(x =>
-                x.PageName.ToLower() == foundUrl.PageName.ToLower() &&
-                x.CanonicalUrl.Equals(foundUrl.CanonicalUrl,
-                StringComparison.CurrentCultureIgnoreCase));
-
-            foreach (var otherUrl in otherUrlsWithSamePageName)
+            foreach (var link in foundPage
+                                .HrefLangLinks
+                                .OrderByDescending(x => x.IsDefault)
+                                .ThenBy(x => x.Language)) 
             {
                 htmlElement = new HtmlElement("link");
                 htmlElement.AddAttribute("rel", "alternate");
-                htmlElement.AddAttribute("href", otherUrl.CanonicalUrl);
-                htmlElement.AddAttribute("hreflang", otherUrl.Language);
+                htmlElement.AddAttribute("hreflang", link.Language);
+                htmlElement.AddAttribute("href", link.CanonicalUrl);
                 str.Append(htmlElement.ToString());
             }
 
@@ -269,18 +290,29 @@ namespace SeoPack.Helpers
         private HtmlElement BuildAnchorTag(AnchorBase anchor, string anchorText = "")
         {
             var htmlElement = new HtmlElement("a");
+            htmlElement.AddAttribute("href", anchor.Href);
+
+            if (!string.IsNullOrEmpty(anchor.Title))
+            {
+                htmlElement.AddAttribute("title", anchor.Title);
+            }
 
             if (anchor.NoFollow)
             {
                 htmlElement.AddAttribute("rel", "nofollow");
             }
 
-            htmlElement.AddAttribute("href", anchor.Href);
-            htmlElement.AddAttribute("title", anchor.Title);
-
             if (!string.IsNullOrEmpty(anchorText))
             {
                 htmlElement.SetInnerText(anchorText);
+            }
+
+            if (anchor.Attributes != null)
+            {
+                foreach (var pair in DictionaryFromAnonymousObject(anchor.Attributes))
+                {
+                    htmlElement.AddAttribute(pair.Key, pair.Value);
+                }
             }
 
             return htmlElement;
@@ -291,6 +323,11 @@ namespace SeoPack.Helpers
             var htmlElement = new HtmlElement("img");
             htmlElement.AddAttribute("src", image.Src);
             htmlElement.AddAttribute("alt", image.AltText);
+
+            if (!string.IsNullOrEmpty(image.Title))
+            {
+                htmlElement.AddAttribute("title", image.Title);
+            }
 
             if (image.Attributes != null)
             {

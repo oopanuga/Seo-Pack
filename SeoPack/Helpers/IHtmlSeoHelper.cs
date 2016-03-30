@@ -17,14 +17,14 @@ namespace SeoPack.Helpers
 
         IHtmlString ImageLink(ImageLink imageLink);
 
-        IHtmlString CanonicalLink(string canonicalUrl);
+        IHtmlString CanonicalLinkIfRequired(string canonicalUrl);
 
-        IHtmlString CanonicalLink();
+        IHtmlString CanonicalLinkIfRequired();
 
         IHtmlString OpenGraph(Og og);
 
-        IHtmlString PaginationAttributes(Pagination pagingLink);
+        IHtmlString PaginationLink(PaginationLink pagingLink);
 
-        IHtmlString HrefLangLink(List<HrefLangLink> hrefLangLinks);
+        IHtmlString HrefLangLink(IEnumerable<HrefLangPage> hrefLangPages);
     }
 }

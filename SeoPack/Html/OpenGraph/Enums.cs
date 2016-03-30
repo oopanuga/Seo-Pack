@@ -2,7 +2,6 @@
 {
     public enum Determiner
     {
-        Blank,
         A,
         An,
         The,
@@ -11,12 +10,13 @@
 
     public enum Gender
     {
-        Male, 
+        Male,
         Female
     }
 
     public enum ObjectType
     {
+        Unknown,
         Website,
         Article,
         Book
