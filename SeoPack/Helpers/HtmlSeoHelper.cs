@@ -270,7 +270,10 @@ namespace SeoPack.Helpers
 
             var str = new StringBuilder();
 
-            foreach (var link in foundPage.HrefLangLinks.OrderByDescending(x => x.IsDefault).ThenBy(x => x.Language)) 
+            foreach (var link in foundPage
+                                .HrefLangLinks
+                                .OrderByDescending(x => x.IsDefault)
+                                .ThenBy(x => x.Language)) 
             {
                 htmlElement = new HtmlElement("link");
                 htmlElement.AddAttribute("rel", "alternate");
