@@ -36,7 +36,7 @@ namespace SeoPack.Tests.Html.OpenGraph
             public void Should_throw_exception_if_image_is_null()
             {
                 OgImage[] ogImages = null;
-                new FakeOgWebsite(title, ogObjectUrl,  ogImages );
+                new FakeOgWebsite(title, ogObjectUrl, ogImages);
             }
 
             [Test]
@@ -44,33 +44,33 @@ namespace SeoPack.Tests.Html.OpenGraph
             {
                 var ogImage = new OgImage(ogImageUrl);
                 var website = new FakeOgWebsite(title, ogObjectUrl, new OgImage[] { ogImage });
-                var audioUrl = "http://www.seopack.com/audio";
-                var videoUrl = "http://www.seopack.com/video";
+                var ogAudio = new OgAudio("http://www.seopack.com/audio");
+                var ogVideo = new OgVideo("http://www.seopack.com/video");
                 var description = "some description";
                 var determiner = Determiner.An;
                 var siteName = "SeoPack Website";
                 var locale = "en-gb";
                 var alternateLocales = new List<string> { "en-us", "en-ca" };
 
-                website.Audio = audioUrl;
+                website.Audio = new OgAudio[] { ogAudio };
                 website.Description = description;
                 website.Determiner = determiner;
                 website.Locale = locale;
                 website.AlternateLocales = alternateLocales;
                 website.SiteName = siteName;
-                website.Video = videoUrl;
+                website.Videos = new OgVideo[] { ogVideo };
 
                 Assert.That(website.Title, Is.EqualTo(title));
                 Assert.That(website.Url, Is.EqualTo(ogObjectUrl));
                 Assert.That(website.Images[0], Is.EqualTo(ogImage));
-                Assert.That(website.Audio, Is.EqualTo(audioUrl));
+                Assert.That(website.Audio[0], Is.EqualTo(ogAudio));
                 Assert.That(website.Description, Is.EqualTo(description));
                 Assert.That(website.Determiner, Is.EqualTo(determiner));
                 Assert.That(website.Type, Is.EqualTo(ObjectType.Website));
                 Assert.That(website.Locale, Is.EqualTo(locale));
                 Assert.That(website.AlternateLocales, Is.EqualTo(alternateLocales));
                 Assert.That(website.SiteName, Is.EqualTo(siteName));
-                Assert.That(website.Video, Is.EqualTo(videoUrl));
+                Assert.That(website.Videos[0], Is.EqualTo(ogVideo));
             }
         }
     }

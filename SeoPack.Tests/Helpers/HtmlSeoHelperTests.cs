@@ -245,13 +245,13 @@ namespace SeoPack.Tests.Helpers
                 var locale = "en-gb";
                 var alternateLocales = new List<string> { "en-us", "en-ca" };
 
-                website.Audio = audioUrl;
+                website.Audio = new OgAudio[] { new OgAudio(audioUrl) };
                 website.Description = description;
                 website.Determiner = determiner;
                 website.Locale = locale;
                 website.AlternateLocales = alternateLocales;
                 website.SiteName = siteName;
-                website.Video = videoUrl;
+                website.Videos = new OgVideo[] { new OgVideo(videoUrl) };
 
                 var seoHelper = new HtmlSeoHelper();
                 var output = seoHelper.OpenGraph(website);
@@ -406,7 +406,7 @@ namespace SeoPack.Tests.Helpers
                 var seoHelper = new HtmlSeoHelper();
                 var output = seoHelper.HrefLangLink(hrefLangPages);
 
-                Assert.That(output.ToString(), Is.EqualTo("<link rel=\"alternate\" hreflang=\"x-default\" href=\"http://www.seopack.com/marketplace\" />"+
+                Assert.That(output.ToString(), Is.EqualTo("<link rel=\"alternate\" hreflang=\"x-default\" href=\"http://www.seopack.com/marketplace\" />" +
                     "<link rel=\"alternate\" hreflang=\"en-gb\" href=\"http://www.seopack.com/gb/marketplace\" /><link rel=\"alternate\" hreflang=\"en-us\" href=\"http://www.seopack.com/us/marketplace\" />"));
             }
         }
