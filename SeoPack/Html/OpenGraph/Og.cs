@@ -46,8 +46,8 @@ namespace SeoPack.Html.OpenGraph
         [OgStructuredProperty(4)]
         public OgImage[] Images { get; private set; }
 
-        [OgProperty("audio", 5)]
-        public string Audio { get; set; }
+        [OgStructuredProperty(5)]
+        public OgAudio[] Audio { get; set; }
 
         [OgProperty("description", 6)]
         public string Description { get; set; }
@@ -64,7 +64,7 @@ namespace SeoPack.Html.OpenGraph
         [OgProperty("site_name", 10)]
         public string SiteName { get; set; }
 
-        [OgProperty("video", 11)]
-        public string Video { get; set; }
+        [OgStructuredProperty(11)]
+        public OgVideo[] Videos { get; set; }
     }
 }
