@@ -19,23 +19,19 @@ namespace SeoPack.Helpers
         /// Returns a seo compliant title tag.
         /// </summary>
         /// <param name="title">The inner text of the title tag.</param>
-        /// <param name="validateLength">A flag that indicates whether or not to validate the 
-        /// length of the title. The title must be between 50 and 60 characters in length</param>
+        /// The length of the title. The title must be 70 characters or less.</param>
         /// <returns>The html string.</returns>
-        public IHtmlString Title(string title, bool validateLength = false)
+        public IHtmlString Title(string title)
         {
             if (string.IsNullOrEmpty(title))
             {
                 throw new ArgumentException("title not set");
             }
 
-            if (validateLength)
+            if (title.Length > 70)
             {
-                if (title.Length < 50 || title.Length > 60)
-                {
-                    throw new ArgumentException(
-                        "title must be between 50 and 60 characters in length");
-                }
+                throw new ArgumentException(
+                    "title must be 70 characters or less");
             }
 
             var htmlElement = new HtmlElement("title");
@@ -48,24 +44,19 @@ namespace SeoPack.Helpers
         /// Returns a seo compliant meta description tag.
         /// </summary>
         /// <param name="description">The content of the description meta tag.</param>
-        /// <param name="validateLength">A flag that indicates whether or not to validate the 
-        /// length of the description. The description must be less than or equal to 155 characters
-        /// in length</param>
+        /// The length of the description. The description must be 155 characters or less.
         /// <returns>The html string.</returns>
-        public IHtmlString MetaDescription(string description, bool validateLength = false)
+        public IHtmlString MetaDescription(string description)
         {
             if (string.IsNullOrEmpty(description))
             {
                 throw new ArgumentException("description not set");
             }
 
-            if (validateLength)
+            if (description.Length > 155)
             {
-                if (description.Length > 155)
-                {
-                    throw new ArgumentException(
-                        "description cannot be more than 155 characters in length");
-                }
+                throw new ArgumentException(
+                    "description must be 155 characters or less");
             }
 
             var htmlElement = new HtmlElement("meta");
@@ -258,7 +249,7 @@ namespace SeoPack.Helpers
                 foundLink = page.HrefLangLinks.First(
                     x => x.CanonicalUrl.ToLower() == currentPageUrl);
 
-                if(foundLink != null)
+                if (foundLink != null)
                 {
                     foundPage = page;
                     break;
@@ -273,7 +264,7 @@ namespace SeoPack.Helpers
             foreach (var link in foundPage
                                 .HrefLangLinks
                                 .OrderByDescending(x => x.IsDefault)
-                                .ThenBy(x => x.Language)) 
+                                .ThenBy(x => x.Language))
             {
                 htmlElement = new HtmlElement("link");
                 htmlElement.AddAttribute("rel", "alternate");
@@ -309,7 +300,7 @@ namespace SeoPack.Helpers
 
             if (anchor.Attributes != null)
             {
-                foreach (var pair in DictionaryFromAnonymousObject(anchor.Attributes))
+                foreach (var pair in AnonymousObjectToHtmlAttributes(anchor.Attributes))
                 {
                     htmlElement.AddAttribute(pair.Key, pair.Value);
                 }
@@ -331,7 +322,7 @@ namespace SeoPack.Helpers
 
             if (image.Attributes != null)
             {
-                foreach (var pair in DictionaryFromAnonymousObject(image.Attributes))
+                foreach (var pair in AnonymousObjectToHtmlAttributes(image.Attributes))
                 {
                     htmlElement.AddAttribute(pair.Key, pair.Value);
                 }
@@ -340,13 +331,13 @@ namespace SeoPack.Helpers
             return htmlElement;
         }
 
-        private IDictionary<string, string> DictionaryFromAnonymousObject(object o)
+        private IDictionary<string, string> AnonymousObjectToHtmlAttributes(object o)
         {
             IDictionary<string, string> dic = new Dictionary<string, string>();
             var properties = o.GetType().GetProperties();
             foreach (PropertyInfo prop in properties)
             {
-                dic.Add(prop.Name, prop.GetValue(o, null) as string);
+                dic.Add(prop.Name.Replace("_", "-"), prop.GetValue(o, null) as string);
             }
             return dic;
         }

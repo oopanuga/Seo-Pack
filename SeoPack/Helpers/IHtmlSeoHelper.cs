@@ -7,9 +7,9 @@ namespace SeoPack.Helpers
 {
     public interface IHtmlSeoHelper
     {
-        IHtmlString Title(string title, bool validateLength = false);
+        IHtmlString Title(string titl);
 
-        IHtmlString MetaDescription(string metaDescription, bool validateLength = false);
+        IHtmlString MetaDescription(string metaDescription);
 
         IHtmlString Image(SeoPack.Html.Image image);
 
