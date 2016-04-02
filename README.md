@@ -40,7 +40,7 @@ Rendering a SEO compliant Anchor tag
 @Html.UnpackSeo().Anchor(new Anchor(
                     href: "https://github.com/oopanuga/seo-pack",
                     text: "The SeoPack Github Page",
-                    nofollow: true,
+                    noFollow: true,
                     attributes: new {
                         target = "_blank",
                         @class = "seo-pack-github-anchor",
