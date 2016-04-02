@@ -2,7 +2,7 @@
 
 A library packed with lots of SEO goodness for ASP.Net MVC projects. Get access to a bunch of Html Seo Helpers for rendering SEO compliant Html tags including Open Graph tags. Please see "Planned features" below for other SEO features to come.
 
-The Html Seo Helpers are an extension of the standard MVC Html Helpers. These helpers were built according to the recommendations defined in the [MOZ SEO Cheat Sheet](https://d2eeipcrcdle6.cloudfront.net/seo-cheat-sheet.pdf) for Web developers.
+The Html Seo Helpers are extension methods of the standard MVC Html Helpers. These helpers were built according to the recommendations defined in the [MOZ SEO Cheat Sheet](https://d2eeipcrcdle6.cloudfront.net/seo-cheat-sheet.pdf) for Web developers.
 
 ### Supported Tags
 1. Title
