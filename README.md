@@ -25,12 +25,12 @@ The Html Seo Helpers are an extension of the standard MVC Html Helpers. These he
 
 ### Examples
 
-Rendering a SEO compliant Title tag - Ensures the title doesn't exceed the recommended length of 70
+Rendering a SEO compliant Title tag - Validates length (70 chars or less)
 ```c#
 @Html.UnpackSeo().Title(new Title("This is the official SeoPack website"))
 ```
 
-Rendering a SEO compliant Meta Description tag - Ensures the Meta Description doesn't exceed the recommended length of 155
+Rendering a SEO compliant Meta Description tag - Validates length (155 chars or less)
 ```c#
 @Html.UnpackSeo().Title(new MetaDescription("This is the official SeoPack website"))
 ```
@@ -48,7 +48,7 @@ Rendering a SEO compliant Anchor tag
                         }))
 ```
 
-### Installing CommonProvider [nuget](https://www.nuget.org/packages/SeoPack/)
+### Installing SeoPack [nuget](https://www.nuget.org/packages/SeoPack/)
 ```
 PM> Install-Package SeoPack
 ```
