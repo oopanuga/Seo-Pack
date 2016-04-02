@@ -25,12 +25,12 @@ The Html SEO Helper methods are extension methods of the ASP.Net MVC HtmlHelper 
 
 ### Examples
 
-Rendering a SEO compliant Title tag - Validates length (70 chars or less)
+Rendering a SEO compliant Title tag - checks length is 70 chars or less
 ```c#
 @Html.UnpackSeo().Title(new Title("Welcome to the SeoPack Github page"))
 ```
 
-Rendering a SEO compliant Meta Description tag - Validates length (155 chars or less)
+Rendering a SEO compliant Meta Description tag - checks length is 155 chars or less
 ```c#
 @Html.UnpackSeo().MetaDescription("The SeoPack lib is packed with lots of SEO goodness"))
 ```
