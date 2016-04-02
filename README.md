@@ -32,12 +32,12 @@ PM> Install-Package SeoPack
 
 Rendering a SEO compliant Title tag - checks length is 70 chars or less
 ```c#
-@Html.UnpackSeo().Title(new Title("Welcome to the SeoPack Github page"))
+@Html.UnpackSeo().Title("Welcome to the SeoPack Github page")
 ```
 
 Rendering a SEO compliant Meta Description tag - checks length is 155 chars or less
 ```c#
-@Html.UnpackSeo().MetaDescription("The SeoPack lib is packed with lots of SEO goodness"))
+@Html.UnpackSeo().MetaDescription("The SeoPack lib is packed with lots of SEO goodness")
 ```
 
 Rendering a SEO compliant Anchor tag
