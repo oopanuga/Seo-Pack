@@ -23,7 +23,12 @@ The Html SEO Helper methods are extension methods of the ASP.Net MVC HtmlHelper 
 5. Script Tag management
 6. etc.
 
-### Examples
+### Installing SeoPack - [nuget](https://www.nuget.org/packages/SeoPack/)
+```
+PM> Install-Package SeoPack
+```
+
+### Using SeoPack - examples
 
 Rendering a SEO compliant Title tag - checks length is 70 chars or less
 ```c#
@@ -46,9 +51,4 @@ Rendering a SEO compliant Anchor tag
                         @class = "seo-pack-github-anchor",
                         some_other_attr = "other-attr"
                         }))
-```
-
-### Installing SeoPack [nuget](https://www.nuget.org/packages/SeoPack/)
-```
-PM> Install-Package SeoPack
 ```
