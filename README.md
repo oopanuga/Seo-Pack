@@ -4,7 +4,7 @@ A library packed with lots of SEO goodness for ASP.Net MVC projects. Get access 
 
 The Html Seo Helpers are an extension of the standard MVC Html Helpers. These helpers were built according to the recommendations defined in the [MOZ SEO Cheat Sheet](https://d2eeipcrcdle6.cloudfront.net/seo-cheat-sheet.pdf) for Web developers.
 
-## Supported Tags
+### Supported Tags
 1. Title
 2. Meta Description
 3. Anchor
@@ -15,7 +15,7 @@ The Html Seo Helpers are an extension of the standard MVC Html Helpers. These he
 8. HrefLang Links
 9. Open Graph 
 
-## Planned features
+### Planned features
 1. Friendly urls
 2. Robots.txt
 3. Sitemap.xml
@@ -23,7 +23,7 @@ The Html Seo Helpers are an extension of the standard MVC Html Helpers. These he
 5. Script Tag management
 6. etc.
 
-## Examples
+### Examples
 
 Rendering a SEO compliant Title tag - Ensures the title doesn't exceed the recommended length of 70
 ```c#
@@ -48,7 +48,7 @@ Rendering a SEO compliant Anchor tag
                         }))
 ```
 
-
+### Installing CommonProvider [nuget](https://www.nuget.org/packages/SeoPack/)
 ```
 PM> Install-Package SeoPack
 ```
