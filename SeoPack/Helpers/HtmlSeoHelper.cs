@@ -117,7 +117,7 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// Returns a seo compliant canonical link if the current url starts with the 
+        /// Returns a seo compliant canonical link if the current page url starts with the 
         /// supplied canonical url but is not the same as the supplied canonical url.
         /// </summary>
         /// <param name="canonicalUrl">The canonical url.</param>
@@ -141,20 +141,17 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// Returns a seo compliant canonical link if the current url has querystrings.
+        /// Returns a seo compliant canonical link by stripping off any querystrings
+        /// from the current page url. It returs a canonical link only if the current
+        /// page url has got querystrings otherwise an empty html string is returned.
         /// </summary>
         /// <returns>The html string.</returns>
         public IHtmlString CanonicalLinkIfRequired()
         {
-            var query = HttpContext.Current.Request.Url.Query;
+            var canonicalUrl = new UrlSeoHelper().CanonicalUrl();
 
-            if (query.Length == 0)
-            {
+            if (string.IsNullOrEmpty(canonicalUrl))
                 return MvcHtmlString.Create(string.Empty);
-            }
-
-            var canonicalUrl = HttpContext.Current
-                .Request.Url.AbsoluteUri.Replace(query, "");
 
             return BuildCanonicalLink(canonicalUrl);
         }
