@@ -1,10 +1,6 @@
 ﻿using NUnit.Framework;
 using SeoPack.Html;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeoPack.Tests.Html
 {
@@ -34,7 +30,7 @@ namespace SeoPack.Tests.Html
             }
 
             [Test]
-            public void Should_return_false_for_isdefault_language_is_supplied()
+            public void Should_return_false_for_when_isdefault_language_is_supplied()
             {
                 var hrefLangLink = new HrefLangLink(canonicalUrl, language);
 
