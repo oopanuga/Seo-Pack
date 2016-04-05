@@ -2,7 +2,7 @@
 
 namespace SeoPack.Html.OpenGraph
 {
-    [AttributeUsage(AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
     public class OgPropertyAttribute : OgMetadataAttribute
     {
         public OgPropertyAttribute(string name, int displayOrder = 0)
