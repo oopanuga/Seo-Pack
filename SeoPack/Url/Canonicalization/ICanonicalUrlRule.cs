@@ -5,7 +5,7 @@ namespace SeoPack.Url.Canonicalization
     /// <summary>
     /// 
     /// </summary>
-    public interface ICanonicalizationRule
+    public interface ICanonicalUrlRule
     {
         void Apply(UriBuilder uri);
     }

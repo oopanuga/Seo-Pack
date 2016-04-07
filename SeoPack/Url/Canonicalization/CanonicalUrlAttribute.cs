@@ -7,7 +7,7 @@ namespace SeoPack.Url.Canonicalization
     /// 
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    public class CanonicalAttribute : ActionFilterAttribute
+    public class CanonicalUrlAttribute : ActionFilterAttribute
     {
         private string _urlSegment;
         private string _fullUrl;
@@ -16,7 +16,7 @@ namespace SeoPack.Url.Canonicalization
         /// 
         /// </summary>
         /// <param name="urlSegment"></param>
-        public CanonicalAttribute(string urlSegment)
+        public CanonicalUrlAttribute(string urlSegment)
         {
             if (string.IsNullOrEmpty(urlSegment))
             {
@@ -56,9 +56,8 @@ namespace SeoPack.Url.Canonicalization
                     }
                 }
             }
-
-            var canonicalUrl = new CanonicalUrl(_fullUrl).AbsoluteUri; ;
-
+            
+            var canonicalUrl = new CanonicalUrl(_fullUrl).AbsoluteUri;
             filterContext.RequestContext.HttpContext.Items["CanonicalUrl"] = canonicalUrl;
             filterContext.Controller.ViewData["CanonicalUrl"] = canonicalUrl;
 
@@ -85,7 +84,8 @@ namespace SeoPack.Url.Canonicalization
                 }
             }
 
-            _fullUrl = _fullUrl.Replace("{" + key + "}", value.ToString(), StringComparison.InvariantCultureIgnoreCase);
+            _fullUrl = _fullUrl.Replace("{" + key + "}", value.ToString(), 
+                StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

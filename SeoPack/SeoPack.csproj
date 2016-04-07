@@ -129,11 +129,21 @@
     <Compile Include="Html\OpenGraph\OgVideo.cs" />
     <Compile Include="Html\PaginationLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalAttribute.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalizationRuleManager.cs" />
+    <Compile Include="Url\Canonicalization\CanonicalUrlRuleBuilder.cs" />
+    <Compile Include="Url\Canonicalization\CanonicalUrlRuleConfiguration.cs" />
+    <Compile Include="Url\Canonicalization\CanonicalUrlAttribute.cs" />
     <Compile Include="Url\Canonicalization\CanonicalUrl.cs" />
+    <Compile Include="Url\Canonicalization\CanonicalUrlRuleBuilderExtensions.cs" />
+    <Compile Include="Url\Canonicalization\Rules\HostRule.cs" />
+    <Compile Include="Url\Canonicalization\Rules\LowercaseRule.cs" />
+    <Compile Include="Url\Canonicalization\Rules\MapRule.cs" />
+    <Compile Include="Url\Canonicalization\Rules\NoTrailingSlashRule.cs" />
+    <Compile Include="Url\Canonicalization\Rules\NoWwwRule.cs" />
+    <Compile Include="Url\Canonicalization\Rules\PatternRule.cs" />
+    <Compile Include="Url\Canonicalization\Rules\TrailingSlashRule.cs" />
+    <Compile Include="Url\Canonicalization\Rules\WwwRule.cs" />
     <Compile Include="Url\FriendlyUrlRoute.cs" />
-    <Compile Include="Url\Canonicalization\ICanonicalizationRule.cs" />
+    <Compile Include="Url\Canonicalization\ICanonicalUrlRule.cs" />
     <Compile Include="Url\NoTrailingSlashAttribute.cs" />
   </ItemGroup>
   <ItemGroup />

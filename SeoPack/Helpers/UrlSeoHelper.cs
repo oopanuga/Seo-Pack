@@ -17,7 +17,7 @@ namespace SeoPack.Helpers
             var canonicalUrl = HttpContext.Current.Items["CanonicalUrl"] as string;
             if (!string.IsNullOrEmpty(canonicalUrl))
             {
-                return new CanonicalUrl(canonicalUrl).AbsoluteUri;
+                return canonicalUrl;
             }
             else
             {

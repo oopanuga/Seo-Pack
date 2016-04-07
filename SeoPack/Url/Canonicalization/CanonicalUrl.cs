@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SeoPack.Url.Canonicalization
 {
@@ -9,21 +7,17 @@ namespace SeoPack.Url.Canonicalization
     /// </summary>
     public class CanonicalUrl : Uri
     {
-        private static CanonicalizationRuleManager _ruleManager;
-        private List<ICanonicalizationRule> _canonicalizationRules;
+        private ICanonicalUrlRule[] _rules;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="canonicalizationRules"></param>
-        public CanonicalUrl(string url,
-            params ICanonicalizationRule[] canonicalizationRules)
+        /// <param name="rules"></param>
+        public CanonicalUrl(string url, params ICanonicalUrlRule[] rules)
             : base(url)
         {
-            _canonicalizationRules = canonicalizationRules != null
-                ? canonicalizationRules.ToList() : null;
-
+            _rules = rules;
             Canonicalize();
         }
 
@@ -32,40 +26,8 @@ namespace SeoPack.Url.Canonicalization
         /// </summary>
         /// <param name="url"></param>
         public CanonicalUrl(string url)
-            : this(url, _ruleManager != null
-            ? _ruleManager.GetRules() : null)
+            : this(url, CanonicalUrlRuleConfiguration.Rules)
         {
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ICanonicalizationRule[] Rules
-        {
-            get
-            {
-                if (_canonicalizationRules == null)
-                    return null;
-                else
-                    return _canonicalizationRules.ToArray();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public static CanonicalizationRuleManager RuleManager
-        {
-            get
-            {
-                if (_ruleManager == null)
-                {
-                    _ruleManager = 
-                        new CanonicalizationRuleManager();
-                }
-
-                return _ruleManager;
-            }
         }
 
         /// <summary>
@@ -75,7 +37,7 @@ namespace SeoPack.Url.Canonicalization
         /// <returns></returns>
         public static CanonicalUrl Canonicalize(string url)
         {
-            if(string.IsNullOrEmpty(url))
+            if (string.IsNullOrEmpty(url))
             {
                 throw new ArgumentException("url not set");
             }
@@ -85,10 +47,10 @@ namespace SeoPack.Url.Canonicalization
 
         private void Canonicalize()
         {
-            if (_canonicalizationRules != null)
+            if (_rules != null)
             {
                 var urlBuildeer = new UriBuilder(this);
-                foreach (var rule in _canonicalizationRules)
+                foreach (var rule in _rules)
                 {
                     rule.Apply(urlBuildeer);
                 }

@@ -48,7 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\HtmlSeoHelperTests.cs" />
+    <Compile Include="Helpers\HtmlSeoHelper\AnchorTests.cs" />
+    <Compile Include="Helpers\HtmlSeoHelper\CanonicalLinkTests.cs" />
+    <Compile Include="Helpers\HtmlSeoHelper\MetaDescriptionTests.cs" />
+    <Compile Include="Helpers\HtmlSeoHelper\TitleTests.cs" />
+    <Compile Include="Helpers\HtmlSeoHelper\HrefLangLinkTests.cs" />
+    <Compile Include="Helpers\HtmlSeoHelper\PaginationLinkTest.cs" />
+    <Compile Include="Helpers\HtmlSeoHelper\OpenGraphTests.cs" />
+    <Compile Include="Helpers\HtmlSeoHelper\ImageLinkTests.cs" />
+    <Compile Include="Helpers\HtmlSeoHelper\ImageTests.cs" />
     <Compile Include="Html\AnchorTests.cs" />
     <Compile Include="Html\HrefLangLinkTests.cs" />
     <Compile Include="Html\ImageLinkTests.cs" />
