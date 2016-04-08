@@ -2,11 +2,16 @@
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class WwwRule : ICanonicalUrlRule
+    public class WwwRule : CanonicalUrlRuleBase
     {
-        public void Apply(UriBuilder uri)
+        protected override void ApplyRule(UriBuilder uri)
         {
-            throw new NotImplementedException();
+            if (uri.Uri.HostNameType == UriHostNameType.Dns 
+                && !uri.Host.StartsWith("www.", StringComparison.InvariantCultureIgnoreCase) 
+                && !uri.Host.Equals("localhost", StringComparison.InvariantCultureIgnoreCase))
+            {
+                uri.Host = "www." + uri.Host;
+            }
         }
     }
 }

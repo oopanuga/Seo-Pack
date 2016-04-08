@@ -1,12 +1,22 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class PatternRule : ICanonicalUrlRule
+    public class PatternRule : CanonicalUrlRuleBase
     {
-        public void Apply(UriBuilder uri)
+        private readonly Regex _regex;
+        private readonly string _replacement;
+
+        public PatternRule(string regex, string replacement)
         {
-            throw new NotImplementedException();
+            _regex = new Regex(regex, RegexOptions.Compiled);
+            _replacement = replacement;
+        }
+
+        protected override void ApplyRule(UriBuilder uri)
+        {
+            uri.Path = _regex.Replace(uri.Path, _replacement);
         }
     }
 }

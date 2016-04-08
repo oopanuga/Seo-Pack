@@ -7,14 +7,14 @@ namespace SeoPack.Url.Canonicalization
     /// </summary>
     public class CanonicalUrl : Uri
     {
-        private ICanonicalUrlRule[] _rules;
+        private CanonicalUrlRuleBase[] _rules;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="url"></param>
         /// <param name="rules"></param>
-        public CanonicalUrl(string url, params ICanonicalUrlRule[] rules)
+        public CanonicalUrl(string url, params CanonicalUrlRuleBase[] rules)
             : base(url)
         {
             _rules = rules;

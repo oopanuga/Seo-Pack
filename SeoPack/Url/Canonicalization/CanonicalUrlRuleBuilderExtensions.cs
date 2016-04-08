@@ -1,4 +1,5 @@
 ﻿using SeoPack.Url.Canonicalization.Rules;
+using System.Collections.Generic;
 
 namespace SeoPack.Url.Canonicalization
 {
@@ -10,9 +11,9 @@ namespace SeoPack.Url.Canonicalization
             return builder;
         }
 
-        public static CanonicalUrlRuleBuilder HostRule(this CanonicalUrlRuleBuilder builder)
+        public static CanonicalUrlRuleBuilder HostRule(this CanonicalUrlRuleBuilder builder, string host)
         {
-            builder.AddRule(new HostRule());
+            builder.AddRule(new HostRule(host));
             return builder;
         }
 
@@ -22,9 +23,9 @@ namespace SeoPack.Url.Canonicalization
             return builder;
         }
 
-        public static CanonicalUrlRuleBuilder MapRule(this CanonicalUrlRuleBuilder builder)
+        public static CanonicalUrlRuleBuilder MapRule(this CanonicalUrlRuleBuilder builder, IDictionary<string, string> urlPathMap)
         {
-            builder.AddRule(new MapRule());
+            builder.AddRule(new MapRule(urlPathMap));
             return builder;
         }
 
@@ -40,9 +41,9 @@ namespace SeoPack.Url.Canonicalization
             return builder;
         }
 
-        public static CanonicalUrlRuleBuilder PatternRule(this CanonicalUrlRuleBuilder builder)
+        public static CanonicalUrlRuleBuilder PatternRule(this CanonicalUrlRuleBuilder builder, string regex, string replacement)
         {
-            builder.AddRule(new PatternRule());
+            builder.AddRule(new PatternRule(regex, replacement));
             return builder;
         }
 

@@ -129,6 +129,7 @@
     <Compile Include="Html\OpenGraph\OgVideo.cs" />
     <Compile Include="Html\PaginationLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Url\Canonicalization\RedirectToCanonicalUrlAttribute.cs" />
     <Compile Include="Url\Canonicalization\CanonicalUrlRuleBuilder.cs" />
     <Compile Include="Url\Canonicalization\CanonicalUrlRuleConfiguration.cs" />
     <Compile Include="Url\Canonicalization\CanonicalUrlAttribute.cs" />
@@ -143,7 +144,7 @@
     <Compile Include="Url\Canonicalization\Rules\TrailingSlashRule.cs" />
     <Compile Include="Url\Canonicalization\Rules\WwwRule.cs" />
     <Compile Include="Url\FriendlyUrlRoute.cs" />
-    <Compile Include="Url\Canonicalization\ICanonicalUrlRule.cs" />
+    <Compile Include="Url\Canonicalization\CanonicalUrlRuleBase.cs" />
     <Compile Include="Url\NoTrailingSlashAttribute.cs" />
   </ItemGroup>
   <ItemGroup />

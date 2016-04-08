@@ -2,11 +2,11 @@
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class NoTrailingSlashRule : ICanonicalUrlRule
+    public class NoTrailingSlashRule : CanonicalUrlRuleBase
     {
-        public void Apply(UriBuilder uri)
+        protected override void ApplyRule(UriBuilder uri)
         {
-            throw new NotImplementedException();
+            uri.Path = uri.Path.TrimEnd('/');
         }
     }
 }

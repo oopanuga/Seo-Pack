@@ -3,11 +3,11 @@ using System;
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class LowercaseRule : ICanonicalUrlRule
+    public class LowercaseRule : CanonicalUrlRuleBase
     {
-        public void Apply(UriBuilder uri)
+        protected override void ApplyRule(UriBuilder uri)
         {
-            throw new NotImplementedException();
+            uri.Path = uri.Path.ToLowerInvariant();
         }
     }
 }

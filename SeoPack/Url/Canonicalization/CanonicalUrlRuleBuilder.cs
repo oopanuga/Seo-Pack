@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace SeoPack.Url.Canonicalization
@@ -7,15 +8,28 @@ namespace SeoPack.Url.Canonicalization
     /// <summary>
     /// 
     /// </summary>
-    public class CanonicalUrlRuleBuilder
+    public sealed class CanonicalUrlRuleBuilder
     {
-        private static List<ICanonicalUrlRule> _rules;
+        private static List<CanonicalUrlRuleBase> _rules;
+
+        public CanonicalUrlRuleBuilder() { }
+
+        internal CanonicalUrlRuleBuilder(List<CanonicalUrlRuleBase> rules)
+        {
+            if (rules == null || !rules.Any())
+                throw new ArgumentException("rules not set");
+
+            if (_rules == null)
+                _rules = new List<CanonicalUrlRuleBase>();
+
+            _rules = rules;
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        internal ICanonicalUrlRule[] Rules
+        internal CanonicalUrlRuleBase[] Rules
         {
             get
             {
@@ -30,7 +44,7 @@ namespace SeoPack.Url.Canonicalization
         /// 
         /// </summary>
         /// <param name="rule"></param>
-        public CanonicalUrlRuleBuilder AddRule(ICanonicalUrlRule rule)
+        public CanonicalUrlRuleBuilder AddRule(CanonicalUrlRuleBase rule)
         {
             if (rule == null)
             {
@@ -38,12 +52,9 @@ namespace SeoPack.Url.Canonicalization
             }
 
             if (_rules == null)
-                _rules = new List<ICanonicalUrlRule>();
+                _rules = new List<CanonicalUrlRuleBase>();
 
-            if (!_rules.Any(x => x.GetType() == rule.GetType()))
-            {
-                _rules.Add(rule);
-            }
+            _rules.Add(rule);
 
             return this;
         }

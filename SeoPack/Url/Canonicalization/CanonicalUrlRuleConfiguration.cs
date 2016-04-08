@@ -1,4 +1,8 @@
 ﻿
+using System.Collections.Generic;
+using System.Linq;
+using System;
+
 namespace SeoPack.Url.Canonicalization
 {
     /// <summary>
@@ -7,11 +11,12 @@ namespace SeoPack.Url.Canonicalization
     public static class CanonicalUrlRuleConfiguration
     {
         private static CanonicalUrlRuleBuilder _builder;
+
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public static ICanonicalUrlRule[] Rules
+        public static CanonicalUrlRuleBase[] Rules
         {
             get
             {
@@ -28,6 +33,15 @@ namespace SeoPack.Url.Canonicalization
         {
             _builder = new CanonicalUrlRuleBuilder();
             return _builder;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rules"></param>
+        public static void Configure(IEnumerable<CanonicalUrlRuleBase> rules)
+        {
+            _builder = new CanonicalUrlRuleBuilder(rules.ToList());
         }
     }
 }

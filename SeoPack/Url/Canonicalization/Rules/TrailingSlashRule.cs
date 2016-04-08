@@ -2,11 +2,14 @@
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class TrailingSlashRule : ICanonicalUrlRule
+    public class TrailingSlashRule : CanonicalUrlRuleBase
     {
-        public void Apply(UriBuilder uri)
+        protected override void ApplyRule(UriBuilder uri)
         {
-            throw new NotImplementedException();
+            if (!uri.Path.EndsWith("/") && !uri.Path.Contains("."))
+            {
+                uri.Path += '/';
+            }
         }
     }
 }

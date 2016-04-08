@@ -2,11 +2,22 @@
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class HostRule : ICanonicalUrlRule
+    public class HostRule : CanonicalUrlRuleBase
     {
-        public void Apply(UriBuilder uri)
+        private string _host;
+        public HostRule(string host)
         {
-            throw new NotImplementedException();
+            if(string.IsNullOrEmpty(host))
+            {
+                throw new ArgumentException("host not set");
+            }
+
+            _host = host;
+        }
+
+        protected override void ApplyRule(UriBuilder uri)
+        {
+            uri.Host = _host;
         }
     }
 }
