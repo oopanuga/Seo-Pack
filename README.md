@@ -17,11 +17,12 @@ The Html SEO Helper methods are extension methods of the ASP.Net MVC HtmlHelper 
 
 ### Planned features
 1. Friendly urls
-2. Robots.txt
-3. Sitemap.xml
-4. Rich Snippets and Structured Data
-5. Script Tag management
-6. etc.
+2. Canonicalization
+3. Robots.txt
+4. Sitemap.xml
+5. Rich Snippets and Structured Data
+6. Script Tag management
+7. etc.
 
 ### Installing SeoPack - [nuget](https://www.nuget.org/packages/SeoPack/)
 ```
