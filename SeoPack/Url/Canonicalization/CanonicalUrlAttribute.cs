@@ -18,7 +18,7 @@ namespace SeoPack.Url.Canonicalization
         /// <param name="urlPath"></param>
         public CanonicalUrlAttribute(string urlPath)
         {
-            if (string.IsNullOrEmpty(urlSegment))
+            if (string.IsNullOrEmpty(urlPath))
             {
                 throw new ArgumentException("url not set");
             }
