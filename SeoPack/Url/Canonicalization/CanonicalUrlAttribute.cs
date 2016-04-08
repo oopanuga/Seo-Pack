@@ -9,21 +9,21 @@ namespace SeoPack.Url.Canonicalization
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public class CanonicalUrlAttribute : ActionFilterAttribute
     {
-        private string _urlSegment;
+        private string _urlPath;
         private string _fullUrl;
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="urlSegment"></param>
-        public CanonicalUrlAttribute(string urlSegment)
+        /// <param name="urlPath"></param>
+        public CanonicalUrlAttribute(string urlPath)
         {
             if (string.IsNullOrEmpty(urlSegment))
             {
                 throw new ArgumentException("url not set");
             }
 
-            _urlSegment = urlSegment;
+            _urlPath = urlPath;
         }
 
         /// <summary>
@@ -32,20 +32,20 @@ namespace SeoPack.Url.Canonicalization
         /// <param name="filterContext"></param>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (_urlSegment.IndexOf("{") != -1)
+            if (_urlPath.IndexOf("{") != -1)
             {
                 _fullUrl = string.Empty;
 
-                if (_urlSegment.IndexOf("http") != -1)
+                if (_urlPath.IndexOf("http") != -1)
                 {
-                    _fullUrl = _urlSegment;
+                    _fullUrl = _urlPath;
                 }
                 else
                 {
                     var currentPageUrl = filterContext.RequestContext.HttpContext.Request.Url;
 
                     _fullUrl = string.Format("{0}://{1}/{2}",
-                        currentPageUrl.Scheme, currentPageUrl.Authority, _urlSegment);
+                        currentPageUrl.Scheme, currentPageUrl.Authority, _urlPath);
                 }
 
                 foreach (var actionParam in filterContext.ActionParameters)
