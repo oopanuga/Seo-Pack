@@ -3,7 +3,7 @@ using System;
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class LowercaseRule : CanonicalUrlRuleBase
+    public class LowercaseRule : CanonicalRuleBase
     {
         protected override void ApplyRule(UriBuilder uri)
         {

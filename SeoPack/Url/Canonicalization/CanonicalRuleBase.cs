@@ -2,10 +2,7 @@
 
 namespace SeoPack.Url.Canonicalization
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public abstract class CanonicalUrlRuleBase
+    public abstract class CanonicalRuleBase
     {
         public void Apply(UriBuilder uri)
         {

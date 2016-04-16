@@ -2,7 +2,7 @@
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class TrailingSlashRule : CanonicalUrlRuleBase
+    public class TrailingSlashRule : CanonicalRuleBase
     {
         protected override void ApplyRule(UriBuilder uri)
         {

@@ -1,13 +1,12 @@
-﻿using NUnit.Framework;
-using SeoPack.Helpers;
+﻿using System;
+using NUnit.Framework;
 using SeoPack.Html;
-using System;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
+namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.Anchor")]
     [TestFixture]
-    public class HtmlSeoHelper_AnchorTests
+    public class AnchorTests
     {
         string text = "SeoPack";
         string href = "http://www.seopack.com";
@@ -18,7 +17,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Should_throw_exception_if_anchor_object_is_null()
         {
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             seoHelper.Anchor(null);
         }
 
@@ -29,7 +28,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
             var anchor = new Anchor(href, text, noFollow, attributes);
             anchor.Title = title;
 
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             var output = seoHelper.Anchor(anchor);
 
             Assert.That(output.ToString(), Is.EqualTo(
@@ -43,7 +42,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
             var anchor = new Anchor(href, text, noFollow, attributes);
             anchor.Title = title;
 
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             var output = seoHelper.Anchor(anchor);
 
             Assert.That(output.ToString(), Is.EqualTo(
@@ -58,7 +57,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
             var anchor = new Anchor(href, text, noFollow, attributes);
             anchor.Title = title;
 
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             var output = seoHelper.Anchor(anchor);
 
             Assert.That(output.ToString(), Is.EqualTo(

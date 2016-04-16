@@ -54,7 +54,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
             aboutUsPage.AddHrefLangLink(new HrefLangLink("http://www.seopack.com/us/aboutus", usLang));
             hrefLangPages.Add(aboutUsPage);
 
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             var output = seoHelper.HrefLangLink(hrefLangPages);
 
             Assert.That(output.ToString(), Is.EqualTo("<link rel=\"alternate\" hreflang=\"x-default\" href=\"http://www.seopack.com/marketplace\" />" +

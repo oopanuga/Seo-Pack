@@ -2,7 +2,7 @@
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class HostRule : CanonicalUrlRuleBase
+    public class HostRule : CanonicalRuleBase
     {
         private string _host;
         public HostRule(string host)

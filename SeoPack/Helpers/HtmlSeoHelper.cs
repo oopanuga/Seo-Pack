@@ -7,6 +7,8 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using SeoPack.Html.OpenGraph.ObjectTypes.Standard;
+using SeoPack.Url.Canonicalization;
 
 namespace SeoPack.Helpers
 {
@@ -18,8 +20,8 @@ namespace SeoPack.Helpers
         /// <summary>
         /// Returns a seo compliant title tag.
         /// </summary>
-        /// <param name="title">The inner text of the title tag.</param>
-        /// The length of the title. The title must be 70 characters or less.</param>
+        /// <param name="title">The inner text of the title tag. The length 
+        /// of the title. The title must be 70 characters or less.</param>
         /// <returns>The html string.</returns>
         public IHtmlString Title(string title)
         {
@@ -43,8 +45,8 @@ namespace SeoPack.Helpers
         /// <summary>
         /// Returns a seo compliant meta description tag.
         /// </summary>
-        /// <param name="description">The content of the description meta tag.</param>
-        /// The length of the description. The description must be 155 characters or less.
+        /// <param name="description">The content of the description meta tag. 
+        /// The length of the description. The description must be 155 characters or less.</param>
         /// <returns>The html string.</returns>
         public IHtmlString MetaDescription(string description)
         {
@@ -141,16 +143,19 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// Returns a seo compliant canonical link by stripping off any querystrings
-        /// from the current page url. It returs a canonical link only if the current
-        /// page url has got querystrings otherwise an empty html string is returned.
+        /// It returns a seo compliant canonical link only if the current page url is not the 
+        /// same as the deduced canonical url. It calls UrlHelper.CanonicalUrl() to get the 
+        /// deduced canonical url and then it builds a Seo compliant Canonical Link off of it. 
         /// </summary>
         /// <returns>The html string.</returns>
         public IHtmlString CanonicalLinkIfRequired()
         {
             var canonicalUrl = new UrlSeoHelper().CanonicalUrl();
 
-            if (string.IsNullOrEmpty(canonicalUrl))
+            var canonicalizedCurrentPageUrl = 
+                new CanonicalUrl(HttpContext.Current.Request.Url.AbsoluteUri).Url.ToString();
+
+            if (canonicalizedCurrentPageUrl == canonicalUrl)
                 return MvcHtmlString.Create(string.Empty);
 
             return BuildCanonicalLink(canonicalUrl);

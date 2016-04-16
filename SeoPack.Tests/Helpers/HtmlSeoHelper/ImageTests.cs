@@ -1,9 +1,8 @@
-﻿using NUnit.Framework;
-using SeoPack.Helpers;
+﻿using System;
+using NUnit.Framework;
 using SeoPack.Html;
-using System;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
+namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.Image")]
     [TestFixture]
@@ -13,7 +12,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Should_throw_exception_if_image_object_is_null()
         {
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             seoHelper.Image(null);
         }
 
@@ -28,7 +27,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
             var image = new Image(src, altText, attributes);
             image.Title = title;
 
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             var output = seoHelper.Image(image);
 
             Assert.That(output.ToString(), Is.EqualTo(

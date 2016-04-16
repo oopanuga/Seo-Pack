@@ -2,6 +2,7 @@
 using SeoPack.Html.OpenGraph;
 using System.Collections.Generic;
 using System.Web;
+using SeoPack.Html.OpenGraph.ObjectTypes.Standard;
 
 namespace SeoPack.Helpers
 {
@@ -11,7 +12,7 @@ namespace SeoPack.Helpers
 
         IHtmlString MetaDescription(string metaDescription);
 
-        IHtmlString Image(SeoPack.Html.Image image);
+        IHtmlString Image(Image image);
 
         IHtmlString Anchor(Anchor anchor);
 

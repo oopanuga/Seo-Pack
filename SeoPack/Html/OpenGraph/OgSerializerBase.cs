@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using SeoPack.Html.OpenGraph.ObjectTypes.Standard;
 
 namespace SeoPack.Html.OpenGraph
 {

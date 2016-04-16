@@ -2,7 +2,7 @@
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class NoWwwRule : CanonicalUrlRuleBase
+    public class NoWwwRule : CanonicalRuleBase
     {
         protected override void ApplyRule(UriBuilder uri)
         {

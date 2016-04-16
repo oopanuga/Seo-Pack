@@ -1,9 +1,8 @@
-﻿using NUnit.Framework;
-using SeoPack.Helpers;
+﻿using System;
+using NUnit.Framework;
 using SeoPack.Html;
-using System;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
+namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.ImageLink")]
     [TestFixture]
@@ -13,7 +12,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Should_throw_exception_if_imagelink_object_is_null()
         {
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             seoHelper.ImageLink(null);
         }
 
@@ -31,7 +30,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
             var imageLink = new ImageLink(image, href, nofollow, attributes);
             imageLink.Title = title;
 
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             var output = seoHelper.ImageLink(imageLink);
 
             Assert.That(output.ToString(), Is.EqualTo(

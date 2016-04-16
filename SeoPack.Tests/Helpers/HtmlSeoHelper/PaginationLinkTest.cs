@@ -1,9 +1,8 @@
-﻿using NUnit.Framework;
-using SeoPack.Helpers;
+﻿using System;
+using NUnit.Framework;
 using SeoPack.Html;
-using System;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
+namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.PaginationLink")]
     [TestFixture]
@@ -18,7 +17,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Should_throw_exception_if_paginationlink_object_is_null()
         {
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             seoHelper.PaginationLink(null);
         }
 
@@ -32,7 +31,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
 
             var paginationLink = new PaginationLink(currentPage, recordCount, urlFormat, pageIsZeroBased);
 
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             var output = seoHelper.PaginationLink(paginationLink);
 
             Assert.That(output.ToString(), Is.EqualTo(
@@ -49,7 +48,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
 
             var paginationLink = new PaginationLink(currentPage, recordCount, urlFormat, pageIsZeroBased);
 
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             var output = seoHelper.PaginationLink(paginationLink);
 
             if (pageIsZeroBased)
@@ -74,7 +73,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
 
             var paginationLink = new PaginationLink(currentPage, recordCount, urlFormat, pageIsZeroBased);
 
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             var output = seoHelper.PaginationLink(paginationLink);
 
             if (pageIsZeroBased)

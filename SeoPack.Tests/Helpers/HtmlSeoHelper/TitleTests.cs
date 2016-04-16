@@ -1,8 +1,7 @@
-﻿using NUnit.Framework;
-using SeoPack.Helpers;
-using System;
+﻿using System;
+using NUnit.Framework;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
+namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.Title")]
     [TestFixture]
@@ -13,7 +12,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
         [ExpectedException(typeof(ArgumentException))]
         public void Should_throw_exception_if_title_is_null_or_empty(string title)
         {
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             seoHelper.Title(title);
         }
 
@@ -22,7 +21,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
         [ExpectedException(typeof(ArgumentException))]
         public void Should_throw_exception_if_title_is_more_than_70_characters_in_length(string title)
         {
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             seoHelper.Title(title);
         }
 
@@ -30,7 +29,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
         [TestCase("The is the official SeoPack website. We've got tons of nice goodies fo")]//70
         public void Should_return_the_correct_output_if_title_is_70_or_characters_or_less(string title)
         {
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             var output = seoHelper.Title(title);
 
             Assert.That(output.ToString(), Is.EqualTo(string.Format("<title>{0}</title>", title)));

@@ -1,4 +1,5 @@
 ﻿using SeoPack.Html.OpenGraph;
+using SeoPack.Html.OpenGraph.ObjectTypes.Standard;
 
 namespace SeoPack.Tests.Html.OpenGraph
 {

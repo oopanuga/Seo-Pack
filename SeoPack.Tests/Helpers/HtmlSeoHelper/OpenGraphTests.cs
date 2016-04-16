@@ -1,11 +1,10 @@
-﻿using NUnit.Framework;
-using SeoPack.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using NUnit.Framework;
 using SeoPack.Html.OpenGraph;
 using SeoPack.Tests.Html.OpenGraph;
-using System;
-using System.Collections.Generic;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
+namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.OpenGraph")]
     [TestFixture]
@@ -15,7 +14,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Should_throw_exception_if_opengraph_object_is_null()
         {
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             seoHelper.Image(null);
         }
 
@@ -44,7 +43,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
             website.SiteName = siteName;
             website.Videos = new OgVideo[] { new OgVideo(videoUrl) };
 
-            var seoHelper = new HtmlSeoHelper();
+            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
             var output = seoHelper.OpenGraph(website);
 
             string expectedOutput = "<meta property=\"og:title\" content=\"This is an Og object\">"

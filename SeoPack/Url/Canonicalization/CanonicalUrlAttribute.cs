@@ -3,19 +3,12 @@ using System.Web.Mvc;
 
 namespace SeoPack.Url.Canonicalization
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Method)]
     public class CanonicalUrlAttribute : ActionFilterAttribute
     {
         private string _urlPath;
         private string _fullUrl;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="urlPath"></param>
         public CanonicalUrlAttribute(string urlPath)
         {
             if (string.IsNullOrEmpty(urlPath))
@@ -26,10 +19,6 @@ namespace SeoPack.Url.Canonicalization
             _urlPath = urlPath;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="filterContext"></param>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (_urlPath.IndexOf("{") != -1)
@@ -57,9 +46,8 @@ namespace SeoPack.Url.Canonicalization
                 }
             }
             
-            var canonicalUrl = new CanonicalUrl(_fullUrl).AbsoluteUri;
+            var canonicalUrl = new CanonicalUrl(_fullUrl).Url.AbsoluteUri;
             filterContext.RequestContext.HttpContext.Items["CanonicalUrl"] = canonicalUrl;
-            filterContext.Controller.ViewData["CanonicalUrl"] = canonicalUrl;
 
             base.OnActionExecuting(filterContext);
         }

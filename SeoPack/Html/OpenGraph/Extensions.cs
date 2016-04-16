@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace SeoPack.Html.OpenGraph
 {
-    static class Extensions
+    internal static class Extensions
     {
         public static int OgMetadataOrder(this PropertyInfo propInfo)
         {

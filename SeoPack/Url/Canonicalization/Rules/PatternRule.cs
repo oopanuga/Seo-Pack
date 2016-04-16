@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class PatternRule : CanonicalUrlRuleBase
+    public class PatternRule : CanonicalRuleBase
     {
         private readonly Regex _regex;
         private readonly string _replacement;

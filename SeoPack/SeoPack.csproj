@@ -117,7 +117,7 @@
     <Compile Include="Html\OpenGraph\OgImage.cs" />
     <Compile Include="Html\OpenGraph\ObjectTypes\Standard\OgArticle.cs" />
     <Compile Include="Html\OpenGraph\ObjectTypes\Standard\OgWebsite.cs" />
-    <Compile Include="Html\OpenGraph\Og.cs" />
+    <Compile Include="Html\OpenGraph\ObjectTypes\Standard\Og.cs" />
     <Compile Include="Html\OpenGraph\OgMetadataAttribute.cs" />
     <Compile Include="Html\OpenGraph\OgSerializerBase.cs" />
     <Compile Include="Html\OpenGraph\Enums.cs" />
@@ -130,11 +130,11 @@
     <Compile Include="Html\PaginationLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Url\Canonicalization\RedirectToCanonicalUrlAttribute.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalUrlRuleBuilder.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalUrlRuleConfiguration.cs" />
+    <Compile Include="Url\Canonicalization\CanonicalRuleBuilder.cs" />
+    <Compile Include="Url\Canonicalization\CanonicalRuleConfiguration.cs" />
     <Compile Include="Url\Canonicalization\CanonicalUrlAttribute.cs" />
     <Compile Include="Url\Canonicalization\CanonicalUrl.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalUrlRuleBuilderExtensions.cs" />
+    <Compile Include="Url\Canonicalization\CanonicalRuleBuilderExtensions.cs" />
     <Compile Include="Url\Canonicalization\Rules\HostRule.cs" />
     <Compile Include="Url\Canonicalization\Rules\LowercaseRule.cs" />
     <Compile Include="Url\Canonicalization\Rules\MapRule.cs" />
@@ -143,8 +143,7 @@
     <Compile Include="Url\Canonicalization\Rules\PatternRule.cs" />
     <Compile Include="Url\Canonicalization\Rules\TrailingSlashRule.cs" />
     <Compile Include="Url\Canonicalization\Rules\WwwRule.cs" />
-    <Compile Include="Url\FriendlyUrlRoute.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalUrlRuleBase.cs" />
+    <Compile Include="Url\Canonicalization\CanonicalRuleBase.cs" />
     <Compile Include="Url\NoTrailingSlashAttribute.cs" />
   </ItemGroup>
   <ItemGroup />

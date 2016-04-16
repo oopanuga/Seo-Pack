@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SeoPack.Url.Canonicalization.Rules
 {
-    public class MapRule : CanonicalUrlRuleBase
+    public class MapRule : CanonicalRuleBase
     {
         private readonly IDictionary<string, string> _urlPathMap;
 
