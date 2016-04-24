@@ -7,7 +7,6 @@ namespace SeoPack.Url.Canonicalization
     public class CanonicalUrlAttribute : ActionFilterAttribute
     {
         private string _urlPath;
-        private string _fullUrl;
 
         public CanonicalUrlAttribute(string urlPath)
         {
@@ -19,40 +18,46 @@ namespace SeoPack.Url.Canonicalization
             _urlPath = urlPath;
         }
 
+        public CanonicalUrlAttribute()
+        {
+            _urlPath = string.Empty;
+        }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (_urlPath.IndexOf("{") != -1)
+            string fullUrl;
+
+            if (string.IsNullOrEmpty(_urlPath))
             {
-                _fullUrl = string.Empty;
-
-                if (_urlPath.IndexOf("http") != -1)
+                fullUrl = filterContext.RequestContext.HttpContext.Request.Url.AbsoluteUri;
+                var query = filterContext.RequestContext.HttpContext.Request.Url.Query;
+                if (query.Length > 0)
                 {
-                    _fullUrl = _urlPath;
-                }
-                else
-                {
-                    var currentPageUrl = filterContext.RequestContext.HttpContext.Request.Url;
-
-                    _fullUrl = string.Format("{0}://{1}/{2}",
-                        currentPageUrl.Scheme, currentPageUrl.Authority, _urlPath);
-                }
-
-                foreach (var actionParam in filterContext.ActionParameters)
-                {
-                    if (_fullUrl.Contains(actionParam.Key.ToLower()))
-                    {
-                        UpdateUrlPlaceholders(actionParam.Key, actionParam.Value);
-                    }
+                    fullUrl = fullUrl.Replace(query, "");
                 }
             }
+            else
+            {
+                var currentPageUrl = filterContext.RequestContext.HttpContext.Request.Url;
+                fullUrl = string.Format("{0}://{1}/{2}", 
+                    currentPageUrl.Scheme, currentPageUrl.Authority, _urlPath.Trim('/'));
+            }
             
-            var canonicalUrl = new CanonicalUrl(_fullUrl).Url.AbsoluteUri;
+            if (fullUrl.IndexOf("{") != -1)
+            {
+                foreach (var actionParam in filterContext.ActionParameters)
+                {
+                    UpdateUrlPlaceholders(actionParam.Key, actionParam.Value, ref fullUrl);
+                }
+            }
+
+            var canonicalUrl = new CanonicalUrl(fullUrl).Url.AbsoluteUri;
             filterContext.RequestContext.HttpContext.Items["CanonicalUrl"] = canonicalUrl;
 
             base.OnActionExecuting(filterContext);
         }
 
-        private void UpdateUrlPlaceholders(string key, object value)
+        private void UpdateUrlPlaceholders(string key, object value, ref string fullUrl)
         {
             var type = value.GetType();
 
@@ -62,18 +67,16 @@ namespace SeoPack.Url.Canonicalization
                 {
                     var propertyValue = property.GetValue(value, null);
                     if (propertyValue == null) continue;
-                    var propertyType = property.PropertyType;
 
-                    if (!propertyType.Equals(typeof(string)) && !propertyType.IsPrimitive)
-                    {
-                        UpdateUrlPlaceholders(key, propertyValue);
-                        continue;
-                    }
+                    UpdateUrlPlaceholders(property.Name, propertyValue, ref fullUrl);
                 }
             }
+            else
+            {
+                fullUrl = fullUrl.Replace("{" + key + "}",
+                    value.ToString(), StringComparison.InvariantCultureIgnoreCase);
 
-            _fullUrl = _fullUrl.Replace("{" + key + "}", value.ToString(), 
-                StringComparison.InvariantCultureIgnoreCase);
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.CanonicalLinkIfRequired")]
     [TestFixture]
-    public class HtmlSeoHelper_CanonicalLinkTests
+    public class CanonicalLinkTests
     {
         [TestCase(null)]
         [TestCase("")]

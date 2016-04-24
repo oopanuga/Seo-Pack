@@ -6,7 +6,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.PaginationLink")]
     [TestFixture]
-    public class HtmlSeoHelper_PaginationLinkTest
+    public class PaginationLinkTest
     {
         private int currentPage;
         private int recordCount;

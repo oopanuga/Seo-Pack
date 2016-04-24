@@ -8,7 +8,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.OpenGraph")]
     [TestFixture]
-    public class HtmlSeoHelper_OpenGraphTests
+    public class OpenGraphTests
     {
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]

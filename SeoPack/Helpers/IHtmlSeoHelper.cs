@@ -1,5 +1,4 @@
 ﻿using SeoPack.Html;
-using SeoPack.Html.OpenGraph;
 using System.Collections.Generic;
 using System.Web;
 using SeoPack.Html.OpenGraph.ObjectTypes.Standard;

@@ -5,7 +5,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.MetaDescription")]
     [TestFixture]
-    public class HtmlSeoHelper_MetaDescriptionTests
+    public class MetaDescriptionTests
     {
         [TestCase(null)]
         [TestCase("")]

@@ -1,32 +1,15 @@
-﻿using NUnit.Framework;
-using SeoPack.Helpers;
-using SeoPack.Html;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Web;
+using NUnit.Framework;
+using SeoPack.Html;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelperTests
+namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.HrefLangLink")]
     [TestFixture]
-    public class HtmlSeoHelper_HrefLangLinkTests
+    public class HrefLangLinkTests
     {
-        //[Test]
-        //[ExpectedException(typeof(ArgumentException))]
-        //public void Should_throw_exception_if_hreflanglinks_object_is_null()
-        //{
-        //    var seoHelper = new HtmlSeoHelper();
-        //    seoHelper.HrefLangLink(null);
-        //}
-
-        //[Test]
-        //[ExpectedException(typeof(ArgumentException))]
-        //public void Should_throw_exception_if_hreflanglinks_object_is_empty()
-        //{
-        //    var seoHelper = new HtmlSeoHelper();
-        //    seoHelper.HrefLangLink(new List<HrefLangLink>());
-        //}
-
         [Test]
         public void Should_display_hreflanglinks_only_when_on_canonical_version_of_page()
         {

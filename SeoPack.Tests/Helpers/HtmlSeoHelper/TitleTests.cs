@@ -5,7 +5,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.Title")]
     [TestFixture]
-    public class HtmlSeoHelper_TitleTests
+    public class TitleTests
     {
         [TestCase(null)]
         [TestCase("")]

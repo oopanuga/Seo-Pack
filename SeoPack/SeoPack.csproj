@@ -144,6 +144,7 @@
     <Compile Include="Url\Canonicalization\Rules\TrailingSlashRule.cs" />
     <Compile Include="Url\Canonicalization\Rules\WwwRule.cs" />
     <Compile Include="Url\Canonicalization\CanonicalRuleBase.cs" />
+    <Compile Include="Url\Canonicalization\CustomUrlBuilder.cs" />
     <Compile Include="Url\NoTrailingSlashAttribute.cs" />
   </ItemGroup>
   <ItemGroup />

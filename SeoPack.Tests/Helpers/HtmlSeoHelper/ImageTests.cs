@@ -6,7 +6,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {
     [Category("HtmlSeoHelper.Image")]
     [TestFixture]
-    public class HtmlSeoHelper_ImageTests
+    public class ImageTests
     {
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
