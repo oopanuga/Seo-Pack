@@ -33,7 +33,7 @@ namespace SeoPack.Helpers
                 canonicalUrl = canonicalUrl.Replace(query, "");
             }
 
-            return new SeoFriendlyUrl(canonicalUrl).Url.ToString();
+            return new SeoFriendlyUrl(canonicalUrl).Value.ToString();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace SeoPack.Helpers
         /// <returns>The seo friendly url.</returns>
         public string ToSeoFriendlyUrl(string url)
         {
-            return new SeoFriendlyUrl(url).Url.ToString();
+            return new SeoFriendlyUrl(url).Value.ToString();
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SeoPack.Html.OpenGraph;
 using SeoPack.Tests.Html.OpenGraph;
+using System;
+using System.Collections.Generic;
 
 namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {

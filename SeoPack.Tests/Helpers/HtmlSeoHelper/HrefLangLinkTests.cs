@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using NUnit.Framework;
+using SeoPack.Html;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
-using NUnit.Framework;
-using SeoPack.Html;
 
 namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {

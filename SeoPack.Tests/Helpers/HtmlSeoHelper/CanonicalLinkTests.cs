@@ -1,7 +1,7 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.IO;
 using System.Web;
-using NUnit.Framework;
 
 namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 {

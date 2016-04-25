@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using NUnit.Framework;
+using SeoPack.Url.Canonicalization;
+using SeoPack.Url.UrlPolicy;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using NUnit.Framework;
-using SeoPack.Url.Canonicalization;
-using SeoPack.Url.UrlPolicy;
 
 namespace SeoPack.Tests.Url.Canonicalization
 {

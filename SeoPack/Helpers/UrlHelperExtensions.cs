@@ -1,7 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using SeoPack.Url;
+using System.Web.Mvc;
 using System.Web.Routing;
-using SeoPack.Url;
-using SeoPack.Url.Canonicalization;
 
 namespace SeoPack.Helpers
 {
@@ -11,7 +10,7 @@ namespace SeoPack.Helpers
     /// </summary>
     public static class UrlHelperExtensions
     {
-        private static UrlSeoHelper _urlSeoHelper;
+        private static readonly UrlSeoHelper _urlSeoHelper;
 
         static UrlHelperExtensions()
         {
@@ -37,7 +36,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, object routeValues)
         {
-            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeValues)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeValues)).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, RouteValueDictionary routeValues)
         {
-            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeValues)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeValues)).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -61,7 +60,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName)
         {
-            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName)).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -74,7 +73,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, object routeValues)
         {
-            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName, routeValues)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName, routeValues)).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, object routeValues, string protocol)
         {
-            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName, routeValues, protocol)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName, routeValues, protocol)).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -103,7 +102,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, RouteValueDictionary routeValues, string protocol, string hostName)
         {
-            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName, routeValues, protocol, hostName)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName, routeValues, protocol, hostName)).Value.AbsoluteUri;
         }
     }
 }

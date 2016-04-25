@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using SeoPack.Url.UrlPolicy.Policies;
+﻿using SeoPack.Url.UrlPolicy.Policies;
+using System.Collections.Generic;
 
 namespace SeoPack.Url.UrlPolicy
 {

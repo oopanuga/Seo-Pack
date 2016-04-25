@@ -1,7 +1,7 @@
 ﻿using SeoPack.Html;
+using SeoPack.Html.OpenGraph.ObjectTypes.Standard;
 using System.Collections.Generic;
 using System.Web;
-using SeoPack.Html.OpenGraph.ObjectTypes.Standard;
 
 namespace SeoPack.Helpers
 {
