@@ -13,7 +13,7 @@ namespace SeoPack.Url.UrlPolicy
         internal UrlPolicyBuilder(List<UrlPolicyBase> urlPolicies)
         {
             if (urlPolicies == null || !urlPolicies.Any())
-                throw new ArgumentException("policies not set");
+                throw new ArgumentException("urlPolicies not set");
 
             if (_urlPolicies == null)
                 _urlPolicies = new List<UrlPolicyBase>();
