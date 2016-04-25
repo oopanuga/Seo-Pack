@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using NUnit.Framework;
 using SeoPack.Url.Canonicalization;
+using SeoPack.Url.UrlPolicy;
 
 namespace SeoPack.Tests.Url.Canonicalization
 {
@@ -15,7 +16,7 @@ namespace SeoPack.Tests.Url.Canonicalization
         [SetUp]
         public void Setup()
         {
-            CanonicalRuleConfiguration.Configure().NoTrailingSlashRule().WwwRule();
+            UrlPolicyConfiguration.Configure().NoTrailingSlashPolicy().WwwPolicy();
         }
 
         [Test]
@@ -79,7 +80,7 @@ namespace SeoPack.Tests.Url.Canonicalization
         }
 
         [Test]
-        public void Should_canonicalize_url_using_predefined_rules()
+        public void Should_canonicalize_url_using_predefined_url_policies()
         {
             var canonicalUrlAttribute = new CanonicalUrlAttribute("/{userid}/{addressid}/");
             var actionExecutingContext = new ActionExecutingContext();
@@ -88,7 +89,7 @@ namespace SeoPack.Tests.Url.Canonicalization
             AddUserObjectToActionParameters(actionExecutingContext);
             SetHttpContext(actionExecutingContext, "http://www.contactly.com");
 
-            CanonicalRuleConfiguration.Configure().TrailingSlashRule().NoWwwRule();
+            UrlPolicyConfiguration.Configure().TrailingSlashPolicy().NoWwwPolicy();
 
             canonicalUrlAttribute.OnActionExecuting(actionExecutingContext);
 

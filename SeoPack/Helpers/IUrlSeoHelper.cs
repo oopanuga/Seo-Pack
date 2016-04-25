@@ -5,6 +5,6 @@ namespace SeoPack.Helpers
     {
         string CanonicalUrl();
 
-        string Canonicalize(string url);
+        string ToSeoFriendlyUrl(string url);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using SeoPack.Url;
 using SeoPack.Url.Canonicalization;
 
 namespace SeoPack.Helpers
@@ -28,65 +29,71 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// Generates a fully qualified canonical URL for the specified route values.
+        /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
+        /// a set of predefined canonicalization policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeValues">The route values.</param>
         /// <returns></returns>
-        public static string RouteCanonicalUrl(this UrlHelper urlHelper, object routeValues)
+        public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, object routeValues)
         {
-            return CanonicalUrl.Canonicalize(urlHelper.RouteUrl(routeValues)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeValues)).Url.AbsoluteUri;
         }
 
         /// <summary>
-        /// Generates a fully qualified canonical URL for the specified route values.
+        /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
+        /// a set of predefined canonicalization policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeValues">The route values.</param>
         /// <returns></returns>
-        public static string RouteCanonicalUrl(this UrlHelper urlHelper, RouteValueDictionary routeValues)
+        public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, RouteValueDictionary routeValues)
         {
-            return CanonicalUrl.Canonicalize(urlHelper.RouteUrl(routeValues)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeValues)).Url.AbsoluteUri;
         }
 
         /// <summary>
-        /// Generates a fully qualified canonical URL for the specified route values.
+        /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
+        /// a set of predefined canonicalization policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeName">Name of the route.</param>
         /// <returns></returns>
-        public static string RouteCanonicalUrl(this UrlHelper urlHelper, string routeName)
+        public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName)
         {
-            return CanonicalUrl.Canonicalize(urlHelper.RouteUrl(routeName)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName)).Url.AbsoluteUri;
         }
 
         /// <summary>
-        /// Generates a fully qualified canonical URL for the specified route values.
+        /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
+        /// a set of predefined canonicalization policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeName">Name of the route.</param>
         /// <param name="routeValues">The route values.</param>
         /// <returns></returns>
-        public static string RouteCanonicalUrl(this UrlHelper urlHelper, string routeName, object routeValues)
+        public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, object routeValues)
         {
-            return CanonicalUrl.Canonicalize(urlHelper.RouteUrl(routeName, routeValues)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName, routeValues)).Url.AbsoluteUri;
         }
 
         /// <summary>
-        /// Generates a fully qualified canonical URL for the specified route values.
+        /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
+        /// a set of predefined canonicalization policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeName">Name of the route.</param>
         /// <param name="routeValues">The route values.</param>
         /// <param name="protocol">The protocol.</param>
         /// <returns></returns>
-        public static string RouteCanonicalUrl(this UrlHelper urlHelper, string routeName, object routeValues, string protocol)
+        public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, object routeValues, string protocol)
         {
-            return CanonicalUrl.Canonicalize(urlHelper.RouteUrl(routeName, routeValues, protocol)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName, routeValues, protocol)).Url.AbsoluteUri;
         }
 
         /// <summary>
-        /// Generates a fully qualified canonical URL for the specified route values.
+        /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
+        /// a set of predefined canonicalization policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeName">Name of the route.</param>
@@ -94,9 +101,9 @@ namespace SeoPack.Helpers
         /// <param name="protocol">The protocol.</param>
         /// <param name="hostName">Name of the host.</param>
         /// <returns></returns>
-        public static string RouteCanonicalUrl(this UrlHelper urlHelper, string routeName, RouteValueDictionary routeValues, string protocol, string hostName)
+        public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, RouteValueDictionary routeValues, string protocol, string hostName)
         {
-            return CanonicalUrl.Canonicalize(urlHelper.RouteUrl(routeName, routeValues, protocol, hostName)).Url.AbsoluteUri;
+            return SeoFriendlyUrl.ApplyUrlPolicies(urlHelper.RouteUrl(routeName, routeValues, protocol, hostName)).Url.AbsoluteUri;
         }
     }
 }

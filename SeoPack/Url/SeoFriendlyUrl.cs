@@ -1,17 +1,18 @@
 ﻿using System;
+using SeoPack.Url.UrlPolicy;
 
-namespace SeoPack.Url.Canonicalization
+namespace SeoPack.Url
 {
     /// <summary>
-    /// Represents a Canonical Url
+    /// Represents a Seo Friendly Url
     /// </summary>
-    public class CanonicalUrl
+    public class SeoFriendlyUrl
     {
-        private readonly CanonicalRuleBase[] _rules;
+        private readonly UrlPolicyBase[] _policies;
 
         public Uri Url { get; private set; }
 
-        public CanonicalUrl(string url, params CanonicalRuleBase[] rules)
+        public SeoFriendlyUrl(string url, params UrlPolicyBase[] policies)
         {
             if (string.IsNullOrEmpty("url"))
             {
@@ -19,33 +20,33 @@ namespace SeoPack.Url.Canonicalization
             }
 
             Url = new Uri(url);
-            _rules = rules;
-            Canonicalize();
+            _policies = policies;
+            ApplyUrlPolicies();
         }
 
-        public CanonicalUrl(string url)
-            : this(url, CanonicalRuleConfiguration.Rules)
+        public SeoFriendlyUrl(string url)
+            : this(url, UrlPolicyConfiguration.UrlPolicies)
         {
         }
 
-        public static CanonicalUrl Canonicalize(string url)
+        public static SeoFriendlyUrl ApplyUrlPolicies(string url)
         {
             if (string.IsNullOrEmpty(url))
             {
                 throw new ArgumentException("url not set");
             }
 
-            return new CanonicalUrl(url);
+            return new SeoFriendlyUrl(url);
         }
 
-        private void Canonicalize()
+        private void ApplyUrlPolicies()
         {
-            if (_rules != null)
+            if (_policies != null)
             {
                 var urlBuilder = new UriBuilder(Url);
-                foreach (var rule in _rules)
+                foreach (var policy in _policies)
                 {
-                    rule.Apply(urlBuilder);
+                    policy.Apply(urlBuilder);
                 }
 
                 Url = urlBuilder.Uri;

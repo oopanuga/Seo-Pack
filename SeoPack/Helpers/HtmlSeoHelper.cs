@@ -8,7 +8,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using SeoPack.Html.OpenGraph.ObjectTypes.Standard;
-using SeoPack.Url.Canonicalization;
+using SeoPack.Url;
 
 namespace SeoPack.Helpers
 {
@@ -153,7 +153,7 @@ namespace SeoPack.Helpers
             var canonicalUrl = new UrlSeoHelper().CanonicalUrl();
 
             var canonicalizedCurrentPageUrl = 
-                new CanonicalUrl(HttpContext.Current.Request.Url.AbsoluteUri).Url.ToString();
+                new SeoFriendlyUrl(HttpContext.Current.Request.Url.AbsoluteUri).Url.ToString();
 
             if (canonicalizedCurrentPageUrl == canonicalUrl)
                 return MvcHtmlString.Create(string.Empty);

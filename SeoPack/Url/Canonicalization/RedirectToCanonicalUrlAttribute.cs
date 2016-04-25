@@ -14,7 +14,7 @@ namespace SeoPack.Url.Canonicalization
             }
 
             var url = filterContext.RequestContext.HttpContext.Request.Url.AbsoluteUri;
-            var canonicalUrl = CanonicalUrl.Canonicalize(url).Url.ToString();
+            var canonicalUrl = SeoFriendlyUrl.ApplyUrlPolicies(url).Url.ToString();
 
             if(!url.Equals(canonicalUrl))
             {

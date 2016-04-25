@@ -130,20 +130,20 @@
     <Compile Include="Html\PaginationLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Url\Canonicalization\RedirectToCanonicalUrlAttribute.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalRuleBuilder.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalRuleConfiguration.cs" />
+    <Compile Include="Url\UrlPolicy\UrlPolicyBuilder.cs" />
+    <Compile Include="Url\UrlPolicy\UrlPolicyConfiguration.cs" />
     <Compile Include="Url\Canonicalization\CanonicalUrlAttribute.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalUrl.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalRuleBuilderExtensions.cs" />
-    <Compile Include="Url\Canonicalization\Rules\HostRule.cs" />
-    <Compile Include="Url\Canonicalization\Rules\LowercaseRule.cs" />
-    <Compile Include="Url\Canonicalization\Rules\MapRule.cs" />
-    <Compile Include="Url\Canonicalization\Rules\NoTrailingSlashRule.cs" />
-    <Compile Include="Url\Canonicalization\Rules\NoWwwRule.cs" />
-    <Compile Include="Url\Canonicalization\Rules\PatternRule.cs" />
-    <Compile Include="Url\Canonicalization\Rules\TrailingSlashRule.cs" />
-    <Compile Include="Url\Canonicalization\Rules\WwwRule.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalRuleBase.cs" />
+    <Compile Include="Url\SeoFriendlyUrl.cs" />
+    <Compile Include="Url\UrlPolicy\UrlPolicyBuilderExtensions.cs" />
+    <Compile Include="Url\UrlPolicy\Policies\HostPolicy.cs" />
+    <Compile Include="Url\UrlPolicy\Policies\LowercasePolicy.cs" />
+    <Compile Include="Url\UrlPolicy\Policies\MapPolicy.cs" />
+    <Compile Include="Url\UrlPolicy\Policies\NoTrailingSlashPolicy.cs" />
+    <Compile Include="Url\UrlPolicy\Policies\NoWwwPolicy.cs" />
+    <Compile Include="Url\UrlPolicy\Policies\PatternPolicy.cs" />
+    <Compile Include="Url\UrlPolicy\Policies\TrailingSlashPolicy.cs" />
+    <Compile Include="Url\UrlPolicy\Policies\WwwPolicy.cs" />
+    <Compile Include="Url\UrlPolicy\UrlPolicyBase.cs" />
     <Compile Include="Url\NoTrailingSlashAttribute.cs" />
   </ItemGroup>
   <ItemGroup />

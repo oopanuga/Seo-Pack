@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace SeoPack.Url.Canonicalization.Rules
+namespace SeoPack.Url.UrlPolicy.Policies
 {
-    public class WwwRule : CanonicalRuleBase
+    public class WwwPolicy : UrlPolicyBase
     {
-        protected override void ApplyRule(UriBuilder uri)
+        protected override void ApplyPolicy(UriBuilder uri)
         {
             if (uri.Uri.HostNameType == UriHostNameType.Dns 
                 && !uri.Host.StartsWith("www.", StringComparison.InvariantCultureIgnoreCase) 

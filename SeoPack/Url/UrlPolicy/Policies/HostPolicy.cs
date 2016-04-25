@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace SeoPack.Url.Canonicalization.Rules
+namespace SeoPack.Url.UrlPolicy.Policies
 {
-    public class HostRule : CanonicalRuleBase
+    public class HostPolicy : UrlPolicyBase
     {
         private string _host;
-        public HostRule(string host)
+        public HostPolicy(string host)
         {
             if(string.IsNullOrEmpty(host))
             {
@@ -15,7 +15,7 @@ namespace SeoPack.Url.Canonicalization.Rules
             _host = host;
         }
 
-        protected override void ApplyRule(UriBuilder uri)
+        protected override void ApplyPolicy(UriBuilder uri)
         {
             uri.Host = _host;
         }

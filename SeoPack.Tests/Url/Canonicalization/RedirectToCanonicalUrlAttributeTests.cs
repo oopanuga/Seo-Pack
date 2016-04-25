@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using NUnit.Framework;
 using SeoPack.Url.Canonicalization;
+using SeoPack.Url.UrlPolicy;
 
 namespace SeoPack.Tests.Url.Canonicalization
 {
@@ -14,7 +15,7 @@ namespace SeoPack.Tests.Url.Canonicalization
         [SetUp]
         public void Setup()
         {
-            CanonicalRuleConfiguration.Configure().NoTrailingSlashRule().WwwRule();
+            UrlPolicyConfiguration.Configure().NoTrailingSlashPolicy().WwwPolicy();
         }
 
         [Test] public void Should_do_a_permanent_redirect_to_the_canonical_url_if_the_request_url_is_not_the_same_as_the_canonical_one()

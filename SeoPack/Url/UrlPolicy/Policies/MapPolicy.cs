@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SeoPack.Url.Canonicalization.Rules
+namespace SeoPack.Url.UrlPolicy.Policies
 {
-    public class MapRule : CanonicalRuleBase
+    public class MapPolicy : UrlPolicyBase
     {
         private readonly IDictionary<string, string> _urlPathMap;
 
-        public MapRule(IDictionary<string, string> urlPathMap)
+        public MapPolicy(IDictionary<string, string> urlPathMap)
         {
             _urlPathMap = urlPathMap;
         }
 
-        protected override void ApplyRule(UriBuilder uri)
+        protected override void ApplyPolicy(UriBuilder uri)
         {
             string newUrlPath;
 

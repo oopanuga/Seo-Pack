@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace SeoPack.Url.Canonicalization
+namespace SeoPack.Url.UrlPolicy
 {
-    public abstract class CanonicalRuleBase
+    public abstract class UrlPolicyBase
     {
         public void Apply(UriBuilder uri)
         {
@@ -11,9 +11,9 @@ namespace SeoPack.Url.Canonicalization
                 throw new ArgumentNullException("uri");
             }
 
-            ApplyRule(uri);
+            ApplyPolicy(uri);
         }
 
-        protected abstract void ApplyRule(UriBuilder uri);
+        protected abstract void ApplyPolicy(UriBuilder uri);
     }
 }

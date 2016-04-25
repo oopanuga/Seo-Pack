@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace SeoPack.Url.Canonicalization.Rules
+namespace SeoPack.Url.UrlPolicy.Policies
 {
-    public class TrailingSlashRule : CanonicalRuleBase
+    public class TrailingSlashPolicy : UrlPolicyBase
     {
-        protected override void ApplyRule(UriBuilder uri)
+        protected override void ApplyPolicy(UriBuilder uri)
         {
             if (!uri.Path.EndsWith("/") && !uri.Path.Contains("."))
             {
