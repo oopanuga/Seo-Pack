@@ -18,10 +18,7 @@ namespace SeoPack.Url
             _urlPath = urlPath;
         }
 
-        public CanonicalUrlAttribute()
-        {
-            _urlPath = string.Empty;
-        }
+        public CanonicalUrlAttribute() { }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -41,19 +38,18 @@ namespace SeoPack.Url
                 var currentPageUrl = filterContext.RequestContext.HttpContext.Request.Url;
                 fullUrl = string.Format("{0}://{1}/{2}", 
                     currentPageUrl.Scheme, currentPageUrl.Authority, _urlPath.Trim('/'));
-            }
-            
-            if (fullUrl.IndexOf("{") != -1)
-            {
-                foreach (var actionParam in filterContext.ActionParameters)
+
+                if (fullUrl.IndexOf("{") != -1)
                 {
-                    UpdateUrlPlaceholders(actionParam.Key, actionParam.Value, ref fullUrl);
+                    foreach (var actionParam in filterContext.ActionParameters)
+                    {
+                        UpdateUrlPlaceholders(actionParam.Key, actionParam.Value, ref fullUrl);
+                    }
                 }
             }
 
             var canonicalUrl = new SeoFriendlyUrl(fullUrl).Value.AbsoluteUri;
             filterContext.RequestContext.HttpContext.Items["CanonicalUrl"] = canonicalUrl;
-
             base.OnActionExecuting(filterContext);
         }
 

@@ -36,7 +36,7 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// It make a url Seo Friendly by making it conform to a set of predefined url policies.
+        /// It makes a url Seo Friendly by making it conform to a set of predefined url policies.
         /// See <see cref="UrlPolicyConfiguration"/> on configuring url policies.
         /// </summary>
         /// <param name="url">The url to make Seo Friendly.</param>

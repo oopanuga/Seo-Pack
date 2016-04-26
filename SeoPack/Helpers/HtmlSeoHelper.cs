@@ -119,7 +119,7 @@ namespace SeoPack.Helpers
         }
 
         /// <summary>
-        /// Returns a seo compliant canonical link if the current page url starts with the 
+        /// Returns a seo compliant canonical link if the current page url begins with the 
         /// supplied canonical url but is not the same as the supplied canonical url.
         /// </summary>
         /// <param name="canonicalUrl">The canonical url.</param>

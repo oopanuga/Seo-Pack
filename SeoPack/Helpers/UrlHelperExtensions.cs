@@ -29,7 +29,7 @@ namespace SeoPack.Helpers
 
         /// <summary>
         /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
-        /// a set of predefined canonicalization policies to achieve this.
+        /// a set of predefined url policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeValues">The route values.</param>
@@ -41,7 +41,7 @@ namespace SeoPack.Helpers
 
         /// <summary>
         /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
-        /// a set of predefined canonicalization policies to achieve this.
+        /// a set of predefined url policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeValues">The route values.</param>
@@ -53,7 +53,7 @@ namespace SeoPack.Helpers
 
         /// <summary>
         /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
-        /// a set of predefined canonicalization policies to achieve this.
+        /// a set of predefined url policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeName">Name of the route.</param>
@@ -65,7 +65,7 @@ namespace SeoPack.Helpers
 
         /// <summary>
         /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
-        /// a set of predefined canonicalization policies to achieve this.
+        /// a set of predefined url policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeName">Name of the route.</param>
@@ -78,7 +78,7 @@ namespace SeoPack.Helpers
 
         /// <summary>
         /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
-        /// a set of predefined canonicalization policies to achieve this.
+        /// a set of predefined url policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeName">Name of the route.</param>
@@ -92,7 +92,7 @@ namespace SeoPack.Helpers
 
         /// <summary>
         /// Generates a fully qualified Seo friendly URL for the specified route values. It uses 
-        /// a set of predefined canonicalization policies to achieve this.
+        /// a set of predefined url policies to achieve this.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeName">Name of the route.</param>
