@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace SeoPack.Url.Canonicalization
+namespace SeoPack.Url
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class CanonicalUrlAttribute : ActionFilterAttribute

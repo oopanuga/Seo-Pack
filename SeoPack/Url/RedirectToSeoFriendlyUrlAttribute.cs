@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace SeoPack.Url.Canonicalization
+namespace SeoPack.Url
 {
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
-    public class RedirectToCanonicalUrlAttribute : FilterAttribute, IAuthorizationFilter
+    public class RedirectToSeoFriendlyUrlAttribute : FilterAttribute, IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationContext filterContext)
         {
@@ -14,11 +14,11 @@ namespace SeoPack.Url.Canonicalization
             }
 
             var url = filterContext.RequestContext.HttpContext.Request.Url.AbsoluteUri;
-            var canonicalUrl = SeoFriendlyUrl.ApplyUrlPolicies(url).Value.ToString();
+            var seoFriendlyUrl = new SeoFriendlyUrl(url).Value.AbsoluteUri;
 
-            if(!url.Equals(canonicalUrl))
+            if(!url.Equals(seoFriendlyUrl))
             {
-                filterContext.Result = new RedirectResult(canonicalUrl, true);
+                filterContext.Result = new RedirectResult(seoFriendlyUrl, true);
             }
         }
     }

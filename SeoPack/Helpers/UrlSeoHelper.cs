@@ -1,5 +1,4 @@
-﻿using SeoPack.Url.Canonicalization;
-using System.Web;
+﻿using System.Web;
 using SeoPack.Url;
 using SeoPack.Url.UrlPolicy;
 

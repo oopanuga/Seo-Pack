@@ -129,10 +129,10 @@
     <Compile Include="Html\OpenGraph\OgVideo.cs" />
     <Compile Include="Html\PaginationLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Url\Canonicalization\RedirectToCanonicalUrlAttribute.cs" />
+    <Compile Include="Url\RedirectToSeoFriendlyUrlAttribute.cs" />
     <Compile Include="Url\UrlPolicy\UrlPolicyBuilder.cs" />
     <Compile Include="Url\UrlPolicy\UrlPolicyConfiguration.cs" />
-    <Compile Include="Url\Canonicalization\CanonicalUrlAttribute.cs" />
+    <Compile Include="Url\CanonicalUrlAttribute.cs" />
     <Compile Include="Url\SeoFriendlyUrl.cs" />
     <Compile Include="Url\UrlPolicy\UrlPolicyBuilderExtensions.cs" />
     <Compile Include="Url\UrlPolicy\Policies\HostPolicy.cs" />

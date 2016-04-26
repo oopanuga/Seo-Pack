@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
-using SeoPack.Url.Canonicalization;
 using SeoPack.Url.UrlPolicy;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using SeoPack.Url;
 
 namespace SeoPack.Tests.Url.Canonicalization
 {
@@ -20,7 +20,7 @@ namespace SeoPack.Tests.Url.Canonicalization
 
         [Test] public void Should_do_a_permanent_redirect_to_the_canonical_url_if_the_request_url_is_not_the_same_as_the_canonical_one()
         {
-            var redirectToCanonicalUrlAttribute = new RedirectToCanonicalUrlAttribute();
+            var redirectToCanonicalUrlAttribute = new RedirectToSeoFriendlyUrlAttribute();
             var authorizationContext = new AuthorizationContext();
             var canonicalUrl = "http://www.contactly.com/2/3";
 
@@ -45,7 +45,7 @@ namespace SeoPack.Tests.Url.Canonicalization
         [Test]
         public void Should_not_do_a_redirect_to_the_canonical_url_if_the_request_url_is_the_same_as_the_canonical_one()
         {
-            var redirectToCanonicalUrlAttribute = new RedirectToCanonicalUrlAttribute();
+            var redirectToCanonicalUrlAttribute = new RedirectToSeoFriendlyUrlAttribute();
             var authorizationContext = new AuthorizationContext();
             var canonicalUrl = "http://www.contactly.com/2/3";
 
