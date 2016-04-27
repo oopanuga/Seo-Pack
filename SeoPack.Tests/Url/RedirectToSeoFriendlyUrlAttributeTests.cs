@@ -18,7 +18,7 @@ namespace SeoPack.Tests.Url
             UrlPolicyConfiguration.Configure().NoTrailingSlashPolicy().WwwPolicy();
         }
 
-        [Test] public void Should_do_a_permanent_redirect_to_the_seo_friendly_version_of_the_url_if_the_request_url_is_different()
+        [Test] public void Should_do_a_permanent_redirect_to_the_seo_friendly_version_of_the_requested_url_if_it_doesnt_conform_to_the_predefined_url_policies()
         {
             var redirectToSeoFriendlyUrlAttribute = new RedirectToSeoFriendlyUrlAttribute();
             var authorizationContext = new AuthorizationContext();
@@ -43,7 +43,7 @@ namespace SeoPack.Tests.Url
         }
 
         [Test]
-        public void Should_not_do_a_redirect_if_the_request_url_is_same_as_the_seo_friendly_version()
+        public void Should_not_do_a_redirect_if_the_requested_url_conforms_to_the_predefined_url_policies()
         {
             var redirectToSeoFriendlyUrlAttribute = new RedirectToSeoFriendlyUrlAttribute();
             var authorizationContext = new AuthorizationContext();

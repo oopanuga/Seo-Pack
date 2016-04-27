@@ -3,6 +3,11 @@ using System.Web.Mvc;
 
 namespace SeoPack.Url
 {
+    /// <summary>
+    /// Represents a class that does a permanent redirect to a Seo Friendly version of the 
+    /// requested url if the requested url is different i.e. doesn't conform to the predefined
+    /// url policies.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
     public class RedirectToSeoFriendlyUrlAttribute : FilterAttribute, IAuthorizationFilter
     {

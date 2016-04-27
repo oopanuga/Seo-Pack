@@ -4,7 +4,9 @@ using System;
 namespace SeoPack.Url
 {
     /// <summary>
-    /// Represents a Seo Friendly Url
+    /// Represents a Seo Friendly Url i.e. a url that conforms to a supplied
+    /// or predefined set of url policies. See <see cref="UrlPolicyConfiguration"/> 
+    /// on configuring url policies.
     /// </summary>
     public class SeoFriendlyUrl
     {
