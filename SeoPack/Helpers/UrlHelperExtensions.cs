@@ -117,7 +117,7 @@ namespace SeoPack.Helpers
         private static string ToAbsoluteUrl(string route)
         {
             var requestUrl = HttpContext.Current.Request.Url;
-            return string.Format("{0}://{1}/{2}",
+            return string.Format("{0}://{1}{2}",
                                                   requestUrl.Scheme,
                                                   requestUrl.Authority,
                                                   route);
