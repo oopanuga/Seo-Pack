@@ -91,6 +91,20 @@ namespace SeoPack.Helpers
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="routeName">Name of the route.</param>
         /// <param name="routeValues">The route values.</param>
+        /// <returns></returns>
+        public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, RouteValueDictionary routeValues)
+        {
+            return new SeoFriendlyUrl(ToAbsoluteUrl(urlHelper.RouteUrl(routeName, routeValues))).Value.AbsoluteUri;
+        }
+
+        /// <summary>
+        /// Generates a fully qualified Seo friendly URL for the specified route values based on a set 
+        /// of predefined url policies. See <see cref="UrlPolicyConfiguration"/> on configuring url 
+        /// policies.
+        /// </summary>
+        /// <param name="urlHelper">The URL helper.</param>
+        /// <param name="routeName">Name of the route.</param>
+        /// <param name="routeValues">The route values.</param>
         /// <param name="protocol">The protocol.</param>
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, object routeValues, string protocol)
