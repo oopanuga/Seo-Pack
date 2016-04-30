@@ -1,4 +1,6 @@
-﻿using SeoPack.Url;
+﻿using System;
+using System.Web;
+using SeoPack.Url;
 using System.Web.Mvc;
 using System.Web.Routing;
 using SeoPack.Url.UrlPolicy;
@@ -38,7 +40,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, object routeValues)
         {
-            return new SeoFriendlyUrl(urlHelper.RouteUrl(routeValues)).Value.AbsoluteUri;
+            return new SeoFriendlyUrl(ToAbsoluteUrl(urlHelper.RouteUrl(routeValues))).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -51,7 +53,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, RouteValueDictionary routeValues)
         {
-            return new SeoFriendlyUrl(urlHelper.RouteUrl(routeValues)).Value.AbsoluteUri;
+            return new SeoFriendlyUrl(ToAbsoluteUrl(urlHelper.RouteUrl(routeValues))).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -64,7 +66,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName)
         {
-            return new SeoFriendlyUrl(urlHelper.RouteUrl(routeName)).Value.AbsoluteUri;
+            return new SeoFriendlyUrl(ToAbsoluteUrl(urlHelper.RouteUrl(routeName))).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -78,7 +80,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, object routeValues)
         {
-            return new SeoFriendlyUrl(urlHelper.RouteUrl(routeName, routeValues)).Value.AbsoluteUri;
+            return new SeoFriendlyUrl(ToAbsoluteUrl(urlHelper.RouteUrl(routeName, routeValues))).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -110,6 +112,15 @@ namespace SeoPack.Helpers
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, RouteValueDictionary routeValues, string protocol, string hostName)
         {
             return new SeoFriendlyUrl(urlHelper.RouteUrl(routeName, routeValues, protocol, hostName)).Value.AbsoluteUri;
+        }
+
+        private static string ToAbsoluteUrl(string route)
+        {
+            var requestUrl = HttpContext.Current.Request.Url;
+            return string.Format("{0}://{1}/{2}",
+                                                  requestUrl.Scheme,
+                                                  requestUrl.Authority,
+                                                  route);
         }
     }
 }
