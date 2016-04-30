@@ -6,7 +6,7 @@ namespace SeoPack.Url.UrlPolicy.Policies
     {
         protected override void ApplyPolicy(UriBuilder uri)
         {
-            if (!uri.Path.EndsWith("/") && !uri.Path.Contains("."))
+            if (!uri.Path.EndsWith("/")/* && !uri.Path.Contains(".")*/)
             {
                 uri.Path += '/';
             }

@@ -1,4 +1,6 @@
-﻿using SeoPack.Url;
+﻿using System;
+using System.Web;
+using SeoPack.Url;
 using System.Web.Mvc;
 using System.Web.Routing;
 using SeoPack.Url.UrlPolicy;
@@ -38,7 +40,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, object routeValues)
         {
-            return new SeoFriendlyUrl(urlHelper.RouteUrl(routeValues)).Value.AbsoluteUri;
+            return new SeoFriendlyUrl(ToAbsoluteUrl(urlHelper.RouteUrl(routeValues))).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -51,7 +53,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, RouteValueDictionary routeValues)
         {
-            return new SeoFriendlyUrl(urlHelper.RouteUrl(routeValues)).Value.AbsoluteUri;
+            return new SeoFriendlyUrl(ToAbsoluteUrl(urlHelper.RouteUrl(routeValues))).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -64,7 +66,7 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName)
         {
-            return new SeoFriendlyUrl(urlHelper.RouteUrl(routeName)).Value.AbsoluteUri;
+            return new SeoFriendlyUrl(ToAbsoluteUrl(urlHelper.RouteUrl(routeName))).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -78,7 +80,21 @@ namespace SeoPack.Helpers
         /// <returns></returns>
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, object routeValues)
         {
-            return new SeoFriendlyUrl(urlHelper.RouteUrl(routeName, routeValues)).Value.AbsoluteUri;
+            return new SeoFriendlyUrl(ToAbsoluteUrl(urlHelper.RouteUrl(routeName, routeValues))).Value.AbsoluteUri;
+        }
+
+        /// <summary>
+        /// Generates a fully qualified Seo friendly URL for the specified route values based on a set 
+        /// of predefined url policies. See <see cref="UrlPolicyConfiguration"/> on configuring url 
+        /// policies.
+        /// </summary>
+        /// <param name="urlHelper">The URL helper.</param>
+        /// <param name="routeName">Name of the route.</param>
+        /// <param name="routeValues">The route values.</param>
+        /// <returns></returns>
+        public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, RouteValueDictionary routeValues)
+        {
+            return new SeoFriendlyUrl(ToAbsoluteUrl(urlHelper.RouteUrl(routeName, routeValues))).Value.AbsoluteUri;
         }
 
         /// <summary>
@@ -110,6 +126,15 @@ namespace SeoPack.Helpers
         public static string RouteSeoFriendlyUrl(this UrlHelper urlHelper, string routeName, RouteValueDictionary routeValues, string protocol, string hostName)
         {
             return new SeoFriendlyUrl(urlHelper.RouteUrl(routeName, routeValues, protocol, hostName)).Value.AbsoluteUri;
+        }
+
+        private static string ToAbsoluteUrl(string route)
+        {
+            var requestUrl = HttpContext.Current.Request.Url;
+            return string.Format("{0}://{1}{2}",
+                                                  requestUrl.Scheme,
+                                                  requestUrl.Authority,
+                                                  route);
         }
     }
 }
