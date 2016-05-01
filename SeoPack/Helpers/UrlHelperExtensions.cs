@@ -128,13 +128,13 @@ namespace SeoPack.Helpers
             return new SeoFriendlyUrl(urlHelper.RouteUrl(routeName, routeValues, protocol, hostName)).Value.AbsoluteUri;
         }
 
-        private static string ToAbsoluteUrl(string route)
+        private static string ToAbsoluteUrl(string relativeUrl)
         {
             var requestUrl = HttpContext.Current.Request.Url;
             return string.Format("{0}://{1}{2}",
                                                   requestUrl.Scheme,
                                                   requestUrl.Authority,
-                                                  route);
+                                                  relativeUrl);
         }
     }
 }
