@@ -1,5 +1,6 @@
 ﻿using SeoPack.Url.UrlPolicy;
 using System;
+using System.Web;
 
 namespace SeoPack.Url
 {
@@ -33,7 +34,7 @@ namespace SeoPack.Url
                 throw new ArgumentException("url not set");
             }
 
-            Value = new Uri(url);
+            Value = new Uri(url.StartsWith("/") ? ToAbsoluteUrl(url) : url);
             _policies = policies;
             ApplyUrlPolicies();
         }
@@ -64,8 +65,16 @@ namespace SeoPack.Url
         }
 
         /// <summary>
-        /// Applies the URL policies.
+        /// Returns a <see cref="System.String" /> that represents this instance.
         /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return Value.AbsoluteUri;
+        }
+
         private void ApplyUrlPolicies()
         {
             if (_policies != null)
@@ -80,15 +89,13 @@ namespace SeoPack.Url
             }
         }
 
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
+        private string ToAbsoluteUrl(string relativeUrl)
         {
-            return Value.AbsoluteUri;
+            var requestUrl = HttpContext.Current.Request.Url;
+            return string.Format("{0}://{1}{2}",
+                                                  requestUrl.Scheme,
+                                                  requestUrl.Authority,
+                                                  relativeUrl);
         }
     }
 }
