@@ -1,6 +1,6 @@
-﻿using System.Web;
-using SeoPack.Url;
+﻿using SeoPack.Url;
 using SeoPack.Url.UrlPolicy;
+using System.Web;
 
 namespace SeoPack.Helpers
 {
