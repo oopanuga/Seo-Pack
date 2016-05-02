@@ -6,7 +6,7 @@ The Html SEO Helper methods are extension methods of the ASP.Net MVC HtmlHelper 
 
 The Url SEO Helper methods are extension methods of the ASP.Net MVC UrlHelper class. These generate outbound Route and Action SEO Friendly Urls based on a predefined set of url policies. Url policies are also applied to inbound urls via the RedirectToSeoFriendlyUrlAttribute filter. So you end up with a consistent set of url policies that apply to both inbound and outbound urls. The concept of url policies was inspired by the [Canonicalize](https://github.com/schourode/canonicalize) library.
 
-At the heart of creating SEO Friendly Urls is the SeoFriendlyUrl class. The class runs a url through the url policies and ensures that the resultant url is one that conforms to the predefined url policies.
+At the heart of creating SEO Friendly Urls is the SeoFriendlyUrl class. The class runs a url through the url policies and ensures that the resultant url is one that conforms to these url policies.
 
 ### Supported Html Tags
 1. Title
@@ -33,7 +33,33 @@ At the heart of creating SEO Friendly Urls is the SeoFriendlyUrl class. The clas
 PM> Install-Package SeoPack
 ```
 
-### Using SeoPack
+### Using SeoPack - Urls
+
+Configuring Url Policies - this is normally done at application startup.
+```c#
+UrlPolicyConfiguration.Configure().LowercasePolicy().WwwPolicy().NoTrailingSlashPolicy()
+```
+
+Creating outbound urls.
+```c#
+@Url.RouteSeoFriendlyUrl("Users", new { pageNumber = 1 })
+or
+@Url.ActionSeoFriendlyUrl("Index", "Users", new { pageNumber = 1 })
+```
+
+Handling inbound urls - configure the RedirectToSeoFriendlyUrlAttribute globally.
+```c#
+GlobalFilters.Filters.Add(new RedirectToSeoFriendlyUrlAttribute())
+```
+
+Creating Seo Friendly Urls.
+```c#
+@Url.UnpackSeo().ToSeoFriendlyUrl("http://WWW.google.com/")
+or
+var seoFriendlyUrl = new SeoFriendlyUrl("http://WWW.google.com/").Value.AbsoluteUri
+```
+
+### Using SeoPack - Html
 
 Rendering a SEO compliant Title tag - checks length is 70 chars or less
 ```c#
