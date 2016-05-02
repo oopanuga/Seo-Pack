@@ -46,7 +46,7 @@ Outbound urls - Creating SEO friendly outbound urls. These return absolute urls 
 @Url.ActionSeoFriendlyUrl("Index", "Users", new { pageNumber = 1 })
 ```
 
-Inbound urls - Use the RedirectToSeoFriendlyUrlAttribute filter to permanently redirect (301) urls that don't conform to a set of predefined url policies
+Inbound urls - Use the RedirectToSeoFriendlyUrlAttribute filter to permanently redirect a url to its Seo Friendly version in the event that it doesn't conform to a set of predefined url policies. The Seo Friendly version conforms to these policies.
 ```c#
 GlobalFilters.Filters.Add(new RedirectToSeoFriendlyUrlAttribute())
 ```
