@@ -274,14 +274,8 @@ namespace SeoPack.Helpers
             }
 
             var seoFriendlyUrl = new SeoFriendlyUrl(url).Value;
-            if (isRelativeUrl)
-            {
-                return seoFriendlyUrl.PathAndQuery;
-            }
-            else
-            {
-                return seoFriendlyUrl.AbsoluteUri;
-            }
+
+            return isRelativeUrl ? seoFriendlyUrl.PathAndQuery : seoFriendlyUrl.AbsoluteUri;
         }
     }
 }
