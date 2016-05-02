@@ -39,7 +39,7 @@ namespace SeoPack.Helpers
         /// <param name="isRelativeUrl">A value indicating whether to return an absolute or relative url.
         /// The default is absolute.</param>
         /// <returns>Route Canonical Url.</returns>
-        public static string CanonicalRouteUrl(this UrlHelper urlHelper, object routeValues, bool isRelativeUrl = false)
+        public static string RouteCanonicalUrl(this UrlHelper urlHelper, object routeValues, bool isRelativeUrl = false)
         {
             return ToCanonicalUrl(urlHelper.RouteUrl(routeValues), isRelativeUrl);
         }
@@ -54,7 +54,7 @@ namespace SeoPack.Helpers
         /// <param name="isRelativeUrl">A value indicating whether to return an absolute or relative url.
         /// The default is absolute.</param>
         /// <returns>Route Canonical Url.</returns>
-        public static string CanonicalRouteUrl(this UrlHelper urlHelper, RouteValueDictionary routeValues, bool isRelativeUrl = false)
+        public static string RouteCanonicalUrl(this UrlHelper urlHelper, RouteValueDictionary routeValues, bool isRelativeUrl = false)
         {
             return ToCanonicalUrl(urlHelper.RouteUrl(routeValues), isRelativeUrl);
         }
@@ -69,7 +69,7 @@ namespace SeoPack.Helpers
         /// <param name="isRelativeUrl">A value indicating whether to return an absolute or relative url.
         /// The default is absolute.</param>
         /// <returns>Route Canonical Url.</returns>
-        public static string CanonicalRouteUrl(this UrlHelper urlHelper, string routeName, bool isRelativeUrl = false)
+        public static string RouteCanonicalUrl(this UrlHelper urlHelper, string routeName, bool isRelativeUrl = false)
         {
             return ToCanonicalUrl(urlHelper.RouteUrl(routeName), isRelativeUrl);
         }
@@ -85,7 +85,7 @@ namespace SeoPack.Helpers
         /// <param name="isRelativeUrl">A value indicating whether to return an absolute or relative url.
         /// The default is absolute.</param>
         /// <returns>Route Canonical Url.</returns>
-        public static string CanonicalRouteUrl(this UrlHelper urlHelper, string routeName, object routeValues, bool isRelativeUrl = false)
+        public static string RouteCanonicalUrl(this UrlHelper urlHelper, string routeName, object routeValues, bool isRelativeUrl = false)
         {
             return ToCanonicalUrl(urlHelper.RouteUrl(routeName, routeValues), isRelativeUrl);
         }
@@ -101,7 +101,7 @@ namespace SeoPack.Helpers
         /// <param name="isRelativeUrl">A value indicating whether to return an absolute or relative url.
         /// The default is absolute.</param>
         /// <returns>Route Canonical Url.</returns>
-        public static string CanonicalRouteUrl(this UrlHelper urlHelper, string routeName, RouteValueDictionary routeValues, bool isRelativeUrl = false)
+        public static string RouteCanonicalUrl(this UrlHelper urlHelper, string routeName, RouteValueDictionary routeValues, bool isRelativeUrl = false)
         {
             return ToCanonicalUrl(urlHelper.RouteUrl(routeName, routeValues), isRelativeUrl);
         }
@@ -116,7 +116,7 @@ namespace SeoPack.Helpers
         /// <param name="routeValues">The route values.</param>
         /// <param name="protocol">The protocol.</param>
         /// <returns>Route Canonical Url.</returns>
-        public static string CanonicalRouteUrl(this UrlHelper urlHelper, string routeName, object routeValues, string protocol)
+        public static string RouteCanonicalUrl(this UrlHelper urlHelper, string routeName, object routeValues, string protocol)
         {
             return ToCanonicalUrl(urlHelper.RouteUrl(routeName, routeValues, protocol), false);
         }
@@ -131,7 +131,7 @@ namespace SeoPack.Helpers
         /// <param name="protocol">The protocol.</param>
         /// <param name="hostName">Name of the host.</param>
         /// <returns>Route Canonical Url.</returns>
-        public static string CanonicalRouteUrl(this UrlHelper urlHelper, string routeName, RouteValueDictionary routeValues, string protocol, string hostName)
+        public static string RouteCanonicalUrl(this UrlHelper urlHelper, string routeName, RouteValueDictionary routeValues, string protocol, string hostName)
         {
             return ToCanonicalUrl(urlHelper.RouteUrl(routeName, routeValues, protocol, hostName), false);
         }
@@ -146,7 +146,7 @@ namespace SeoPack.Helpers
         /// <param name="isRelativeUrl">A value indicating whether to return an absolute or relative url.
         /// The default is absolute.</param>
         /// <returns>Action Canonical Url.</returns>
-        public static string CanonicalActionUrl(this UrlHelper urlHelper, string actionName, bool isRelativeUrl = false)
+        public static string ActionCanonicalUrl(this UrlHelper urlHelper, string actionName, bool isRelativeUrl = false)
         {
             return ToCanonicalUrl(urlHelper.Action(actionName), isRelativeUrl);
         }
@@ -162,7 +162,7 @@ namespace SeoPack.Helpers
         /// <param name="isRelativeUrl">A value indicating whether to return an absolute or relative url.
         /// The default is absolute.</param>
         /// <returns>Action Canonical Url.</returns>
-        public static string CanonicalActionUrl(this UrlHelper urlHelper, string actionName, object routeValues, bool isRelativeUrl = false)
+        public static string ActionCanonicalUrl(this UrlHelper urlHelper, string actionName, object routeValues, bool isRelativeUrl = false)
         {
             return ToCanonicalUrl(urlHelper.Action(actionName, routeValues), isRelativeUrl);
         }
@@ -178,7 +178,7 @@ namespace SeoPack.Helpers
         /// <param name="isRelativeUrl">A value indicating whether to return an absolute or relative url.
         /// The default is absolute.</param>
         /// <returns>Action Canonical Url.</returns>
-        public static string CanonicalActionUrl(this UrlHelper urlHelper, string actionName, RouteValueDictionary routeValues, bool isRelativeUrl = false)
+        public static string ActionCanonicalUrl(this UrlHelper urlHelper, string actionName, RouteValueDictionary routeValues, bool isRelativeUrl = false)
         {
             return ToCanonicalUrl(urlHelper.Action(actionName, routeValues), isRelativeUrl);
         }
@@ -194,7 +194,7 @@ namespace SeoPack.Helpers
         /// <param name="isRelativeUrl">A value indicating whether to return an absolute or relative url.
         /// The default is absolute.</param>
         /// <returns>Action Canonical Url.</returns>
-        public static string CanonicalActionUrl(this UrlHelper urlHelper, string actionName, string controllerName, bool isRelativeUrl = false)
+        public static string ActionCanonicalUrl(this UrlHelper urlHelper, string actionName, string controllerName, bool isRelativeUrl = false)
         {
             return ToCanonicalUrl(urlHelper.Action(actionName, controllerName), isRelativeUrl);
         }
@@ -210,7 +210,7 @@ namespace SeoPack.Helpers
         /// <param name="isRelativeUrl">A value indicating whether to return an absolute or relative url.
         /// The default is absolute.</param>
         /// <returns>Action Canonical Url.</returns>
-        public static string CanonicalActionUrl(this UrlHelper urlHelper, string actionName, string controllerName, object routeValues, bool isRelativeUrl = false)
+        public static string ActionCanonicalUrl(this UrlHelper urlHelper, string actionName, string controllerName, object routeValues, bool isRelativeUrl = false)
         {
             return ToCanonicalUrl(urlHelper.Action(actionName, controllerName, routeValues), isRelativeUrl);
         }
@@ -226,7 +226,7 @@ namespace SeoPack.Helpers
         /// <param name="isRelativeUrl">A value indicating whether to return an absolute or relative url.
         /// The default is absolute.</param>
         /// <returns>Action Canonical Url.</returns>
-        public static string CanonicalActionUrl(this UrlHelper urlHelper, string actionName, string controllerName, RouteValueDictionary routeValues, bool isRelativeUrl = false)
+        public static string ActionCanonicalUrl(this UrlHelper urlHelper, string actionName, string controllerName, RouteValueDictionary routeValues, bool isRelativeUrl = false)
         {
             return ToCanonicalUrl(urlHelper.Action(actionName, controllerName, routeValues), isRelativeUrl);
         }
@@ -241,7 +241,7 @@ namespace SeoPack.Helpers
         /// <param name="routeValues">The route values.</param>
         /// <param name="protocol">The protocol.</param>
         /// <returns>Action Canonical Url.</returns>
-        public static string CanonicalActionUrl(this UrlHelper urlHelper, string actionName, string controllerName, object routeValues, string protocol)
+        public static string ActionCanonicalUrl(this UrlHelper urlHelper, string actionName, string controllerName, object routeValues, string protocol)
         {
             return ToCanonicalUrl(urlHelper.Action(actionName, controllerName, routeValues, protocol), false);
         }
@@ -257,7 +257,7 @@ namespace SeoPack.Helpers
         /// <param name="protocol">The protocol.</param>
         /// <param name="hostName">Name of the host.</param>
         /// <returns>Action Canonical Url.</returns>
-        public static string CanonicalActionUrl(this UrlHelper urlHelper, string actionName, string controllerName, RouteValueDictionary routeValues, string protocol, string hostName)
+        public static string ActionCanonicalUrl(this UrlHelper urlHelper, string actionName, string controllerName, RouteValueDictionary routeValues, string protocol, string hostName)
         {
             return ToCanonicalUrl(urlHelper.Action(actionName, controllerName, routeValues, protocol, hostName), false);
         }
