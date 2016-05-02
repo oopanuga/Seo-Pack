@@ -1,12 +1,12 @@
 # SeoPack
 
-A library packed with lots of SEO goodness for ASP.Net MVC projects. Get access to a bunch of SEO Helper methods for rendering SEO compliant Html tags and for generating SEO Friendly Urls based on a set of predefined url policies. Please see "Planned features" below for other SEO features to come.
+A library packed with lots of SEO goodness for ASP.Net MVC projects. Get access to a bunch of SEO Helper methods for rendering SEO compliant Html tags and for generating Canonical Urls based on a set of predefined url policies. Please see "Planned features" below for other SEO features to come.
 
 The Html SEO Helper methods are extension methods of the ASP.Net MVC HtmlHelper class. These render SEO compliant html tags according to the recommendations defined in the [MOZ SEO Cheat Sheet](https://d2eeipcrcdle6.cloudfront.net/seo-cheat-sheet.pdf) for Web developers.
 
-The Url SEO Helper methods are extension methods of the ASP.Net MVC UrlHelper class. These generate outbound Route and Action SEO Friendly Urls based on a predefined set of url policies. Url policies are also applied to inbound urls via the RedirectToSeoFriendlyUrlAttribute filter. So you end up with a consistent set of url policies that apply to both inbound and outbound urls. The concept of url policies was inspired by [Canonicalize](https://github.com/schourode/canonicalize).
+The Url SEO Helper methods are extension methods of the ASP.Net MVC UrlHelper class. These generate outbound Route and Action Canonical Urls based on a predefined set of url policies. Url policies are also applied to inbound urls via the RedirectToSeoFriendlyUrlAttribute filter. So you end up with a consistent set of url policies that apply to both inbound and outbound urls. The concept of url policies was inspired by [Canonicalize](https://github.com/schourode/canonicalize).
 
-At the heart of creating SEO Friendly Urls is the SeoFriendlyUrl class. The class runs a url through the url policies and ensures that the resultant url is one that conforms to these url policies.
+At the heart of creating Canonical Urls is the CanonicalUrl class. The class runs a url through the url policies and ensures that the resultant url is one that conforms to these url policies.
 
 ### Supported Html Tags
 1. Title
@@ -40,22 +40,22 @@ Configuring Url Policies - this is best done on application startup
 UrlPolicyConfiguration.Configure().LowercasePolicy().WwwPolicy().NoTrailingSlashPolicy()
 ```
 
-Outbound urls - Creating SEO friendly outbound urls. These return absolute urls by default but have an overload to return relative urls
+Outbound urls - Creating Canonical outbound urls. These return absolute urls by default but have an overload to return relative urls
 ```c#
-@Url.RouteSeoFriendlyUrl("Users", new { pageNumber = 1 })
-@Url.ActionSeoFriendlyUrl("Index", "Users", new { pageNumber = 1 })
+@Url.RouteCanonicalUrl("Users", new { pageNumber = 1 })
+@Url.ActionCanonicalUrl("Index", "Users", new { pageNumber = 1 })
 ```
 
-Inbound urls - Use the RedirectToSeoFriendlyUrlAttribute filter to permanently redirect a url to its Seo Friendly version in the event that it doesn't conform to a set of predefined url policies. The Seo Friendly version conforms to these policies.
+Inbound urls - Use the RedirectToCanonicalUrlAttribute filter to permanently redirect a url to its Canonical version in the event that it doesn't conform to a set of predefined url policies. The Canonical version conforms to these policies.
 ```c#
 GlobalFilters.Filters.Add(new RedirectToSeoFriendlyUrlAttribute())
 ```
 
-Convert a url to a SEO friendly one
+Convert a url to a Canonical one
 ```c#
-@Url.UnpackSeo().ToSeoFriendlyUrl("http://WWW.google.com/")
+@Url.UnpackSeo().ToCanonicalUrl("http://WWW.google.com/")
 //OR
-var seoFriendlyUrl = new SeoFriendlyUrl("http://WWW.google.com/").Value.AbsoluteUri
+var canonicalUrl = new CanonicalUrl("http://WWW.google.com/").Value.AbsoluteUri
 ```
 
 ### Using SeoPack - Html
