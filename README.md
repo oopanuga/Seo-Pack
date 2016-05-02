@@ -35,12 +35,12 @@ PM> Install-Package SeoPack
 
 ### Using SeoPack - Urls
 
-Configuring Url Policies - this is best done on application startup.
+Configuring Url Policies - this is best done on application startup
 ```c#
 UrlPolicyConfiguration.Configure().LowercasePolicy().WwwPolicy().NoTrailingSlashPolicy()
 ```
 
-Creating outbound urls.
+Creating SEO friendly outbound urls - returns absolute urls by default but has an overload to make it relative
 ```c#
 @Url.RouteSeoFriendlyUrl("Users", new { pageNumber = 1 })
 or
@@ -52,7 +52,7 @@ Handling inbound urls - configure the RedirectToSeoFriendlyUrlAttribute filter
 GlobalFilters.Filters.Add(new RedirectToSeoFriendlyUrlAttribute())
 ```
 
-Creating Seo Friendly Urls
+Convert a url to a SEO friendly one
 ```c#
 @Url.UnpackSeo().ToSeoFriendlyUrl("http://WWW.google.com/")
 or
