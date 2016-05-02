@@ -19,14 +19,15 @@ At the heart of creating Canonical Urls is the CanonicalUrl class. The class run
 8. HrefLang Links
 9. Open Graph 
 
+### Url features
+1. Configure Url Policies for inbound and outbound urls
+2. Generate canonical route and action urls
+3. Do 301 redirects to canonical version of requested url if not in line with url policies
+4. Convert urls to canonical version
+
 ### Planned features
-1. Friendly urls
-2. Canonicalization
-3. Robots.txt
-4. Sitemap.xml
-5. Rich Snippets and Structured Data
-6. Script Tag management
-7. etc.
+1. Robots.txt
+2. Sitemap.xml
 
 ### Installing SeoPack - [nuget](https://www.nuget.org/packages/SeoPack/)
 ```
@@ -46,7 +47,7 @@ Outbound urls - Creating Canonical outbound urls. These return absolute urls by 
 @Url.ActionCanonicalUrl("Index", "Users", new { pageNumber = 1 })
 ```
 
-Inbound urls - Use the RedirectToCanonicalUrlAttribute filter to permanently redirect a url to its Canonical version in the event that it doesn't conform to a set of predefined url policies. The Canonical version conforms to these policies.
+Inbound urls - Use the RedirectToCanonicalUrlAttribute filter to permanently (301) redirect a url to its Canonical version in the event that it doesn't conform to the set of predefined url policies. The Canonical version conforms to these policies.
 ```c#
 GlobalFilters.Filters.Add(new RedirectToSeoFriendlyUrlAttribute())
 ```
