@@ -4,7 +4,7 @@ using System.Web.Mvc;
 namespace SeoPack.Url
 {
     /// <summary>
-    /// Represents a class that does a permanent redirect to a Canonical version of the 
+    /// Represents a class that does a permanent redirect to the Canonical version of the 
     /// requested url if the requested url is different i.e. doesn't conform to the predefined
     /// url policies.
     /// </summary>
