@@ -54,6 +54,7 @@ GlobalFilters.Filters.Add(new RedirectToSeoFriendlyUrlAttribute())
 Convert a url to a SEO friendly one
 ```c#
 @Url.UnpackSeo().ToSeoFriendlyUrl("http://WWW.google.com/")
+//OR
 var seoFriendlyUrl = new SeoFriendlyUrl("http://WWW.google.com/").Value.AbsoluteUri
 ```
 
