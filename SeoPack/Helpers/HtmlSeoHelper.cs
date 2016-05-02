@@ -153,7 +153,7 @@ namespace SeoPack.Helpers
             var canonicalUrl = new UrlSeoHelper().CanonicalUrl();
 
             var canonicalizedCurrentPageUrl = 
-                new SeoFriendlyUrl(HttpContext.Current.Request.Url.AbsoluteUri).Value.ToString();
+                new CanonicalUrl(HttpContext.Current.Request.Url.AbsoluteUri).Value.ToString();
 
             if (canonicalizedCurrentPageUrl == canonicalUrl)
                 return MvcHtmlString.Create(string.Empty);

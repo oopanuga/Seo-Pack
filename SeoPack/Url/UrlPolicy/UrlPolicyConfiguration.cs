@@ -5,7 +5,7 @@ namespace SeoPack.Url.UrlPolicy
 {
     /// <summary>
     /// Represents a class used to configure a set of url policies that define the characteristics
-    /// of a Seo Friendly Url. See <see cref="SeoFriendlyUrl"/>
+    /// of a Canonical Url. See <see cref="CanonicalUrl"/>
     /// </summary>
     public static class UrlPolicyConfiguration
     {

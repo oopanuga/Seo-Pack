@@ -71,7 +71,7 @@
     <Compile Include="Html\PaginationLinkTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Url\CanonicalUrlAttributeTests.cs" />
-    <Compile Include="Url\RedirectToSeoFriendlyUrlAttributeTests.cs" />
+    <Compile Include="Url\RedirectToCanonicalUrlAttributeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeoPack\SeoPack.csproj">
