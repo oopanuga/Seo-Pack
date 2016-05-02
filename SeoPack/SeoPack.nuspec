@@ -9,7 +9,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>SeoPack is a library packed with lots of SEO goodness for ASP.Net MVC projects.</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
-    <copyright>Copyright 2016 SeoPack</copyright>
     <summary />
     <language>en-US</language>
     <tags>seo mvc asp.net search engine optimization optimisation</tags>
