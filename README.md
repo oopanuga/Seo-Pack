@@ -49,7 +49,7 @@ Outbound urls - Creating Canonical outbound urls. These return absolute urls by 
 
 Inbound urls - Use the RedirectToCanonicalUrlAttribute filter to permanently (301) redirect a url to its Canonical version in the event that it doesn't conform to the set of predefined url policies. The Canonical version conforms to these policies.
 ```c#
-GlobalFilters.Filters.Add(new RedirectToSeoFriendlyUrlAttribute())
+GlobalFilters.Filters.Add(new RedirectToCanonicalAttribute())
 ```
 
 Convert a url to a Canonical one
