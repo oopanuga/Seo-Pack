@@ -4,7 +4,7 @@ A library packed with lots of SEO goodness for ASP.Net MVC projects. Get access 
 
 The Html SEO Helper methods are extension methods of the ASP.Net MVC HtmlHelper class. These render SEO compliant html tags according to the recommendations defined in the [MOZ SEO Cheat Sheet](https://d2eeipcrcdle6.cloudfront.net/seo-cheat-sheet.pdf) for Web developers.
 
-The Url SEO Helper methods are extension methods of the ASP.Net MVC UrlHelper class. These generate outbound Route and Action SEO Friendly Urls based on a predefined set of url policies. Url policies are also applied to inbound urls via the RedirectToSeoFriendlyUrlAttribute filter. So you end up with a consistent set of url policies that apply to both inbound and outbound urls. The concept of url policies was inspired by the [Canonicalize](https://github.com/schourode/canonicalize) library.
+The Url SEO Helper methods are extension methods of the ASP.Net MVC UrlHelper class. These generate outbound Route and Action SEO Friendly Urls based on a predefined set of url policies. Url policies are also applied to inbound urls via the RedirectToSeoFriendlyUrlAttribute filter. So you end up with a consistent set of url policies that apply to both inbound and outbound urls. The concept of url policies was inspired by [Canonicalize](https://github.com/schourode/canonicalize).
 
 At the heart of creating SEO Friendly Urls is the SeoFriendlyUrl class. The class runs a url through the url policies and ensures that the resultant url is one that conforms to these url policies.
 
@@ -43,7 +43,6 @@ UrlPolicyConfiguration.Configure().LowercasePolicy().WwwPolicy().NoTrailingSlash
 Creating SEO friendly outbound urls - returns absolute urls by default but has an overload to make it relative
 ```c#
 @Url.RouteSeoFriendlyUrl("Users", new { pageNumber = 1 })
-or
 @Url.ActionSeoFriendlyUrl("Index", "Users", new { pageNumber = 1 })
 ```
 
@@ -55,7 +54,6 @@ GlobalFilters.Filters.Add(new RedirectToSeoFriendlyUrlAttribute())
 Convert a url to a SEO friendly one
 ```c#
 @Url.UnpackSeo().ToSeoFriendlyUrl("http://WWW.google.com/")
-or
 var seoFriendlyUrl = new SeoFriendlyUrl("http://WWW.google.com/").Value.AbsoluteUri
 ```
 
