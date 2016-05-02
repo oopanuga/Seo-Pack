@@ -40,13 +40,13 @@ Configuring Url Policies - this is best done on application startup
 UrlPolicyConfiguration.Configure().LowercasePolicy().WwwPolicy().NoTrailingSlashPolicy()
 ```
 
-Creating SEO friendly outbound urls - returns absolute urls by default but has an overload to make it relative
+Outbound urls - Creating SEO friendly outbound urls. These return absolute urls by default but have an overload to return relative urls
 ```c#
 @Url.RouteSeoFriendlyUrl("Users", new { pageNumber = 1 })
 @Url.ActionSeoFriendlyUrl("Index", "Users", new { pageNumber = 1 })
 ```
 
-Handling inbound urls - configure the RedirectToSeoFriendlyUrlAttribute filter
+Inbound urls - Use the RedirectToSeoFriendlyUrlAttribute filter to permanently redirect (301) urls that don't conform to a set of predefined url policies
 ```c#
 GlobalFilters.Filters.Add(new RedirectToSeoFriendlyUrlAttribute())
 ```
