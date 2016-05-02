@@ -34,7 +34,7 @@ namespace SeoPack.Url
                 throw new ArgumentException("url not set");
             }
 
-            Value = new Uri(url.StartsWith("/") ? ToAbsoluteUrl(url) : url);
+            Value = new Uri(url);
             _policies = policies;
             ApplyUrlPolicies();
         }
@@ -87,15 +87,6 @@ namespace SeoPack.Url
 
                 Value = urlBuilder.Uri;
             }
-        }
-
-        private string ToAbsoluteUrl(string relativeUrl)
-        {
-            var requestUrl = HttpContext.Current.Request.Url;
-            return string.Format("{0}://{1}{2}",
-                                                  requestUrl.Scheme,
-                                                  requestUrl.Authority,
-                                                  relativeUrl);
         }
     }
 }

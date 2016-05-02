@@ -1,4 +1,5 @@
-﻿using SeoPack.Url;
+﻿using System.Web;
+using SeoPack.Url;
 using SeoPack.Url.UrlPolicy;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -263,8 +264,16 @@ namespace SeoPack.Helpers
 
         private static string ToSeoFriendlyUrl(string url, bool isRelativeUrl)
         {
-            var seoFriendlyUrl = new SeoFriendlyUrl(url).Value;
+            if (url.StartsWith("/"))
+            {
+                var requestUrl = HttpContext.Current.Request.Url;
+                url = string.Format("{0}://{1}{2}",
+                                                      requestUrl.Scheme,
+                                                      requestUrl.Authority,
+                                                      url);
+            }
 
+            var seoFriendlyUrl = new SeoFriendlyUrl(url).Value;
             if (isRelativeUrl)
             {
                 return seoFriendlyUrl.PathAndQuery;
