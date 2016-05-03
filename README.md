@@ -4,7 +4,7 @@ A library packed with lots of SEO goodness for ASP.Net MVC projects. Get access 
 
 The Html SEO Helper methods are extension methods of the ASP.Net MVC HtmlHelper class. These render SEO compliant html tags according to the recommendations defined in the [MOZ SEO Cheat Sheet](https://d2eeipcrcdle6.cloudfront.net/seo-cheat-sheet.pdf) for Web developers.
 
-The Url SEO Helper methods are extension methods of the ASP.Net MVC UrlHelper class. These generate outbound Route and Action Canonical Urls based on a predefined set of url policies. Url policies are also applied to inbound urls via the RedirectToSeoFriendlyUrlAttribute filter. So you end up with a consistent set of url policies that apply to both inbound and outbound urls. The concept of url policies was inspired by an awesome called [Canonicalize](https://github.com/schourode/canonicalize).
+The Url SEO Helper methods are extension methods of the ASP.Net MVC UrlHelper class. These generate outbound Route and Action Canonical Urls based on a predefined set of url policies. Url policies are also applied to inbound urls via the RedirectToSeoFriendlyUrlAttribute filter. So you end up with a consistent set of url policies that apply to both inbound and outbound urls. The concept of url policies was inspired by an awesome library called [Canonicalize](https://github.com/schourode/canonicalize).
 
 At the heart of creating Canonical Urls is the CanonicalUrl class. The class runs a url through the url policies and ensures that the resultant url is one that conforms to these url policies.
 
