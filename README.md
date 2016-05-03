@@ -59,7 +59,7 @@ Convert a url to a Canonical one
 var canonicalUrl = new CanonicalUrl("http://WWW.google.com/").Value.AbsoluteUri
 ```
 
-The AppendTrailingSlash and LowercaseUrls options introduced in .NET 4.5 apply only to outbound urls. As a result devs have had to opt for other options to handle inbound urls e.g. url rewriting. So you end up with url policies/rules defined in multiple places and maintenance could be daunting. SeoPack enables you to use the same defined url policies for both inbound and outbound urls. 
+The AppendTrailingSlash and LowercaseUrls options introduced in .NET 4.5 apply only to outbound urls. As a result devs have had to opt for other options to handle inbound urls e.g. url rewriting. So you end up with url policies/rules defined in multiple places and maintenance could be daunting. SeoPack enables you to use the same set of predefined url policies for both inbound and outbound urls. 
 
 SeoPack also provides you with more options regarding url policies and the ability to create custom url policies. AppendTrailingSlash and LowercaseUrls options seem to be the only options provided by the .Net framework.
 
