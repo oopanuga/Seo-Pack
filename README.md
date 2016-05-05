@@ -89,3 +89,8 @@ Rendering a SEO compliant Anchor tag
 ```
 
 And lots more....
+
+
+### License
+
+SeoPack is released under the MIT license.
