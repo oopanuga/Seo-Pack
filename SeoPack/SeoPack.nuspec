@@ -6,7 +6,7 @@
     <authors>Oluwaseun Opanuga</authors>
     <owners>Oluwaseun Opanuga</owners>
     <projectUrl>https://github.com/oopanuga/seo-pack</projectUrl>
-    <licenseUrl>https://github.com/oopanuga/Seo-Pack/blob/master/LICENSE.txt</licenseUrl>
+    <licenseUrl>https://github.com/oopanuga/seo-pack/blob/master/LICENSE.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>SeoPack is a library packed with lots of SEO goodness for ASP.Net MVC projects.</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
