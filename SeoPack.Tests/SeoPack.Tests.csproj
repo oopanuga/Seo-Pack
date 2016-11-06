@@ -51,15 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\HtmlSeoHelper\AnchorTests.cs" />
-    <Compile Include="Helpers\HtmlSeoHelper\CanonicalLinkTests.cs" />
-    <Compile Include="Helpers\HtmlSeoHelper\MetaDescriptionTests.cs" />
-    <Compile Include="Helpers\HtmlSeoHelper\TitleTests.cs" />
-    <Compile Include="Helpers\HtmlSeoHelper\HrefLangLinkTests.cs" />
-    <Compile Include="Helpers\HtmlSeoHelper\PaginationLinkTest.cs" />
-    <Compile Include="Helpers\HtmlSeoHelper\OpenGraphTests.cs" />
-    <Compile Include="Helpers\HtmlSeoHelper\ImageLinkTests.cs" />
-    <Compile Include="Helpers\HtmlSeoHelper\ImageTests.cs" />
+    <Compile Include="Helpers\HtmlHelper\AnchorTests.cs" />
+    <Compile Include="Helpers\HtmlHelper\CanonicalLinkTests.cs" />
+    <Compile Include="Helpers\HtmlHelper\Helpers.cs" />
+    <Compile Include="Helpers\HtmlHelper\HrefLangLinkTests.cs" />
+    <Compile Include="Helpers\HtmlHelper\ImageLinkTests.cs" />
+    <Compile Include="Helpers\HtmlHelper\ImageTests.cs" />
+    <Compile Include="Helpers\HtmlHelper\MetaDescriptionTests.cs" />
+    <Compile Include="Helpers\HtmlHelper\OpenGraphTests.cs" />
+    <Compile Include="Helpers\HtmlHelper\PaginationLinkTest.cs" />
+    <Compile Include="Helpers\HtmlHelper\TitleTests.cs" />
     <Compile Include="Html\AnchorTests.cs" />
     <Compile Include="Html\HrefLangLinkTests.cs" />
     <Compile Include="Html\ImageLinkTests.cs" />
@@ -74,7 +75,7 @@
     <Compile Include="Html\PaginationLinkTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Url\CanonicalUrlAttributeTests.cs" />
-    <Compile Include="Url\RedirectToCanonicalUrlAttributeTests.cs" />
+    <Compile Include="Url\UrlPolicyCheckAttributeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeoPack\SeoPack.csproj">

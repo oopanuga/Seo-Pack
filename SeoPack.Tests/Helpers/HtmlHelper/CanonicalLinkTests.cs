@@ -1,21 +1,32 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.IO;
 using System.Web;
+using System.Web.Mvc;
+using NUnit.Framework;
+using SeoPack.Helpers;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelper
+namespace SeoPack.Tests.Helpers.HtmlHelper
 {
     [Category("HtmlSeoHelper.CanonicalLinkIfRequired")]
     [TestFixture]
     public class CanonicalLinkTests
     {
+        private System.Web.Mvc.HtmlHelper _htmlHelper;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _htmlHelper =
+                Helpers.CreateHtmlHelper<string>(
+                        new ViewDataDictionary("Hello World"));
+        }
+        
         [TestCase(null)]
         [TestCase("")]
         [ExpectedException(typeof(ArgumentException))]
         public void Should_throw_exception_if_canonicalurl_is_not_set(string canonicalUrl)
         {
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            seoHelper.CanonicalLinkIfRequired(canonicalUrl);
+           _htmlHelper.SpCanonicalLinkIfRequired(canonicalUrl);
         }
 
         [Test]
@@ -28,8 +39,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
                 new HttpRequest("", currentPageUrl, ""),
                 new HttpResponse(new StringWriter()));
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.CanonicalLinkIfRequired(canonicalUrl);
+            var output = _htmlHelper.SpCanonicalLinkIfRequired(canonicalUrl);
 
             Assert.That(output.ToString(), Is.EqualTo(string.Format("<link rel=\"canonical\" href=\"{0}\" />", canonicalUrl)));
         }
@@ -44,8 +54,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
                 new HttpRequest("", currentPageUrl, ""),
                 new HttpResponse(new StringWriter()));
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.CanonicalLinkIfRequired(canonicalUrl);
+            var output = _htmlHelper.SpCanonicalLinkIfRequired(canonicalUrl);
 
             Assert.That(output.ToString(), Is.EqualTo(string.Empty));
         }
@@ -60,8 +69,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
                 new HttpRequest("", currentPageUrl, ""),
                 new HttpResponse(new StringWriter()));
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.CanonicalLinkIfRequired(canonicalUrl);
+            var output = _htmlHelper.SpCanonicalLinkIfRequired(canonicalUrl);
 
             Assert.That(output.ToString(), Is.EqualTo(string.Empty));
         }
@@ -76,8 +84,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
                 new HttpRequest("", currentPageUrl, ""),
                 new HttpResponse(new StringWriter()));
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.CanonicalLinkIfRequired();
+            var output = _htmlHelper.SpCanonicalLinkIfRequired();
 
             Assert.That(output.ToString(), Is.EqualTo(string.Format("<link rel=\"canonical\" href=\"{0}\" />", canonicalUrl)));
         }
@@ -91,8 +98,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
                 new HttpRequest("", currentPageUrl, ""),
                 new HttpResponse(new StringWriter()));
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.CanonicalLinkIfRequired();
+            var output = _htmlHelper.SpCanonicalLinkIfRequired();
 
             Assert.That(output.ToString(), Is.EqualTo(string.Empty));
         }

@@ -22,7 +22,7 @@ namespace SeoPack.Tests.Url
         [Test]
         public void Should_inject_data_into_placeholders_in_supplied_url_path_and_expose_the_canonical_url_as_a_http_context_item()
         {
-            var canonicalUrlAttribute = new CanonicalUrlAttribute("/{userid}/{addressid}/");
+            var canonicalUrlAttribute = new CanonicalUrlAttribute("{userid}/{addressid}");
             var actionExecutingContext = new ActionExecutingContext();
             var canonicalUrl = "http://www.contactly.com/2/3";
 

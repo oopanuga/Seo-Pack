@@ -1,15 +1,27 @@
-﻿using NUnit.Framework;
-using SeoPack.Html;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Web;
+using System.Web.Mvc;
+using NUnit.Framework;
+using SeoPack.Helpers;
+using SeoPack.Html;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelper
+namespace SeoPack.Tests.Helpers.HtmlHelper
 {
     [Category("HtmlSeoHelper.HrefLangLink")]
     [TestFixture]
     public class HrefLangLinkTests
     {
+        private System.Web.Mvc.HtmlHelper _htmlHelper;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _htmlHelper =
+                Helpers.CreateHtmlHelper<string>(
+                        new ViewDataDictionary("Hello World"));
+        }
+
         [Test]
         public void Should_display_hreflanglinks_only_when_on_canonical_version_of_page()
         {
@@ -37,8 +49,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
             aboutUsPage.AddHrefLangLink(new HrefLangLink("http://www.seopack.com/us/aboutus", usLang));
             hrefLangPages.Add(aboutUsPage);
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.HrefLangLink(hrefLangPages);
+            var output = _htmlHelper.SpHrefLangLink(hrefLangPages);
 
             Assert.That(output.ToString(), Is.EqualTo("<link rel=\"alternate\" hreflang=\"x-default\" href=\"http://www.seopack.com/marketplace\" />" +
                 "<link rel=\"alternate\" hreflang=\"en-gb\" href=\"http://www.seopack.com/gb/marketplace\" /><link rel=\"alternate\" hreflang=\"en-us\" href=\"http://www.seopack.com/us/marketplace\" />"));

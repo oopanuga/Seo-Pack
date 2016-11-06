@@ -1,19 +1,30 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Web.Mvc;
+using NUnit.Framework;
+using SeoPack.Helpers;
 using SeoPack.Html;
-using System;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelper
+namespace SeoPack.Tests.Helpers.HtmlHelper
 {
     [Category("HtmlSeoHelper.ImageLink")]
     [TestFixture]
     public class ImageLinkTests
     {
+        private System.Web.Mvc.HtmlHelper _htmlHelper;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _htmlHelper =
+                Helpers.CreateHtmlHelper<string>(
+                        new ViewDataDictionary("Hello World"));
+        }
+
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Should_throw_exception_if_imagelink_object_is_null()
         {
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            seoHelper.ImageLink(null);
+            _htmlHelper.SpImageLink(null);
         }
 
         [Test]
@@ -30,8 +41,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
             var imageLink = new ImageLink(image, href, nofollow, attributes);
             imageLink.Title = title;
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.ImageLink(imageLink);
+            var output = _htmlHelper.SpImageLink(imageLink);
 
             Assert.That(output.ToString(), Is.EqualTo(
                 string.Format("<a href=\"{0}\" title=\"{1}\" rel=\"{2}\" class=\"{3}\"><img src=\"{4}\" alt=\"{5}\" /></a>", href, title, "nofollow", "bold", src, altText)));

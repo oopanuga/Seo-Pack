@@ -1,0 +1,25 @@
+Version 2.0.0
+- Simplified access to Html helpers e.g. @Html.UnpackSeo().Title("some title") should now be accessed via @Html.SpTitle("some title")
+- Renamed Url extension methods RouteCanonicalUrl to SpRouteUrl and ActionCanonicalUrl to SpActionUrl
+- Renamed RedirectToCanonicalUrlAttribute to UrlPolicyCheckAttribute
+- Added support for skipping url policy check filter i.e. UrlPolicyCheckAttribute via ISkipUrlPolicyCheckFilter marker interface interface
+- Removed non trailing slash check in UrlPolicyCheckAttribute (formerly RedirectToCanonicalUrlAttribute) to provide loose coupling.
+- Updated NoTrailingSlashAttribute to implement ISkipUrlPolicyCheckFilter marker interface. This can be used on actions that render file content e.g. robots.txt
+- Added new MatchUrlAttribute for matching/comparing request urls with supplied ones. It does a redirect to the supplied url if urls don't match
+- Updated tests accordingly
+
+Version 1.1.0
+- Support for handling actions with NoTrailingSlashAttribute in the RedirectToCanonicalUrlAttribute
+
+Version 1.0.0
+- Replaced text "SeoFriendly" with "Canonical" in method name RouteSeoFriendlyUrl.
+
+Version  0.9.5
+- Added additional ASP.Net MVC UrlHelper extension methods.
+
+Version 0.9.4
+- Fixed issue with MVC Url extension method RouteSeoFriendlyUrl when a relative url is supplied.
+
+Version 0.9.0
+- Added support for setting up url policies to create Seo friendly urls. 
+- Added overloads of the method RouteSeoFriendlyUrl exposed as extension methods of the standard MVC Url Helper class.

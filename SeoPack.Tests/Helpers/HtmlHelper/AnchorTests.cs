@@ -1,8 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Web.Mvc;
+using NUnit.Framework;
+using SeoPack.Helpers;
 using SeoPack.Html;
-using System;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelper
+namespace SeoPack.Tests.Helpers.HtmlHelper
 {
     [Category("HtmlSeoHelper.Anchor")]
     [TestFixture]
@@ -12,13 +14,21 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
         string href = "http://www.seopack.com";
         object attributes = new { @class = "bold" };
         string title = "This is the official SeoPack website";
+        private System.Web.Mvc.HtmlHelper _htmlHelper;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _htmlHelper =
+                Helpers.CreateHtmlHelper<string>(
+                        new ViewDataDictionary("Hello World"));
+        }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Should_throw_exception_if_anchor_object_is_null()
         {
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            seoHelper.Anchor(null);
+            _htmlHelper.SpAnchor(null);
         }
 
         [Test]
@@ -28,8 +38,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
             var anchor = new Anchor(href, text, noFollow, attributes);
             anchor.Title = title;
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.Anchor(anchor);
+            var output = _htmlHelper.SpAnchor(anchor);
 
             Assert.That(output.ToString(), Is.EqualTo(
                 string.Format("<a href=\"{0}\" title=\"{1}\" rel=\"{2}\" class=\"{3}\">{4}</a>", href, title, "nofollow", "bold", text)));
@@ -42,8 +51,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
             var anchor = new Anchor(href, text, noFollow, attributes);
             anchor.Title = title;
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.Anchor(anchor);
+            var output = _htmlHelper.SpAnchor(anchor);
 
             Assert.That(output.ToString(), Is.EqualTo(
                 string.Format("<a href=\"{0}\" title=\"{1}\" class=\"{2}\">{3}</a>", href, title, "bold", text)));
@@ -57,8 +65,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
             var anchor = new Anchor(href, text, noFollow, attributes);
             anchor.Title = title;
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.Anchor(anchor);
+            var output = _htmlHelper.SpAnchor(anchor);
 
             Assert.That(output.ToString(), Is.EqualTo(
                 string.Format("<a href=\"{0}\" title=\"{1}\" text-font-weight=\"{2}\">{3}</a>", href, title, "bold", text)));

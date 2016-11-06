@@ -6,7 +6,7 @@ namespace SeoPack.Url.UrlPolicy.Policies
     {
         protected override void ApplyPolicy(UriBuilder uri)
         {
-            uri.Path = uri.Path.ToLowerInvariant();
+            uri.Path = uri.Path.ToLower();
         }
     }
 }

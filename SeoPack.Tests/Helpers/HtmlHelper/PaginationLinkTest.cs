@@ -1,8 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Web.Mvc;
+using NUnit.Framework;
+using SeoPack.Helpers;
 using SeoPack.Html;
-using System;
 
-namespace SeoPack.Tests.Helpers.HtmlSeoHelper
+namespace SeoPack.Tests.Helpers.HtmlHelper
 {
     [Category("HtmlSeoHelper.PaginationLink")]
     [TestFixture]
@@ -12,13 +14,21 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
         private int recordCount;
         private string urlFormat;
         private bool pageIsZeroBased;
+        private System.Web.Mvc.HtmlHelper _htmlHelper;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _htmlHelper =
+                Helpers.CreateHtmlHelper<string>(
+                        new ViewDataDictionary("Hello World"));
+        }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Should_throw_exception_if_paginationlink_object_is_null()
         {
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            seoHelper.PaginationLink(null);
+            _htmlHelper.SpPaginationLink(null);
         }
 
         [Test]
@@ -31,8 +41,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 
             var paginationLink = new PaginationLink(currentPage, recordCount, urlFormat, pageIsZeroBased);
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.PaginationLink(paginationLink);
+            var output = _htmlHelper.SpPaginationLink(paginationLink);
 
             Assert.That(output.ToString(), Is.EqualTo(
                 "<link rel=\"prev\" heref=\"http://www.seopack.com/result?page=2\" /><link rel=\"next\" heref=\"http://www.seopack.com/result?page=4\" />"));
@@ -48,9 +57,8 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 
             var paginationLink = new PaginationLink(currentPage, recordCount, urlFormat, pageIsZeroBased);
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.PaginationLink(paginationLink);
-
+            var output = _htmlHelper.SpPaginationLink(paginationLink);
+            
             if (pageIsZeroBased)
             {
                 Assert.That(output.ToString(), Is.EqualTo(
@@ -73,8 +81,7 @@ namespace SeoPack.Tests.Helpers.HtmlSeoHelper
 
             var paginationLink = new PaginationLink(currentPage, recordCount, urlFormat, pageIsZeroBased);
 
-            var seoHelper = new SeoPack.Helpers.HtmlSeoHelper();
-            var output = seoHelper.PaginationLink(paginationLink);
+            var output = _htmlHelper.SpPaginationLink(paginationLink);
 
             if (pageIsZeroBased)
             {

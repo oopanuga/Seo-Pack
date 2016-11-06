@@ -96,11 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
-    <Compile Include="Helpers\IHtmlSeoHelper.cs" />
-    <Compile Include="Helpers\HtmlHelperExtensions.cs" />
-    <Compile Include="Helpers\IUrlSeoHelper.cs" />
     <Compile Include="Helpers\UrlHelperExtensions.cs" />
-    <Compile Include="Helpers\UrlSeoHelper.cs" />
     <Compile Include="Html\HrefLangPage.cs" />
     <Compile Include="Html\HtmlElement.cs" />
     <Compile Include="Html\HrefLangLink.cs" />
@@ -122,14 +118,17 @@
     <Compile Include="Html\OpenGraph\OgSerializerBase.cs" />
     <Compile Include="Html\OpenGraph\Enums.cs" />
     <Compile Include="Html\OpenGraph\OgPropertyAttribute.cs" />
-    <Compile Include="Helpers\HtmlSeoHelper.cs" />
+    <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Html\OpenGraph\OgStructuredPropertyAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Html\OpenGraph\OgVideo.cs" />
     <Compile Include="Html\PaginationLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Url\RedirectToCanonicalUrlAttribute.cs" />
+    <Compile Include="Url\MatchUrlAttribute.cs" />
+    <Compile Include="Url\NoTrailingSlashAttribute.cs" />
+    <Compile Include="Url\UrlPolicyCheckAttribute.cs" />
+    <Compile Include="Url\ISkipUrlPolicyCheckFilter.cs" />
     <Compile Include="Url\UrlPolicy\UrlPolicyBuilder.cs" />
     <Compile Include="Url\UrlPolicy\UrlPolicyConfiguration.cs" />
     <Compile Include="Url\CanonicalUrlAttribute.cs" />
@@ -144,7 +143,6 @@
     <Compile Include="Url\UrlPolicy\Policies\TrailingSlashPolicy.cs" />
     <Compile Include="Url\UrlPolicy\Policies\WwwPolicy.cs" />
     <Compile Include="Url\UrlPolicy\UrlPolicyBase.cs" />
-    <Compile Include="Url\NoTrailingSlashAttribute.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

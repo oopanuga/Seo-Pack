@@ -43,18 +43,18 @@ UrlPolicyConfiguration.Configure().LowercasePolicy().WwwPolicy().NoTrailingSlash
 
 Outbound urls - Creating Canonical outbound urls. These return absolute urls by default but have an overload to return relative urls
 ```c#
-@Url.RouteCanonicalUrl("Users", new { pageNumber = 1 })
-@Url.ActionCanonicalUrl("Index", "Users", new { pageNumber = 1 })
+@Url.SpRouteUrl("Users", new { pageNumber = 1 })
+@Url.SpActionUrl("Index", "Users", new { pageNumber = 1 })
 ```
 
-Inbound urls - Use the RedirectToCanonicalUrlAttribute filter to permanently (301) redirect a url to its Canonical version in the event that it doesn't conform to the set of predefined url policies. The Canonical version conforms to these policies.
+Inbound urls - Use the UrlPolicyCheckAttribute filter to permanently (301) redirect a url to its Canonical version in the event that it doesn't conform to the set of predefined url policies. The Canonical version conforms to these policies.
 ```c#
-GlobalFilters.Filters.Add(new RedirectToCanonicalAttribute())
+GlobalFilters.Filters.Add(new UrlPolicyCheckAttribute())
 ```
 
 Convert a url to a Canonical one
 ```c#
-@Url.UnpackSeo().ToCanonicalUrl("http://WWW.google.com/")
+@Url.ToCanonicalUrl("http://WWW.google.com/")
 //OR
 var canonicalUrl = new CanonicalUrl("http://WWW.google.com/").Value.AbsoluteUri
 ```
@@ -67,17 +67,17 @@ SeoPack also provides you with more options for url policies and the ability to 
 
 Rendering a SEO compliant Title tag - checks length is 70 chars or less
 ```c#
-@Html.UnpackSeo().Title("Welcome to the SeoPack Github page")
+@Html.SpTitle("Welcome to the SeoPack Github page")
 ```
 
 Rendering a SEO compliant Meta Description tag - checks length is 155 chars or less
 ```c#
-@Html.UnpackSeo().MetaDescription("The SeoPack lib is packed with lots of SEO goodness")
+@Html.SpMetaDescription("The SeoPack lib is packed with lots of SEO goodness")
 ```
 
 Rendering a SEO compliant Anchor tag
 ```c#
-@Html.UnpackSeo().Anchor(new Anchor(
+@Html.SpAnchor(new Anchor(
                     href: "https://github.com/oopanuga/seo-pack",
                     text: "The SeoPack Github Page",
                     noFollow: true,
