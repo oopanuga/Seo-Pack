@@ -54,7 +54,7 @@ GlobalFilters.Filters.Add(new UrlPolicyCheckAttribute())
 
 Convert a url to a Canonical one
 ```c#
-@Url.ToCanonicalUrl("http://WWW.google.com/")
+@Url.SpToCanonicalUrl("http://WWW.google.com/")
 //OR
 var canonicalUrl = new CanonicalUrl("http://WWW.google.com/").Value.AbsoluteUri
 ```
