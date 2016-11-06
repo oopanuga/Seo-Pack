@@ -157,7 +157,7 @@ namespace SeoPack.Helpers
         /// <returns>The html string.</returns>
         public static IHtmlString SpCanonicalLinkIfRequired(this HtmlHelper htmlHelper)
         {
-            var canonicalUrl = UrlHelperExtensions.CanonicalUrl(null);
+            var canonicalUrl = UrlHelperExtensions.SpCanonicalUrl(null);
 
             var canonicalizedCurrentPageUrl = 
                 new CanonicalUrl(HttpContext.Current.Request.Url.AbsoluteUri).Value.ToString();

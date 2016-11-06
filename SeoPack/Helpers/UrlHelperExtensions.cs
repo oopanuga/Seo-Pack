@@ -253,7 +253,7 @@ namespace SeoPack.Helpers
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <returns>The canonical url.</returns>
-        public static string CanonicalUrl(this UrlHelper urlHelper)
+        public static string SpCanonicalUrl(this UrlHelper urlHelper)
         {
             var canonicalUrl = HttpContext.Current.Items["CanonicalUrl"] as string;
             if (!string.IsNullOrEmpty(canonicalUrl))
@@ -279,7 +279,7 @@ namespace SeoPack.Helpers
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="url">The url to make Canonical.</param>
         /// <returns>The canonical url.</returns>
-        public static string ToCanonicalUrl(this UrlHelper urlHelper, string url)
+        public static string SpToCanonicalUrl(this UrlHelper urlHelper, string url)
         {
             return new CanonicalUrl(url).Value.ToString();
         }
