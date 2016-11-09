@@ -41,7 +41,7 @@ Configuring Url Policies - this is best done on application startup
 UrlPolicyConfiguration.Configure().LowercasePolicy().WwwPolicy().NoTrailingSlashPolicy()
 ```
 
-Outbound urls - Creating Canonical outbound urls. These return absolute urls by default but have an overload to return relative urls
+Outbound urls - Creating Canonical outbound urls. SeoPack Url helpers return absolute urls by default. However there is an overload that can be used to specify that relative urls should be returned.
 ```c#
 @Url.SpRouteUrl("Users", new { pageNumber = 1 })
 @Url.SpActionUrl("Index", "Users", new { pageNumber = 1 })
